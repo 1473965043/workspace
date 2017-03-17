@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- 底部菜单 -->
+    <color name="bottombar_color_selected">#3337A8FF</color>
+    <color name="text_bar_selected">#37A8FF</color>
+    <color name="text_bar_unselected">#808080</color>
+    <color name="transparent">#FF0000</color>
+
+    <!-- 首页搜索bar -->
+    <color name="search_bar_bg">#A0A0A0</color>
+    <color name="search_tv_color">#F1F1F1</color>
+    <!-- 职位 -->
+    <color name="job_checkbox_color">#FB6E05</color>
+    <color name="gray">#8c8c8c</color>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:background="@color/job_checkbox_color">
+
+    <ImageView
+        android:id="@+id/job_more"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <LinearLayout
+        android:layout_width="160dp"
+        android:layout_height="30dp"
+        android:weightSum="2"
+        android:layout_centerInParent="true"
+        android:background="@drawable/job_checkbox_bg"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/job_of_enterprise"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/job_of_enterprise"
+            android:textColor="@color/checkbox_item_color"
+            android:background="@drawable/checkbox_item_bg"/>
+
+        <TextView
+            android:id="@+id/job_of_hunter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/job_of_hunter"
+            android:gravity="center"
+            android:textColor="@color/checkbox_item_color"
+            android:background="@drawable/checkbox_item_bg"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/job_search"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>
