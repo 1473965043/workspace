@@ -50,17 +50,18 @@ public class MyScrollview extends ScrollView implements Pullable {
 
     @Override
     public boolean canPullDown() {
-        if (getScrollY() == 0)//判断是否滑到顶端
+        if (getScrollY() == 0) {//判断是否滑到顶端
             return true;
-        else
+        }else {
             return false;
+        }
     }
 
     @Override
     public boolean canPullUp() {
-        if(getChildAt(0).getHeight() >= getMeasuredHeight()){//判断子控件的高度是否超过本身高度
+        if(getChildAt(0).getMeasuredHeight() >= getHeight()){//判断子控件的高度是否超过本身高度
 
-            if (getScrollY() >= (getChildAt(0).getHeight() - getMeasuredHeight())){//判断是否滑到底部
+            if (getScrollY() >= (getChildAt(0).getMeasuredHeight() - getHeight())){//判断是否滑到底部
                 return true;
             } else {
                 return false;

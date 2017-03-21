@@ -4,29 +4,24 @@
     android:id="@+id/refreshlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <include layout="@layout/refresh_head" />
 
     <com.hq.fiveonejrq.jrq.widget.MyScrollview
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></RelativeLayout>
-
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-            <include layout="@layout/load_more" />
-        </LinearLayout>
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
     </com.hq.fiveonejrq.jrq.widget.MyScrollview>
+
+    <include layout="@layout/load_more" />
 
 
 </com.hq.fiveonejrq.jrq.widget.PullToRefreshLayout>

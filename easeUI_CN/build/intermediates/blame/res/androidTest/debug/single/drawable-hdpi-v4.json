@@ -380,12 +380,12 @@
         "source": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_30.png"
     },
     {
-        "merged": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_13.png",
-        "source": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_13.png"
-    },
-    {
         "merged": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_search_clear_pressed.png",
         "source": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_search_clear_pressed.png"
+    },
+    {
+        "merged": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_13.png",
+        "source": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ee_13.png"
     },
     {
         "merged": "D:\\workplace\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_6.png",

@@ -89,7 +89,7 @@ public class BottomMenuLayout extends LinearLayout {
         view.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                notifyDataSetChanged(position);
+                setCurrentFragment(position);
             }
         });
         /** 每一个Tab的布局参数 */
@@ -101,8 +101,7 @@ public class BottomMenuLayout extends LinearLayout {
      * 更新UI
      * @param current
      */
-    public void notifyDataSetChanged(int current){
-        setCurrentFragment(current);
+    private void notifyDataSetChanged(int current){
         for(int i=0; i<getChildCount(); i++){
             if(current == i){
                 getChildAt(i).setSelected(true);
@@ -120,7 +119,7 @@ public class BottomMenuLayout extends LinearLayout {
     /**
      * 设置当前显示的fragment
      */
-    private void setCurrentFragment(int current){
+    public void setCurrentFragment(int current){
         for(int i=0; i<mItemView.size(); i++){
             FragmentTransaction ft = fragmentManager.beginTransaction();
             Fragment fragment = mItemView.get(i).getFragment();
@@ -131,6 +130,7 @@ public class BottomMenuLayout extends LinearLayout {
             }
             ft.commit();
         }
+        notifyDataSetChanged(current);
     }
 
     /**
@@ -140,6 +140,6 @@ public class BottomMenuLayout extends LinearLayout {
         for (BottomItemView itemView:mItemView) {
             fragmentManager.beginTransaction().add(containerId, itemView.getFragment()).hide(itemView.getFragment()).commit();
         }
-        notifyDataSetChanged(0);
+        setCurrentFragment(0);
     }
 }

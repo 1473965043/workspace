@@ -17,6 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -28,9 +34,12 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
     testCompile 'junit:junit:4.12'
     compile project(':easeUI_CN')
-    compile files('libs/weibosdkcore_release.jar')
     /** 网络框架okhttp */
     compile 'com.zhy:okhttputils:2.6.2'
-//    /** 解析html库 */
-//    compile 'org.jsoup:jsoup:1.10.2'
+    /** 带圆环的头像 */
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    /** 搜索框效果 */
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+//    /** dialog库 */
+//    compile 'com.flyco.dialog:FlycoDialog_Lib:1.0.0'
 }

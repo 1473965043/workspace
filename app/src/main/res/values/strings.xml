@@ -23,4 +23,5 @@
     <!-- 职位栏 -->
     <string name="job_of_enterprise">企业职位</string>
     <string name="job_of_hunter">猎头职位</string>
+    <string name="job_filtration">标题</string>
 </resources>

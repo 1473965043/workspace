@@ -12,8 +12,14 @@
 
     <!-- 首页搜索bar -->
     <color name="search_bar_bg">#A0A0A0</color>
-    <color name="search_tv_color">#F1F1F1</color>
+    <color name="search_tv_color">#cdcdcd</color>
     <!-- 职位 -->
     <color name="job_checkbox_color">#FB6E05</color>
     <color name="gray">#8c8c8c</color>
+    <color name="jobfiltration_item_selected">@android:color/white</color>
+    <color name="jobfiltration_itemcolor_unselected">#88000000</color>
+    <!-- 搜索 -->
+    <color name="internal_search_grey">#8e8e93</color>
+    <color name="internal_search_inactive">#e4e4e4</color>
+    <color name="internal_search_blue">#007aff</color>
 </resources>

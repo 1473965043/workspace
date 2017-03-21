@@ -1,36 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="6dp"
-    android:paddingBottom="6dp"
-    android:paddingRight="12dp"
-    android:paddingLeft="12dp"
-    android:background="@color/search_bar_bg">
+    android:layout_height="?attr/actionBarSize"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:background="@color/job_checkbox_color">
 
     <LinearLayout
         android:id="@+id/search_linearlayout"
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/filter"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="6dp"
         android:background="@drawable/searchbar_bg">
+
         <ImageView
-            android:id="@+id/search_bar_icon"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginLeft="2dp"
-            android:src="@mipmap/ic_search"
-            />
-
+            android:src="@mipmap/search"/>
         <TextView
             android:id="@+id/search_tv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:hint="@string/search"
             android:gravity="center"
             android:textColorHint="@color/search_tv_color"/>
@@ -42,5 +37,5 @@
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/add"/>
 </RelativeLayout>

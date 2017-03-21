@@ -61,12 +61,16 @@
         </receiver>
 
         <activity android:name=".job.TestActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
+        <activity android:name=".job.SearchActivity" />
+        <activity android:name=".homepage.SearchActivity"></activity>
     </application>
 
 </manifest>

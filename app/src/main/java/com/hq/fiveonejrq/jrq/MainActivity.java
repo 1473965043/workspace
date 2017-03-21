@@ -53,11 +53,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initDatas() {
         bottomMenuLayout.setDatas(this, R.id.content_container, mList);
-        bottomMenuLayout.notifyDataSetChanged(2);
+        bottomMenuLayout.setCurrentFragment(2);
     }
 
-    @Override
-    protected void setStatusBarBackgroundColor(int colorid) {
-        super.setStatusBarBackgroundColor(Color.parseColor("#37A8FF"));
+    public void setStatusBarBackgroundColor(String colorid){
+        super.setStatusBarBackgroundColor(Color.parseColor(colorid));
     }
+
 }

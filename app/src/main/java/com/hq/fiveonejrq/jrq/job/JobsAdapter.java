@@ -2,6 +2,7 @@ package com.hq.fiveonejrq.jrq.job;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,16 +15,12 @@ import java.util.ArrayList;
  * Created by guodong on 2017/3/16.
  */
 
-public class JobsAdapter extends RecyclerView.Adapter {
+public class JobsAdapter extends RecyclerView.Adapter<JobsAdapter.ViewHolder> {
 
-    /** 头部view的ItemViewType */
-    private final int headviewType = 1;
     /** 上下文 */
     private Context mContext;
     /** 数据 */
     private ArrayList<JobBean> jobList;
-    /** 头部view */
-    private View headView;
 
     /**
      * 构造方法
@@ -36,16 +33,13 @@ public class JobsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == headviewType && headView != null){
-            return new ViewHolder(headView);
-        }
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.job_item_layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
 
     }
 
@@ -55,32 +49,8 @@ public class JobsAdapter extends RecyclerView.Adapter {
      */
     @Override
     public int getItemCount() {
-        int count = jobList.size() == 0?0:jobList.size();
-        if(headView != null){
-            count ++;
-        }
-        return 10;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if(isHaveHeadView(position)){
-            return headviewType;
-        }
-        return super.getItemViewType(position);
-    }
-
-    /**
-     * 添加头部view
-     * @param headView
-     */
-    public void setHeadView(View headView) {
-        this.headView = headView;
-    }
-
-    /** 判断是否为头部view */
-    private boolean isHaveHeadView(int position){
-        return headView != null && position == 0;
+//        return jobList.size();
+        return 8;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
