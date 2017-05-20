@@ -4,28 +4,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/job_checkbox_color" />
+
     <TextView
         android:id="@+id/mine_title_bar"
         android:layout_width="match_parent"
-        android:background="#37A8FF"
+        android:layout_height="45dp"
         android:text="消息"
         android:textSize="20sp"
         android:gravity="center"
-        android:textColor="@android:color/white"
-        android:layout_height="40dp" />
+        android:background="@color/job_checkbox_color"
+        android:textColor="@android:color/white"/>
 
-
-    <com.hq.fiveonejrq.jrq.widget.RefreshView
-        android:id="@+id/refreshview"
+    <com.hq.fiveonejrq.jrq.widget.MyScrollview
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#44CDCDCD">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </com.hq.fiveonejrq.jrq.widget.RefreshView>
+            <include layout="@layout/msg_top_layout" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#446F6F6F"/>
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1px"-->
+                <!--android:background="#446F6F6F"-->
+                <!--android:layout_marginTop="10dp"/>-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </com.hq.fiveonejrq.jrq.widget.MyScrollview>
 </LinearLayout>

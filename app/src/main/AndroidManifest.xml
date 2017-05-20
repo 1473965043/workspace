@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.hq.fiveonejrq.jrq">
 
     <!-- Required -->
@@ -27,11 +28,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
 
         <!-- 设置环信应用的AppKey -->
@@ -70,7 +71,19 @@
             <!-- </intent-filter> -->
         </activity>
         <activity android:name=".job.SearchActivity" />
-        <activity android:name=".homepage.SearchActivity"></activity>
+        <activity android:name=".homepage.SearchActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".homepage.ScanCodeActivity"></activity>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="landscape"
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>

@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/job_checkbox_color" />
+
     <include
         layout="@layout/jobs_top_bar"
         />

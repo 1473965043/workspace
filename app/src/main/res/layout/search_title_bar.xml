@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
+    android:layout_height="65dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
+    android:id="@+id/search_bar"
     android:background="@color/job_checkbox_color">
 
     <LinearLayout
@@ -12,10 +13,12 @@
         android:layout_height="30dp"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@+id/filter"
         android:layout_marginRight="6dp"
+        android:transitionName="@string/transitions_name"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/searchbar_bg">
 
         <ImageView
@@ -36,6 +39,8 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
         android:src="@mipmap/add"/>
+
 </RelativeLayout>

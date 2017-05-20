@@ -91,27 +91,35 @@ public class FlowLayout extends ViewGroup
 			// 得到child的lp
 			MarginLayoutParams lp = (MarginLayoutParams) child
 					.getLayoutParams();
-			// 当前子空间实际占据的宽度
-			int childWidth = child.getMeasuredWidth() + lp.leftMargin
-					+ lp.rightMargin;
-			// 当前子空间实际占据的高度
-			int childHeight = child.getMeasuredHeight() + lp.topMargin
-					+ lp.bottomMargin;
 
-			if(i == 0){
-				//第一行不添加横间距
-				isFirstLine = true;
-				//第一列不添加纵间距
+			int childHeight, childWidth;
+			//判断是否为第一行的child
+			if(!isFirstLine){
+				childHeight = child.getMeasuredHeight() + lp.bottomMargin;
+			}else{
+				// 当前子空间实际占据的高度
+				childHeight = child.getMeasuredHeight() + lp.topMargin + lp.bottomMargin;
+			}
+
+			//判断是否为第一列的child
+			if(!isFirstRow){
+				childWidth = child.getMeasuredWidth() + lp.rightMargin;
 				isFirstRow = true;
 			}else{
-				//不是第一列添加纵间距
-				isFirstRow = false;
+				// 当前子空间实际占据的宽度
+				childWidth = child.getMeasuredWidth() + lp.leftMargin + lp.rightMargin;
 			}
+
+//			// 当前子空间实际占据的宽度
+//			int childWidth = child.getMeasuredWidth() + lp.leftMargin
+//					+ lp.rightMargin;
+//			// 当前子空间实际占据的高度
+//			int childHeight = child.getMeasuredHeight() + lp.topMargin
+//					+ lp.bottomMargin;
 
 			/**
 			 * 如果加入当前child，则超出最大宽度，则的到目前最大宽度给width，类加height 然后开启新行
 			 */
-
 			if (lineWidth + childWidth > sizeWidth)
 			{
 				width = Math.max(lineWidth, childWidth);// 取最大的
@@ -120,10 +128,9 @@ public class FlowLayout extends ViewGroup
 				height += lineHeight;
 				// 开启记录下一行的高度
 				lineHeight = childHeight;
-				//换行,某行第一个子控件
-				isFirstLine = false;
-				isFirstRow = true;
-				Log.e("超标", "isFirstLine");
+				//某行第一列
+				isFirstLine = true;
+				isFirstRow = false;
 			} else
 			// 否则累加值lineWidth,lineHeight取最大高度
 			{
@@ -136,9 +143,8 @@ public class FlowLayout extends ViewGroup
 				width = Math.max(width, lineWidth);
 				height += lineHeight;//将原来行数的高度加上最新一行的高度，为总高度
 			}
-
-			Log.e("状态", "i==" + i + ""+ isFirstLine());
 		}
+
 		setMeasuredDimension((modeWidth == MeasureSpec.EXACTLY) ? sizeWidth
 				: width, (modeHeight == MeasureSpec.EXACTLY) ? sizeHeight
 				: height);
@@ -158,12 +164,14 @@ public class FlowLayout extends ViewGroup
 	{
 		mAllViews.clear();
 		mLineHeight.clear();
+		isFirstRow = false;
+		isFirstLine = false;
 		int width = getWidth();
 
 		int lineWidth = 0;
 		int lineHeight = 0;
 		// 存储每一行所有的childView
-		List<View> lineViews = new ArrayList<View>();
+		List<View> lineViews = new ArrayList<>();
 		int cCount = getChildCount();
 		// 遍历所有的孩子
 		for (int i = 0; i < cCount; i++)
@@ -174,23 +182,56 @@ public class FlowLayout extends ViewGroup
 			int childWidth = child.getMeasuredWidth();
 			int childHeight = child.getMeasuredHeight();
 
-			// 如果已经需要换行
-			if (childWidth + lp.leftMargin + lp.rightMargin + lineWidth > width)
-			{
-				// 记录这一行所有的View以及最大高度
-				mLineHeight.add(lineHeight);
-				// 将当前行的childView保存，然后开启新的ArrayList保存下一行的childView
-				mAllViews.add(lineViews);
-				lineWidth = 0;// 重置行宽
-				lineViews = new ArrayList<View>();
+//			//某行第一列
+//			isFirstLine = true;
+//			isFirstRow = false;
+
+			//第一列的时候
+			if(!isFirstRow){
+				// 如果已经需要换行
+				if (childWidth + lp.rightMargin + lineWidth > width)
+				{
+					// 记录这一行所有的View以及最大高度
+					mLineHeight.add(lineHeight);
+					// 将当前行的childView保存，然后开启新的ArrayList保存下一行的childView
+					mAllViews.add(lineViews);
+					lineWidth = 0;// 重置行宽
+					lineViews = new ArrayList<>();
+					//某行第一列
+					isFirstLine = true;
+					isFirstRow = false;
+				}
+			}else{
+				// 如果已经需要换行
+				if (childWidth + lp.leftMargin + lp.rightMargin + lineWidth > width)
+				{
+					// 记录这一行所有的View以及最大高度
+					mLineHeight.add(lineHeight);
+					// 将当前行的childView保存，然后开启新的ArrayList保存下一行的childView
+					mAllViews.add(lineViews);
+					lineWidth = 0;// 重置行宽
+					lineViews = new ArrayList<>();
+					//某行第一列
+					isFirstLine = true;
+					isFirstRow = false;
+				}
 			}
 			/**
 			 * 如果不需要换行，则累加
 			 */
-			lineWidth += childWidth + lp.leftMargin + lp.rightMargin;
-			lineHeight = Math.max(lineHeight, childHeight + lp.topMargin
-					+ lp.bottomMargin);
+			if(!isFirstRow){
+				lineWidth += childWidth + lp.rightMargin;
+			}else{
+				lineWidth += childWidth + lp.leftMargin + lp.rightMargin;
+			}
+
+			if(!isFirstLine){
+				lineHeight = Math.max(lineHeight, childHeight + lp.bottomMargin);
+			}else{
+				lineHeight = Math.max(lineHeight, childHeight + lp.topMargin + lp.bottomMargin);
+			}
 			lineViews.add(child);
+			isFirstRow = true;
 		}
 		// 记录最后一行
 		mLineHeight.add(lineHeight);
@@ -222,18 +263,37 @@ public class FlowLayout extends ViewGroup
 						.getLayoutParams();
 
 				//计算childView的left,top,right,bottom
-				int lc = left + lp.leftMargin;
-				int tc = top + lp.topMargin;
-				int rc =lc + child.getMeasuredWidth();
-				int bc = tc + child.getMeasuredHeight();
+				int lc, tc, rc, bc;
+				//第一行child
+				if(i == 0){
+					tc = top;
+				}else{
+					tc = top + lp.topMargin;
+				}
 
-				Log.e(TAG, child + " , l = " + lc + " , t = " + t + " , r ="
-						+ rc + " , b = " + bc);
-
+				//第一列child
+				if(j == 0){
+					lc = left;
+				}else{
+					lc = left + lp.leftMargin;
+				}
+				rc =lc + child.getMeasuredWidth();
+				bc = tc + child.getMeasuredHeight();
+//				int lc = left + lp.leftMargin;
+//				int tc = top + lp.topMargin;
+//				int rc =lc + child.getMeasuredWidth();
+//				int bc = tc + child.getMeasuredHeight();
+				Log.e(TAG, child + " , l = " + lc + " , t = " + t + " , r =" + rc + " , b = " + bc);
+				//绘制child
 				child.layout(lc, tc, rc, bc);
-				
-				left += child.getMeasuredWidth() + lp.rightMargin
-						+ lp.leftMargin;
+
+				//第一列child
+				if(j == 0){
+					left += child.getMeasuredWidth() + lp.rightMargin;
+				}else{
+					left += child.getMeasuredWidth() + lp.rightMargin + lp.leftMargin;
+				}
+
 			}
 			left = 0;
 			top += lineHeight;

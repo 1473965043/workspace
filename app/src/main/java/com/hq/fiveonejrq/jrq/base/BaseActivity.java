@@ -1,28 +1,41 @@
 package com.hq.fiveonejrq.jrq.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.hq.fiveonejrq.jrq.R;
+import com.hq.fiveonejrq.jrq.Utils.Util;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.controller.EaseUI;
+
+import java.util.List;
 
 /**
  * Created by guodong on 2017/2/27.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends FragmentActivity {
+
+    private static final String TAG = "BaseActivity";
 
     /** 状态栏默认颜色 */
-    private int colorId = Color.TRANSPARENT;
+    private int colorId = android.R.color.transparent;
+    private View titleView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         EaseUI.getInstance().init(this, null);
         EMClient.getInstance().setDebugMode(true);
         setContentView(setLayoutId());
-        setStatusBarBackgroundColor(colorId);
+        setStatusBarBackgroundColor();
         initViews();
         initEvents();
         initDatas();
@@ -51,29 +64,54 @@ public abstract class BaseActivity extends AppCompatActivity {
             ViewGroup contentView = (ViewGroup) findViewById(android.R.id.content);
             //获得跟布局
             View childAt = contentView.getChildAt(0);
-            Log.e("数量", ""+contentView.getChildCount());
+//            Log.e("数量", ""+contentView.getChildCount());
             if (childAt != null) {
                 //设置跟布局风格
                 childAt.setFitsSystemWindows(true);
             }
             //给statusbar着色
-            View view = new View(this);
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(this)));
-            view.setBackgroundColor(colorid);
-            contentView.addView(view);
+            if(null == titleView){
+                titleView = new View(this);
+                titleView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(this)));
+                titleView.setBackgroundColor(colorid);
+                contentView.addView(titleView);
+            }else{
+                titleView.setBackgroundColor(colorid);
+            }
+        }
+    }
+
+    protected void setStatusBarBackgroundColor(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE ;
+            decorView.setSystemUiVisibility(option);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
 
     /**
      * 获取状态栏高度
-     *
-     * @param context context
-     * @return 状态栏高度
      */
-    private static int getStatusBarHeight(Context context) {
-        // 获得状态栏高度
+    public static int getStatusBarHeight(Context context) {
+        //获取status_bar_height资源的ID
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
-        return context.getResources().getDimensionPixelSize(resourceId);
+        if (resourceId > 0) {
+            //根据资源ID获取响应的尺寸值
+            return context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return -1;
+    }
+
+    protected View getTitleView(){
+        if(titleView == null){
+            try{
+                throw new NullPointerException("titleView is null");
+            }catch (NullPointerException e){
+                e.printStackTrace();
+            }
+        }
+        return titleView;
     }
 
     /**

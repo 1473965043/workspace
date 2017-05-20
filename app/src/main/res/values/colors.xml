@@ -17,9 +17,13 @@
     <color name="job_checkbox_color">#FB6E05</color>
     <color name="gray">#8c8c8c</color>
     <color name="jobfiltration_item_selected">@android:color/white</color>
-    <color name="jobfiltration_itemcolor_unselected">#88000000</color>
+    <color name="jobfiltration_itemcolor_unselected">#8c8c8c</color>
     <!-- 搜索 -->
     <color name="internal_search_grey">#8e8e93</color>
     <color name="internal_search_inactive">#e4e4e4</color>
     <color name="internal_search_blue">#007aff</color>
+    <!-- 首页 -->
+    <color name="title_of_recommend">#333333</color>
+    <color name="title_of_activity">#333333</color>
+    <color name="title_of_topic">#333333</color>
 </resources>

@@ -10,7 +10,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,26 +34,55 @@ import java.util.ArrayList;
 public class JobsFragment extends Fragment {
 
     /**
-     * 标题栏textview
+     * 标题控件
      */
     private TextView enterprise, hunter;
-    /** */
-    private JobBodyFragment body;
 
+    /**
+     * 企业与猎头界面
+     */
+    private HunterFragment hunterJobs;
+    private CompanyFragment companyJobs;
+    private ArrayList<Fragment> fragmentList;
+
+    /**
+     * 查询控件
+     */
     private ImageView jobSearch;
 
+    /**
+     * 筛选控件
+     */
     private ImageView jobFiltration;
 
+    /**
+     * 内容主体控件
+     */
     private ViewPager mViewPager;
 
-    private ArrayList<View> list;
+    /**
+     * 筛选弹出框数据集合
+     */
+    private ArrayList<FiltrationTypeBean> filtrationList;
 
-    private ArrayList<FiltrationTypeBean> mList;
-
+    /**
+     * 标题栏根布局
+     */
     private View rootView;
 
+    /**
+     * 弹出框
+     */
     private PopupWindow popupWindow;
 
+    /**
+     * 弹出框适配器
+     */
+    private PopupWindowAdapter popupWindowAdapter;
+
+    /**
+     * 窗体参数
+     */
     private WindowManager.LayoutParams lp;
 
     private Window popWindow;
@@ -65,29 +93,34 @@ public class JobsFragment extends Fragment {
         rootView = inflater.inflate(R.layout.jobs_layout, container, false);
         initViews(rootView);
         initEvents();
+        initData();
         return rootView;
     }
 
+    /**
+     * 初始化控件
+     * @param view
+     */
     private void initViews(View view) {
+        filtrationList = new ArrayList<>();
+        fragmentList = new ArrayList<>();
+        hunterJobs = new HunterFragment();
+        companyJobs = new CompanyFragment();
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        list = new ArrayList<>();
-        mList = new ArrayList<>();
         enterprise = (TextView) view.findViewById(R.id.job_of_enterprise);
         hunter = (TextView) view.findViewById(R.id.job_of_hunter);
         jobFiltration = (ImageView) view.findViewById(R.id.filtration);
         jobSearch = (ImageView) view.findViewById(R.id.job_search);
     }
 
+    /**
+     * 初始化事件
+     */
     private void initEvents() {
-        setData(3);
         jobFiltration.setOnClickListener(listener);
         jobSearch.setOnClickListener(listener);
         enterprise.setOnClickListener(listener);
         hunter.setOnClickListener(listener);
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.job_item_layout, null);
-        View view1 = LayoutInflater.from(getContext()).inflate(R.layout.homepage_layout, null);
-        list.add(view);
-        list.add(view1);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -96,7 +129,6 @@ public class JobsFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                mViewPager.setCurrentItem(position);
                 if(enterprise.isSelected()){
                     enterprise.setSelected(false);
                     hunter.setSelected(true);
@@ -111,34 +143,23 @@ public class JobsFragment extends Fragment {
 
             }
         });
-
-        mViewPager.setAdapter(new PagerAdapter() {
-            @Override
-            public int getCount() {
-                return 2;
-            }
-
-            @Override
-            public boolean isViewFromObject(View view, Object object) {
-                return view == object;
-            }
-
-            @Override
-            public Object instantiateItem(ViewGroup container, int position) {
-                container.addView(list.get(position));
-                return list.get(position);
-            }
-
-            @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
-                container.removeView(list.get(position));
-            }
-        });
-
         mViewPager.setCurrentItem(0);
         enterprise.setSelected(true);
     }
 
+    /**
+     * 初始化数据
+     */
+    private void initData(){
+        setPopupWindowData(3);
+        fragmentList.add(hunterJobs);
+        fragmentList.add(companyJobs);
+        mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList));
+    }
+
+    /**
+     * 点击监听器
+     */
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -149,7 +170,7 @@ public class JobsFragment extends Fragment {
                     }else{
                         lp.alpha = 0.7f;
                         popWindow.setAttributes(lp);
-                        popupWindow.showAsDropDown(rootView.findViewById(R.id.rootview));
+                        popupWindow.showAsDropDown(rootView.findViewById(R.id.titlebar));
                     }
                     break;
                 case R.id.job_search:
@@ -161,11 +182,26 @@ public class JobsFragment extends Fragment {
                 case R.id.job_of_hunter:
                     mViewPager.setCurrentItem(1);
                     break;
+                case R.id.determine:
+                    //执行关键词查询
+                    popupWindow.dismiss();
+                    Toast.makeText(getContext(), "功能尚未完成...", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.reset:
+                    // 重置关键词
+                    ViewGroup viewGroup = (ViewGroup) popupWindow.getContentView();
+                    RecyclerView recyclerView = (RecyclerView) viewGroup.getChildAt(0);
+                    popupWindowAdapter.clearAllFlag(recyclerView);
+                    break;
             }
         }
     };
 
-    private void setData(int size){
+    /**
+     * 设置弹出数据
+     * @param size
+     */
+    private void setPopupWindowData(int size){
         ArrayList<FiltrationTypeBean> list = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             ArrayList<String> strlist = new ArrayList<>();
@@ -178,7 +214,7 @@ public class JobsFragment extends Fragment {
             ft.setList(strlist);
             list.add(ft);
         }
-        mList.addAll(list);
+        filtrationList.addAll(list);
     }
 
     /**
@@ -187,9 +223,13 @@ public class JobsFragment extends Fragment {
     private void showPopwindow(){
         popupWindow = new PopupWindow(getContext());
         View pop = LayoutInflater.from(getContext()).inflate(R.layout.job_filtration_layout, null);
+        TextView determine = (TextView) pop.findViewById(R.id.determine);
+        TextView reset = (TextView) pop.findViewById(R.id.reset);
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setFocusable(true);
+        determine.setOnClickListener(listener);
+        reset.setOnClickListener(listener);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F5F8FD")));
         popWindow = getActivity().getWindow();
         lp = popWindow.getAttributes();
@@ -198,12 +238,13 @@ public class JobsFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) pop.findViewById(R.id.filtration_recyclerview);
         //设置布局管理器
         recyclerView.setLayoutManager(new FullyLinearLayoutManager(getContext()));
+        popupWindowAdapter = new PopupWindowAdapter(filtrationList, getContext());
         //设置适配器
-        recyclerView.setAdapter(new MyAdapter());
+        recyclerView.setAdapter(popupWindowAdapter);
         //设置布局
         popupWindow.setContentView(pop);
         //显示位置
-        popupWindow.showAsDropDown(rootView.findViewById(R.id.rootview));
+        popupWindow.showAsDropDown(rootView.findViewById(R.id.titlebar));
         popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
@@ -216,90 +257,6 @@ public class JobsFragment extends Fragment {
         });
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.job_filtration_item, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            FiltrationTypeBean ft = mList.get(position);
-            holder.title.setText(ft.getTitle());
-            addLabel(holder.flowLayout, ft);
-            holder.flowLayout.getChildAt(0).setSelected(true);
-        }
-
-        @Override
-        public int getItemCount() {
-            return 3;
-        }
-
-        class ViewHolder extends RecyclerView.ViewHolder{
-
-            private FlowLayout flowLayout;
-            private TextView title;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                flowLayout = (FlowLayout) itemView.findViewById(R.id.flowlayout);
-                title = (TextView) itemView.findViewById(R.id.title);
-            }
-        }
-
-        /**
-         * 添加标签
-         */
-        private void addLabel(final FlowLayout flowLayout, FiltrationTypeBean ft){
-            for (int i = 0; i < ft.getList().size(); i++) {
-                final int position = i;
-                TextView label = new TextView(getContext());
-                label.setText(ft.getList().get(i));
-                label.setBackgroundResource(R.drawable.jobfiltration_item_selector);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                lp.setMargins(15, 15, 0, 0);
-                label.setLayoutParams(lp);
-                label.setPadding(15, 10, 15, 10);
-                label.setBackgroundResource(R.drawable.jobfiltration_item_selector);
-                label.setTextColor(ContextCompat.getColor(getContext(), R.color.jobfiltration_item_selector));
-                flowLayout.addView(label);
-                label.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(position != 0){
-                            clearFlag(position, flowLayout);
-                        }else{
-                            clearAllFlag(flowLayout);
-                        }
-                    }
-                });
-            }
-        }
-
-        private void clearFlag(int position, FlowLayout flowlayout){
-            View child = flowlayout.getChildAt(position);
-            if(child.isSelected()){
-                child.setSelected(false);
-            }else{
-                child.setSelected(true);
-            }
-            flowlayout.getChildAt(0).setSelected(false);
-        }
-
-        private void clearAllFlag(FlowLayout flowlayout){
-            for (int i = 0; i < flowlayout.getChildCount(); i++) {
-                if(i == 0){
-                    flowlayout.getChildAt(i).setSelected(true);
-                }else{
-                    flowlayout.getChildAt(i).setSelected(false);
-                }
-            }
-        }
-
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -310,37 +267,4 @@ public class JobsFragment extends Fragment {
             popupWindow.dismiss();
         }
     }
-
-    //    /**
-//     * 初始化控件
-//     * @param view
-//     */
-//    private void initViews(View view) {
-//        enterprise = (TextView) view.findViewById(R.id.job_of_enterprise);
-//        hunter = (TextView) view.findViewById(R.id.job_of_hunter);
-//        body = new JobBodyFragment();
-//    }
-
-//    /**
-//     * 初始化数据
-//     */
-//    private void initEvents() {
-//        enterprise.setSelected(true);
-//        getActivity().getSupportFragmentManager().beginTransaction().add(R.id.job_content_fragment, body).commit();
-//        hunter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                hunter.setSelected(true);
-//                enterprise.setSelected(false);
-//            }
-//        });
-//
-//        enterprise.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                hunter.setSelected(false);
-//                enterprise.setSelected(true);
-//            }
-//        });
-//    }
 }

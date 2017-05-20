@@ -1,9 +1,9 @@
-package com.hq.fiveonejrq.jrq.widget;
+package com.hq.fiveonejrq.jrq.base;
 
 import android.support.v4.app.Fragment;
 
 /**
- * Created by Administrator on 2017/2/28.
+ * Created by guodong on 2017/2/28.
  */
 
 public class BottomItemView {

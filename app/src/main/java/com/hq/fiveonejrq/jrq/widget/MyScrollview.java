@@ -71,4 +71,22 @@ public class MyScrollview extends ScrollView implements Pullable {
             return false;
         }
     }
+
+    private OnScrollListener onScrollListener;
+
+    public interface OnScrollListener {
+        void onScrollChanged(int x, int y, int oldX, int oldY);
+    }
+
+    public void setOnScrollListener(OnScrollListener scrollListener) {
+        this.onScrollListener = scrollListener;
+    }
+
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        super.onScrollChanged(l, t, oldl, oldt);
+        if(null != onScrollListener){
+            onScrollListener.onScrollChanged(l, t, oldl, oldt);
+        }
+    }
 }

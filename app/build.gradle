@@ -18,6 +18,10 @@ android {
         }
     }
 
+    repositories {
+        jcenter()
+    }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -42,4 +46,8 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
 //    /** dialog库 */
 //    compile 'com.flyco.dialog:FlycoDialog_Lib:1.0.0'
+//    /** 节选器 */
+//    compile 'com.7heaven.widgets:segmentcontrol:1.16'
+    /** 二维码 */
+    compile 'com.journeyapps:zxing-android-embedded:3.4.0'
 }

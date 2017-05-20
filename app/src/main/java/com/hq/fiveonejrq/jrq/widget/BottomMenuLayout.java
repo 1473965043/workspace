@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hq.fiveonejrq.jrq.R;
+import com.hq.fiveonejrq.jrq.base.BottomItemView;
 
 import java.util.List;
 
@@ -26,6 +27,16 @@ public class BottomMenuLayout extends LinearLayout {
     private FragmentManager fragmentManager;
     private Context mContext;
     private int containerId;
+    private OnChangeListener mChangeListener;
+    private int current;
+
+    public interface OnChangeListener{
+        void change(int position);
+    }
+
+    public void setChangeListener(OnChangeListener listener){
+        mChangeListener = listener;
+    }
 
     /**
      * 构造方法-->new出来时调用
@@ -90,6 +101,9 @@ public class BottomMenuLayout extends LinearLayout {
             @Override
             public void onClick(View v) {
                 setCurrentFragment(position);
+                if(null != mChangeListener){
+                    mChangeListener.change(position);
+                }
             }
         });
         /** 每一个Tab的布局参数 */
@@ -112,7 +126,6 @@ public class BottomMenuLayout extends LinearLayout {
                 getChildAt(i).findViewById(R.id.bottom_icon).setSelected(false);
                 getChildAt(i).findViewById(R.id.bottom_title).setSelected(false);
             }
-
         }
     }
 
@@ -130,7 +143,16 @@ public class BottomMenuLayout extends LinearLayout {
             }
             ft.commit();
         }
+        this.current = current;
         notifyDataSetChanged(current);
+    }
+
+    /**
+     * 获取当前fragment的下标
+     * @return
+     */
+    public int getCurrent(){
+        return this.current;
     }
 
     /**

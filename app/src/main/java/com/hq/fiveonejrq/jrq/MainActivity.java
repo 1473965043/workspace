@@ -1,10 +1,14 @@
 package com.hq.fiveonejrq.jrq;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.hq.fiveonejrq.jrq.base.BaseActivity;
-import com.hq.fiveonejrq.jrq.widget.BottomItemView;
+import com.hq.fiveonejrq.jrq.base.BottomItemView;
 import com.hq.fiveonejrq.jrq.job.JobsFragment;
 import com.hq.fiveonejrq.jrq.homepage.HomePageFragment;
 import com.hq.fiveonejrq.jrq.message.MessageFragment;
@@ -37,6 +41,7 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(new JobsFragment());
         fragmentList.add(new MessageFragment());
         fragmentList.add(new MineFragment());
+//        setStatusBarBackgroundColor("#FB6E05");
     }
 
     @Override
@@ -53,11 +58,43 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initDatas() {
         bottomMenuLayout.setDatas(this, R.id.content_container, mList);
-        bottomMenuLayout.setCurrentFragment(2);
+        bottomMenuLayout.setCurrentFragment(0);
+        bottomMenuLayout.setChangeListener(changeListener);
     }
 
-    public void setStatusBarBackgroundColor(String colorid){
-        super.setStatusBarBackgroundColor(Color.parseColor(colorid));
+    /**
+     * 获取当前显示的fragment的下标
+     * @return
+     */
+    public int getCurrent(){
+        if(bottomMenuLayout != null){
+            return bottomMenuLayout.getCurrent();
+        }
+        return -1;
     }
 
+    /**
+     * 获取状态栏view
+     * @return
+     */
+    public View getTitleView() {
+        return super.getTitleView();
+    }
+
+    private BottomMenuLayout.OnChangeListener changeListener = new BottomMenuLayout.OnChangeListener() {
+        @Override
+        public void change(int position) {
+
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        for (int i = 0; i < fragmentList.size(); i++) {
+            if(i == getCurrent()){
+                fragmentList.get(i).onActivityResult(requestCode, resultCode, data);
+                return;
+            }
+        }
+    }
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by guodong on 2017/3/17.
  */
 
-public class JobBodyFragment extends Fragment {
+public class HunterFragment extends Fragment {
 
     /** 内容主体控件 */
     private RecyclerView recyclerView;
@@ -63,7 +63,7 @@ public class JobBodyFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return 18;
+            return 8;
         }
 
         class ViewHodler extends RecyclerView.ViewHolder{

@@ -2,39 +2,128 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#33cccccc">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/job_checkbox_color"/>
 
     <TextView
         android:id="@+id/mine_title_bar"
         android:layout_width="match_parent"
-        android:background="#37A8FF"
+        android:layout_height="45dp"
+        android:background="@color/job_checkbox_color"
         android:text="个人中心"
         android:textSize="20sp"
         android:gravity="center"
-        android:textColor="@android:color/white"
-        android:layout_height="40dp" />
+        android:textColor="@android:color/white" />
 
-    <LinearLayout
+    <com.hq.fiveonejrq.jrq.widget.BounceScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <Button
-            android:id="@+id/show"
+        android:layout_height="match_parent">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#176FFF"
-            android:text="获取信息"/>
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/shouquan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#777FFF"
-            android:layout_marginTop="50dp"
-            android:text="授权"/>
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:background="@android:color/white">
 
+                <ImageView
+                    android:id="@+id/headicon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/headicon">
 
+                    <TextView
+                        android:id="@+id/username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/user_name"/>
+
+                    <TextView
+                        android:id="@+id/userid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="001122334"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/usercode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+
+            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+                android:id="@+id/layout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:img_item="@mipmap/ic_launcher"
+                app:arrow_item="@mipmap/ic_launcher"
+                app:text_item="@string/more_jobs"
+                app:textcolor_item="@color/gray"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                />
+
+            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:img_item="@mipmap/ic_launcher"
+                app:arrow_item="@mipmap/ic_launcher"
+                app:text_item="@string/more_jobs"
+                app:textcolor_item="@color/gray"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                />
+
+            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:img_item="@mipmap/ic_launcher"
+                app:arrow_item="@mipmap/ic_launcher"
+                app:text_item="@string/more_jobs"
+                app:textcolor_item="@color/gray"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                />
+            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:img_item="@mipmap/ic_launcher"
+                app:arrow_item="@mipmap/ic_launcher"
+                app:text_item="@string/more_jobs"
+                app:textcolor_item="@color/gray"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                />
+            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:img_item="@mipmap/ic_launcher"
+                app:arrow_item="@mipmap/ic_launcher"
+                app:text_item="@string/more_jobs"
+                app:textcolor_item="@color/gray"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                />
+        </LinearLayout>
+    </com.hq.fiveonejrq.jrq.widget.BounceScrollView>
 </LinearLayout>

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootview"
+    android:id="@+id/titlebar"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:layout_height="45dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:background="@color/job_checkbox_color">
@@ -13,6 +11,7 @@
         android:id="@+id/filtration"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_centerVertical="true"
         android:src="@mipmap/setting"/>
 
     <LinearLayout
@@ -50,5 +49,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@mipmap/search_bar"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"/>
 </RelativeLayout>

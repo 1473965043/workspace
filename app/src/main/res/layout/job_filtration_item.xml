@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#FFFFFF"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:paddingTop="12dp"
@@ -20,6 +19,6 @@
         android:id="@+id/flowlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp">
+        android:layout_marginTop="5dp">
     </com.hq.fiveonejrq.jrq.widget.FlowLayout>
 </LinearLayout>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:background="@android:color/white"
+    android:weightSum="4">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/feedback_of_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/feedback"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/feedback_of_img"
+            android:textSize="13sp"
+            android:text="@string/delivery_feedback"/>
+
+        <TextView
+            android:id="@+id/feedback_of_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/textview_circle"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/invitation_of_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/invitation"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/invitation_of_img"
+            android:textSize="13sp"
+            android:text="@string/invitation_of_hr"/>
+
+        <TextView
+            android:id="@+id/invitation_of_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/textview_circle"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/contacts_of_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/contacts"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/contacts_of_img"
+            android:textSize="13sp"
+            android:text="@string/invitation_of_hr"/>
+
+        <TextView
+            android:id="@+id/contacts_of_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/textview_circle"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/notice_of_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/notice"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:layout_below="@+id/notice_of_img"
+            android:textSize="13sp"
+            android:text="@string/notice"/>
+
+        <TextView
+            android:id="@+id/notice_of_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/textview_circle"
+            android:textColor="@android:color/white"
+            />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,31 +1,52 @@
 package com.hq.fiveonejrq.jrq.homepage;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import com.hq.fiveonejrq.jrq.R;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
-public class SearchActivity extends AppCompatActivity {
+import com.hq.fiveonejrq.jrq.R;
+import com.hq.fiveonejrq.jrq.base.BaseActivity;
+import com.hq.fiveonejrq.jrq.widget.LuckyRotateView;
+
+public class SearchActivity extends BaseActivity {
+
+    private EditText keywords;
+    private TextView cancle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.search);
-        getSupportActionBar().hide();
-        initView();
-        initEvents();
-        initData();
+    protected int setLayoutId() {
+        return R.layout.search;
     }
 
-    private void initView() {
+    @Override
+    protected void initViews() {
+        keywords = (EditText) findViewById(R.id.search_keywords);
+        cancle = (TextView) findViewById(R.id.cancle);
+    }
+
+    @Override
+    protected void initEvents() {
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LuckyRotateView) findViewById(R.id.rotateview)).ss();
+//                onBackPressed();
+            }
+        });
+    }
+
+    @Override
+    protected void initDatas() {
 
     }
 
-    private void initEvents() {
-
+    @Override
+    protected void setStatusBarBackgroundColor(int colorid) {
+        super.setStatusBarBackgroundColor(Color.parseColor("#E5E5E5"));
     }
 
-    private void initData() {
-
+    public void start(View view){
+        ((LuckyRotateView) findViewById(R.id.rotateview)).setRunTag(3);
     }
-
 }
