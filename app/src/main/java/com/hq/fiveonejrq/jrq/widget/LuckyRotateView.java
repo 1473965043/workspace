@@ -21,7 +21,7 @@ import com.hq.fiveonejrq.jrq.R;
 /**
  * Created by guodong on 2017/4/21.
  * 自定义view实现幸运大转盘效果 来源 http://blog.csdn.net/lmj623565791/article/details/41722441
- * 实现过程没有用到动画
+ * 测试分支
  */
 
 public class LuckyRotateView extends SurfaceView {
