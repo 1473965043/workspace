@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.hq.fiveonejrq.jrq"
         minSdkVersion 15
@@ -37,7 +37,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:recyclerview-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-    compile project(':easeUI_CN')
     /** 网络框架okhttp */
     compile 'com.zhy:okhttputils:2.6.2'
     /** 带圆环的头像 */

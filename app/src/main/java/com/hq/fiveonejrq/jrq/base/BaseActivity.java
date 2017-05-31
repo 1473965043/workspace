@@ -16,14 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.Utils.Util;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.controller.EaseUI;
-
-import java.util.List;
 
 /**
  * Created by guodong on 2017/2/27.
@@ -41,8 +34,6 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.MyTranslucentTheme);
         super.onCreate(savedInstanceState);
-        EaseUI.getInstance().init(this, null);
-        EMClient.getInstance().setDebugMode(true);
         setContentView(setLayoutId());
         setStatusBarBackgroundColor();
         initViews();
