@@ -60,12 +60,12 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_showvideo_activity.xml"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\layout\\ease_expression_gridview.xml",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_expression_gridview.xml"
-    },
-    {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\layout\\ease_alert_dialog.xml",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_alert_dialog.xml"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\layout\\ease_expression_gridview.xml",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_expression_gridview.xml"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\layout\\ease_widget_emojicon_tab_bar.xml",
