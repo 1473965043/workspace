@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.hq.fiveonejrq.jrq.widget.PullToRefreshLayout
+<com.hq.fiveonejrq.jrq.common.widget.PullToRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/refreshlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/refresh_head" />
 
-    <com.hq.fiveonejrq.jrq.widget.MyScrollview
+    <com.hq.fiveonejrq.jrq.common.widget.MyScrollview
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -19,9 +19,9 @@
                 android:layout_height="match_parent">
             </android.support.v7.widget.RecyclerView>
         </RelativeLayout>
-    </com.hq.fiveonejrq.jrq.widget.MyScrollview>
+    </com.hq.fiveonejrq.jrq.common.widget.MyScrollview>
 
     <include layout="@layout/load_more" />
 
 
-</com.hq.fiveonejrq.jrq.widget.PullToRefreshLayout>
+</com.hq.fiveonejrq.jrq.common.widget.PullToRefreshLayout>

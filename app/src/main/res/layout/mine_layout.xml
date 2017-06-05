@@ -21,7 +21,7 @@
         android:gravity="center"
         android:textColor="@android:color/white" />
 
-    <com.hq.fiveonejrq.jrq.widget.BounceScrollView
+    <com.hq.fiveonejrq.jrq.common.widget.BounceScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -71,7 +71,7 @@
                     android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
-            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+            <com.hq.fiveonejrq.jrq.common.widget.ItemMenuLayout
                 android:id="@+id/layout1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 android:background="@android:color/white"
                 />
 
-            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+            <com.hq.fiveonejrq.jrq.common.widget.ItemMenuLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:img_item="@mipmap/ic_launcher"
@@ -94,7 +94,7 @@
                 android:background="@android:color/white"
                 />
 
-            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+            <com.hq.fiveonejrq.jrq.common.widget.ItemMenuLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:img_item="@mipmap/ic_launcher"
@@ -104,7 +104,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@android:color/white"
                 />
-            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+            <com.hq.fiveonejrq.jrq.common.widget.ItemMenuLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:img_item="@mipmap/ic_launcher"
@@ -114,7 +114,7 @@
                 android:layout_marginTop="5dp"
                 android:background="@android:color/white"
                 />
-            <com.hq.fiveonejrq.jrq.widget.ItemMenuLayout
+            <com.hq.fiveonejrq.jrq.common.widget.ItemMenuLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:img_item="@mipmap/ic_launcher"
@@ -125,5 +125,5 @@
                 android:background="@android:color/white"
                 />
         </LinearLayout>
-    </com.hq.fiveonejrq.jrq.widget.BounceScrollView>
+    </com.hq.fiveonejrq.jrq.common.widget.BounceScrollView>
 </LinearLayout>

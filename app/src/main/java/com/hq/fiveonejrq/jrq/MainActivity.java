@@ -3,17 +3,14 @@ package com.hq.fiveonejrq.jrq;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.View;
-import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-import com.hq.fiveonejrq.jrq.base.BaseActivity;
-import com.hq.fiveonejrq.jrq.base.BottomItemView;
+import com.hq.fiveonejrq.jrq.common.base.BaseActivity;
+import com.hq.fiveonejrq.jrq.common.base.BottomItemView;
 import com.hq.fiveonejrq.jrq.job.JobsFragment;
 import com.hq.fiveonejrq.jrq.homepage.HomePageFragment;
 import com.hq.fiveonejrq.jrq.message.MessageFragment;
 import com.hq.fiveonejrq.jrq.mine.MineFragment;
-import com.hq.fiveonejrq.jrq.widget.BottomMenuLayout;
+import com.hq.fiveonejrq.jrq.common.widget.BottomMenuLayout;
 
 import java.util.ArrayList;
 import java.util.List;

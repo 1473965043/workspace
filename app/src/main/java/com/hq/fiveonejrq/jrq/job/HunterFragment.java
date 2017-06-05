@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.widget.FullyLinearLayoutManager;
-import com.hq.fiveonejrq.jrq.widget.PullToRefreshLayout;
+import com.hq.fiveonejrq.jrq.common.widget.FullyLinearLayoutManager;
+import com.hq.fiveonejrq.jrq.common.widget.PullToRefreshLayout;
 
 import java.util.ArrayList;
 

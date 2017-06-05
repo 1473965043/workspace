@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"></FrameLayout>
 
-    <com.hq.fiveonejrq.jrq.widget.BottomMenuLayout
+    <com.hq.fiveonejrq.jrq.common.widget.BottomMenuLayout
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

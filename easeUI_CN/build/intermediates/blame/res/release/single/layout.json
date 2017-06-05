@@ -12,24 +12,24 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_received_message.xml"
     },
     {
-        "merged": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_activity_baidumap.xml",
-        "source": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_activity_baidumap.xml"
-    },
-    {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_expression.xml",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_expression.xml"
-    },
-    {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_contact.xml",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_contact.xml"
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_file.xml",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_file.xml"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_big_expression.xml",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_big_expression.xml"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_file.xml",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_file.xml"
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_contact.xml",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_contact.xml"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_expression.xml",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_expression.xml"
+    },
+    {
+        "merged": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_activity_baidumap.xml",
+        "source": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_activity_baidumap.xml"
     },
     {
         "merged": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_search_bar.xml",
@@ -48,12 +48,12 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_video.xml"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_location.xml",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_location.xml"
-    },
-    {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_fragment_conversation_list.xml",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_fragment_conversation_list.xml"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_location.xml",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_location.xml"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_expression_gridview.xml",
@@ -132,12 +132,12 @@
         "source": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_message.xml"
     },
     {
-        "merged": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_location.xml",
-        "source": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_location.xml"
-    },
-    {
         "merged": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_video_call.xml",
         "source": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_video_call.xml"
+    },
+    {
+        "merged": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_row_sent_location.xml",
+        "source": "F:\\BaiduNetdiskDownload\\jrq\\jrq\\easeUI_CN\\src\\main\\res\\layout\\ease_row_sent_location.xml"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\layout\\ease_chat_message_list.xml",

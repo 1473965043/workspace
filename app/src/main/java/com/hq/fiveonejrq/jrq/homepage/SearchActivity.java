@@ -6,8 +6,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.base.BaseActivity;
-import com.hq.fiveonejrq.jrq.widget.LuckyRotateView;
+import com.hq.fiveonejrq.jrq.common.base.BaseActivity;
+import com.hq.fiveonejrq.jrq.common.widget.LuckyRotateView;
 
 public class SearchActivity extends BaseActivity {
 

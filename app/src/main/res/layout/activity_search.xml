@@ -23,7 +23,7 @@
         android:layout_height="20dp"
         android:indeterminateDrawable="@drawable/progress_indicator"/>
 
-    <com.hq.fiveonejrq.jrq.widget.SearchBar
+    <com.hq.fiveonejrq.jrq.common.widget.SearchBar
         android:layout_width="match_parent"
         android:id="@+id/search_bar"
         android:background="@drawable/gradient_bg"

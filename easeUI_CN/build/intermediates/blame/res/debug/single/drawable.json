@@ -24,12 +24,12 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable\\ease_chatfrom_bg.xml"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable\\ease_common_tab_bg.xml",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable\\ease_common_tab_bg.xml"
-    },
-    {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable\\ease_btn_blue_pressed_shape.xml",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable\\ease_btn_blue_pressed_shape.xml"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable\\ease_common_tab_bg.xml",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable\\ease_common_tab_bg.xml"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable\\ease_chat_send_btn_selector.xml",

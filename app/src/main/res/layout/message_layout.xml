@@ -6,20 +6,20 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="@dimen/y40"
         android:background="@color/job_checkbox_color" />
 
     <TextView
         android:id="@+id/mine_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="@dimen/y90"
         android:text="消息"
-        android:textSize="20sp"
+        android:textSize="@dimen/x40"
         android:gravity="center"
         android:background="@color/job_checkbox_color"
         android:textColor="@android:color/white"/>
 
-    <com.hq.fiveonejrq.jrq.widget.MyScrollview
+    <com.hq.fiveonejrq.jrq.common.widget.MyScrollview
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#44CDCDCD">
@@ -49,5 +49,5 @@
                 android:background="@android:color/white">
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
-    </com.hq.fiveonejrq.jrq.widget.MyScrollview>
+    </com.hq.fiveonejrq.jrq.common.widget.MyScrollview>
 </LinearLayout>

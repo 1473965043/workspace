@@ -7,8 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
 
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.Utils.StatusBarUtils;
-import com.hq.fiveonejrq.jrq.widget.SearchBar;
+import com.hq.fiveonejrq.jrq.common.Utils.StatusBarUtils;
+import com.hq.fiveonejrq.jrq.common.widget.SearchBar;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
 import java.io.InterruptedIOException;

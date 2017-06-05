@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.hq.fiveonejrq.jrq.widget.MyScrollview
+    <com.hq.fiveonejrq.jrq.common.widget.MyScrollview
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -122,7 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
-    </com.hq.fiveonejrq.jrq.widget.MyScrollview>
+    </com.hq.fiveonejrq.jrq.common.widget.MyScrollview>
 
 
     <include

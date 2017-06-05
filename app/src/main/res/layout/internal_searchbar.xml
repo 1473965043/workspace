@@ -41,7 +41,7 @@
     </RelativeLayout>
 
 
-    <com.hq.fiveonejrq.jrq.widget.ViewSwitcher
+    <com.hq.fiveonejrq.jrq.common.widget.ViewSwitcher
         android:layout_width="70dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/internal_searchbar_radius"
@@ -69,6 +69,6 @@
             android:layout_height="match_parent"
             android:background="@drawable/internal_search_shape_bg_right_8"/>
 
-    </com.hq.fiveonejrq.jrq.widget.ViewSwitcher>
+    </com.hq.fiveonejrq.jrq.common.widget.ViewSwitcher>
 
 </RelativeLayout>
