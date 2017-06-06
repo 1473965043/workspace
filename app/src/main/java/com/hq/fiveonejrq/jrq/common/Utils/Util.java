@@ -2,9 +2,13 @@ package com.hq.fiveonejrq.jrq.common.Utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Display;
+
+import java.io.File;
 
 /**
  * Created by guodong on 2017/3/13.
@@ -60,4 +64,46 @@ public class Util {
         float scale =context.getResources().getDisplayMetrics().density;
         return(int)(pxValue / scale +0.5f);
     }
+
+    /**
+     * 判断SD是否插入,返回SD根目录
+     */
+    public static String getExternalStorageDirectory(){
+        String rootpath;
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            rootpath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        }else{
+            rootpath = null;
+        }
+        return rootpath;
+    }
+
+    /**
+     * 获取文件保存地址
+     * @return
+     */
+    public static String getFileTargetPath(Context context, String fileName){
+        String targetPath;
+        if(null != getExternalStorageDirectory()){
+            File file = new File(getExternalStorageDirectory() + File.separator + getAppName(context));
+            if(!file.exists()){
+                file.mkdir();
+            }
+            targetPath = file.getAbsolutePath() + File.separator + fileName;
+        }else{
+            targetPath = null;
+        }
+        return targetPath;
+    }
+
+    /**
+     * 获取应用程序名
+     * @param context
+     * @return
+     */
+    public static String getAppName(Context context){
+        PackageManager pm = context.getPackageManager();
+        return context.getApplicationInfo().loadLabel(pm).toString();
+    }
+
 }
