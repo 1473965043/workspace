@@ -8,11 +8,6 @@ package com.hq.fiveonejrq.jrq.common.bean;
 public class FileDownBean {
 
     /**
-     * 是否下载完成
-     */
-    private boolean isDownFinished = false;
-
-    /**
      * 文件下载远程地址
      */
     private String path;
@@ -30,14 +25,6 @@ public class FileDownBean {
     public FileDownBean(String path, String targetPath) {
         this.path = path;
         this.targetPath = targetPath;
-    }
-
-    public boolean isDownFinished() {
-        return isDownFinished;
-    }
-
-    public void setDownFinished(boolean downFinished) {
-        isDownFinished = downFinished;
     }
 
     public String getPath() {

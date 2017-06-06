@@ -80,9 +80,8 @@ public class DownThread extends Thread{
             byte[] buffer = new byte[1024];
             while ((len = is.read(buffer)) != -1){
                 raf.write(buffer, 0, len);
-                total += len;
                 if(mOnLengthChangeListenenr != null){
-                    mOnLengthChangeListenenr.onProgress(total);
+                    mOnLengthChangeListenenr.onProgress(len);
                 }
             }
             is.close();

@@ -1,7 +1,6 @@
 package com.hq.fiveonejrq.jrq.common.Utils;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.hq.fiveonejrq.jrq.common.bean.DownThread;
 import com.hq.fiveonejrq.jrq.common.bean.FileDownBean;
