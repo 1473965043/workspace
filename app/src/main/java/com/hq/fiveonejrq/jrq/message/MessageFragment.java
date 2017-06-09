@@ -170,19 +170,25 @@ public class MessageFragment extends Fragment {
 
         @Override
         public void onCompleted(String targetPath) {
-            new AlertDialog.Builder(getActivity()).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+            getActivity().runOnUiThread(new Runnable() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                public void run() {
+                    new AlertDialog.Builder(getActivity()).setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
 
-                }
-            })
-            .setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
+                            .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
 
+                                }
+                            })
+                            .create();
                 }
-            })
-            .show();
+            });
+
             getActivity().unbindService(mConnection);
             mHandler.sendEmptyMessage(0);
         }

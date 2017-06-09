@@ -1,12 +1,8 @@
 package com.hq.fiveonejrq.jrq.job;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
-import android.view.ViewGroup;
-
 import java.util.ArrayList;
 
 /**
@@ -16,7 +12,7 @@ import java.util.ArrayList;
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
     /**
-     * 数据集合
+     * item fragment集合
      */
     private ArrayList<Fragment> list;
 

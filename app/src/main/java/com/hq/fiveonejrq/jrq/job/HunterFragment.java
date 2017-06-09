@@ -48,7 +48,7 @@ public class HunterFragment extends Fragment {
         recyclerView.setAdapter(new MyAdapter());
     }
 
-    class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHodler>{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHodler>{
 
         @Override
         public ViewHodler onCreateViewHolder(ViewGroup parent, int viewType) {

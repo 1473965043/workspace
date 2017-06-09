@@ -117,6 +117,17 @@ public class JobsFragment extends Fragment {
         jobSearch.setOnClickListener(listener);
         enterprise.setOnClickListener(listener);
         hunter.setOnClickListener(listener);
+        enterprise.setSelected(true);
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData(){
+        setPopupWindowData(3);
+        fragmentList.add(hunterJobs);
+        fragmentList.add(companyJobs);
+        mViewPager.setAdapter(new MyPagerAdapter(getChildFragmentManager(), fragmentList));
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -140,17 +151,6 @@ public class JobsFragment extends Fragment {
             }
         });
         mViewPager.setCurrentItem(0);
-        enterprise.setSelected(true);
-    }
-
-    /**
-     * 初始化数据
-     */
-    private void initData(){
-        setPopupWindowData(3);
-        fragmentList.add(hunterJobs);
-        fragmentList.add(companyJobs);
-        mViewPager.setAdapter(new MyPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList));
     }
 
     /**

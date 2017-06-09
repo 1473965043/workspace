@@ -212,12 +212,12 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_chatto_bg_normal.9.png"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_msg_state_fail_resend.png",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_msg_state_fail_resend.png"
-    },
-    {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_record_animate_12.png",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_record_animate_12.png"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ease_msg_state_fail_resend.png",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ease_msg_state_fail_resend.png"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ee_15.png",

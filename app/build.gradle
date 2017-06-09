@@ -10,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+//        ndk {
+//            abiFilters "armeabi", "armeabi -v7a", "x86", "mips"
+//        }
+//        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -20,6 +24,9 @@ android {
 
     repositories {
         jcenter()
+//        flatDir {
+//            dirs 'libs'
+//        }
     }
 
     sourceSets {
@@ -50,4 +57,12 @@ dependencies {
 //    compile 'com.7heaven.widgets:segmentcontrol:1.16'
     /** 二维码 */
     compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+
+
+//    //汇付
+//    compile(name:'sunflower_sdk',ext:'aar')
+//    compile 'com.google.code.gson:gson:2.6.2'
+//    compile 'org.xutils:xutils:3.3.34'
+//    compile 'com.facebook.fresco:fresco:0.12.0'
+//    compile 'com.android.support:multidex:1.0.1'
 }
