@@ -90,6 +90,11 @@ public class MyRecyclerView extends LinearLayout{
     private int initialY = 0;
 
     /**
+     * 移动过程中Y方向上的坐标
+     */
+    private int moveY = 0;
+
+    /**
      * 滑动时的始末间距
      */
     private int distance = 0;
@@ -181,126 +186,71 @@ public class MyRecyclerView extends LinearLayout{
         recyclerView.layout(0, distance, loadingViewWidth, distance + getHeight());
     }
 
-    /**
-     * 事件消费
-     * 返回true则代表消费了事件
-     * @param event 事件
-     * @return
-     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        Log.e("result", "onTouchEvent");
-//        switch (event.getAction()){
-//            case MotionEvent.ACTION_DOWN:
-//                //获取按下去的Y坐标
-//                Log.e("result", "ACTION_DOWN");
-//                initialY = (int) event.getY();
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                //移动的变化量
-//                Log.e("result", "ACTION_MOVE");
-//                int moveY = (int) (event.getY() - initialY);
-//                //赋值distance
-//                distance = moveY;
-//                //recyclerView到达顶部
-//                if(!recyclerView.canScrollVertically(-1)){
-//                    if(refreshing){//正在刷新
-//                        changeDownLayout(refreshDist + distance/2);
-//                    }else{
-//                        changeDownLayout(distance/2);
-//                    }
-//                }
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                Log.e("result", "ACTION_UP");
-//                changeUpLayout(distance);
-//                break;
-//        }
-        return super.onTouchEvent(event);
-    }
-
-    /**
-     * 事件拦截 返回true则表示拦截向下传递事件，自己消费事件调用onTouchEvent
-     * @param ev
-     * @return
-     */
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.e("result", "onInterceptTouchEvent");
-//        if(ev.getAction() == MotionEvent.ACTION_MOVE){
-//            if(recyclerView.getTop()<0) {
-//                Log.e("result", "top == " + recyclerView.getTop());
-//                return false;
-//            }else{
-//
-//            }
-//        }
-//        switch (ev.getAction()){
-//            case MotionEvent.ACTION_DOWN:
-//                //获取按下去的Y坐标
-//                Log.e("result", "ACTION_DOWN");
-//                initialY = (int) ev.getY();
-//                break;
-//            case MotionEvent.ACTION_MOVE:
-//                //移动的变化量
-//                Log.e("result", "ACTION_MOVE");
-//                int moveY = (int) (ev.getY() - initialY);
-//                //赋值distance
-//                distance = moveY;
-//                //recyclerView到达顶部
-//                if(!recyclerView.canScrollVertically(-1)){
-//                    if(refreshing){//正在刷新
-//                        changeDownLayout(refreshDist + distance/2);
-//                    }else{
-//                        changeDownLayout(distance/2);
-//                    }
-//                }
-//                break;
-//            case MotionEvent.ACTION_UP:
-//                Log.e("result", "ACTION_UP");
-//                changeUpLayout(distance);
-//                break;
-//        }  
-
-        return super.onInterceptTouchEvent(ev);
-    }
-
-    /**
-     * 事件分发 super.dispatchTouchEvent(ev)源码里有调用onInterceptTouchEvent方法的代码
-     * 不执行super.dispatchTouchEvent(ev),则不会调用自己的onInterceptTouchEvent方法
-     * @param ev
-     * @return
-     */
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.e("result", "dispatchTouchEvent");
-        switch (ev.getAction()){
+        if(consumeStatus){
+            return super.onTouchEvent(event);
+        }
+        switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 //获取按下去的Y坐标
-                Log.e("result", "ACTION_DOWN");
-                initialY = (int) ev.getY();
+                initialY = (int) event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                //移动的变化量
-                Log.e("result", "ACTION_MOVE");
-                int moveY = (int) (ev.getY() - initialY);
+                int dy = (int) (event.getY() - moveY);
+                moveY = (int) event.getY();
                 //赋值distance
-                distance = moveY;
-                //recyclerView到达顶部
-                if(!recyclerView.canScrollVertically(-1)){
-                    if(refreshing){//正在刷新
-                        changeDownLayout(refreshDist + distance/2);
+                distance = (int) (event.getY() - initialY);
+                if(dy > 0){//下滑
+                    if(!recyclerView.canScrollVertically(-1)){//recyclerView到达顶部，达到下拉刷新的条件
+                        if(refreshing){//正在刷新
+                            changeDownLayout(refreshDist + distance/2);
+                        }else{
+                            changeDownLayout(distance/2);
+                        }
                     }else{
-                        changeDownLayout(distance/2);
+                        //在onInterceptTouchEvent不拦截触摸事件
                     }
+                }else{//上滑
+                    if(refreshing){//正在刷新
+                        distance = refreshDist + distance/2;
+                    }else{
+                        distance = distance/2;
+                    }
+                    if(distance < 0){
+                        int position = Math.abs(distance);
+                        recyclerView.scrollTo(0, position);
+                        distance = 0;
+                        consumeStatus = true;
+                        moveStatus = true;
+                    }
+                    changeDownLayout(distance);
                 }
+                Log.e("result", "onTouchEvent == " + MotionEvent.ACTION_MOVE);
                 break;
             case MotionEvent.ACTION_UP:
-                Log.e("result", "ACTION_UP");
                 changeUpLayout(distance);
                 break;
         }
-        return super.dispatchTouchEvent(ev);
+        Log.e("result", "consumeStatus == " + consumeStatus);
+        return !consumeStatus;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.e("result", "onInterceptTouchEvent");
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                Log.e("onInterceptTouchEvent", "ACTION_DOWN");
+                return !moveStatus;
+            case MotionEvent.ACTION_MOVE:
+                Log.e("onInterceptTouchEvent", "ACTION_MOVE");
+                return false;
+            case MotionEvent.ACTION_UP:
+                Log.e("onInterceptTouchEvent", "ACTION_UP");
+                return false;
+        }
+        return super.onInterceptTouchEvent(ev);
     }
 
     /**
