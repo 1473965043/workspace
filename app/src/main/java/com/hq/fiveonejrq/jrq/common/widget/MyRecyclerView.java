@@ -188,9 +188,7 @@ public class MyRecyclerView extends LinearLayout{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(consumeStatus){
-            return super.onTouchEvent(event);
-        }
+        Log.i("result", "onTouchEvent");
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 //获取按下去的Y坐标
@@ -202,27 +200,34 @@ public class MyRecyclerView extends LinearLayout{
                 //赋值distance
                 distance = (int) (event.getY() - initialY);
                 if(dy > 0){//下滑
-                    if(!recyclerView.canScrollVertically(-1)){//recyclerView到达顶部，达到下拉刷新的条件
-                        if(refreshing){//正在刷新
-                            changeDownLayout(refreshDist + distance/2);
-                        }else{
-                            changeDownLayout(distance/2);
-                        }
-                    }else{
-                        //在onInterceptTouchEvent不拦截触摸事件
+                    if(recyclerView.canScrollVertically(-1)){
+                        int position = recyclerView.getScrollY() - dy;
+                        recyclerView.scrollBy(0, position);
+                       break;
                     }
+                    if(distance > 0){//recyclerView到达顶部，达到下拉刷新的条件
+                        if(refreshing){//正在刷新
+                            distance = refreshDist + distance/2;
+                        }else{
+                            distance = distance/2;
+                        }
+                    }
+                    changeDownLayout(distance);
+                    Log.i("result", "dy > 0");
                 }else{//上滑
                     if(refreshing){//正在刷新
                         distance = refreshDist + distance/2;
                     }else{
                         distance = distance/2;
                     }
-                    if(distance < 0){
-                        int position = Math.abs(distance);
-                        recyclerView.scrollTo(0, position);
+                    if(distance < 0){//滑动变化量小于零，表示滑到初始位置的上方
+                        int position = Math.abs(dy);
+//                        ((LinearLayoutManager)recyclerView.getLayoutManager()).scrollToPositionWithOffset(0, position);
+                        recyclerView.scrollBy(0, position);
                         distance = 0;
                         consumeStatus = true;
                         moveStatus = true;
+                        Log.i("result", "dy < 0");
                     }
                     changeDownLayout(distance);
                 }
@@ -238,17 +243,13 @@ public class MyRecyclerView extends LinearLayout{
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        Log.e("result", "onInterceptTouchEvent");
-        switch (ev.getAction()){
-            case MotionEvent.ACTION_DOWN:
-                Log.e("onInterceptTouchEvent", "ACTION_DOWN");
-                return !moveStatus;
-            case MotionEvent.ACTION_MOVE:
-                Log.e("onInterceptTouchEvent", "ACTION_MOVE");
-                return false;
-            case MotionEvent.ACTION_UP:
-                Log.e("onInterceptTouchEvent", "ACTION_UP");
-                return false;
+        Log.e("result", "onInterceptTouchEvent == " + moveStatus);
+        if(ev.getAction() == MotionEvent.ACTION_DOWN){
+            Log.e("result", "ACTION_DOWN");
+            return !moveStatus;
+        }else if(ev.getAction() == MotionEvent.ACTION_MOVE){
+            Log.e("result", "ACTION_MOVE");
+            return !moveStatus;
         }
         return super.onInterceptTouchEvent(ev);
     }
