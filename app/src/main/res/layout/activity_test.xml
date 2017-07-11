@@ -8,11 +8,20 @@
 
     <Button
         android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#11CEF2"
-        android:text="点击"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/white"/>
+        android:layout_width="@dimen/x350"
+        android:layout_height="140dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onclick"
+        android:background="#FAEB00"
+        />
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_below="@+id/btn"
+        android:background="#55FF0000"
+        android:layout_centerHorizontal="true"
+        />
 </RelativeLayout>

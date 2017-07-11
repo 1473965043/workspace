@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.WindowManager;
 
 import java.io.File;
+import java.lang.reflect.Method;
 
 /**
  * Created by guodong on 2017/3/13.
@@ -106,4 +109,38 @@ public class Util {
         return context.getApplicationInfo().loadLabel(pm).toString();
     }
 
+    /**
+     * @param context
+     * @return 获取屏幕原始尺寸高度，包括虚拟功能键高度
+     */
+    public static int getTotalHeight(Context context) {
+        int dpi = 0;
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        @SuppressWarnings("rawtypes")
+        Class c;
+        try {
+            c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked")
+            Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, displayMetrics);
+            dpi = displayMetrics.heightPixels;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dpi;
+    }
+
+    /**
+     * @param context
+     * @return 获取屏幕内容高度不包括虚拟按键
+     */
+    public static int getScreenHeight(Context context) {
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.heightPixels;
+    }
 }

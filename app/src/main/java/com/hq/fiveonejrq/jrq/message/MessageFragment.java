@@ -78,9 +78,9 @@ public class MessageFragment extends Fragment {
                 deleteMkdir();
             }
         });
+        Toast.makeText(getActivity(), screenWidth+"与"+screenHeight, Toast.LENGTH_SHORT).show();
         //绑定服务
         getActivity().bindService(new Intent(getActivity(), DownService.class), mConnection, Context.BIND_AUTO_CREATE);
-        Toast.makeText(getActivity(), screenWidth+"与"+screenHeight, Toast.LENGTH_SHORT).show();
         return view;
     }
 
