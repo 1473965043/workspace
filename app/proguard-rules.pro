@@ -81,3 +81,7 @@
 # -----------------------  环信代码混淆  ---------------------------
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
+
+# ---------------------  retrofit网络框架  _________________________
+-dontwarn okio.**
+-dontwarn javax.annotation.**

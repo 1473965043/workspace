@@ -2,13 +2,17 @@ package com.hq.fiveonejrq.jrq.common.Utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Environment;
+import android.support.compat.BuildConfig;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+
+import com.hq.fiveonejrq.jrq.MyApplication;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -45,13 +49,13 @@ public class Util {
 
     /**
      * 获取状态栏高度
+     * @return -1代表获取失败
      */
     public static int getStatusBarHeight(Context context) {
         //获取status_bar_height资源的ID
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
             //根据资源ID获取响应的尺寸值
-
             return pxTodp(context, context.getResources().getDimensionPixelSize(resourceId));
         }
         return -1;
@@ -142,5 +146,57 @@ public class Util {
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.heightPixels;
+    }
+
+    /**
+     * 获取系统build.gradle文件中的versionName
+     * @return 版本name
+     */
+    public static String getAppVersionName(){
+        String versionName = BuildConfig.VERSION_NAME;
+        return versionName;
+    }
+
+    /**
+     * 获取系统build.gradle文件中的versionCode
+     * @return 版本code
+     */
+    public static int getAppVersionCode(){
+        int versionCode = BuildConfig.VERSION_CODE;
+        return versionCode;
+    }
+
+    /**
+     * 获取系统androidManifest文件中的versionName
+     * @return 当前应用的版本name 返回""代表获取失败
+     */
+    public static String getVersionName() {
+        Context context = MyApplication.getInstance();
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            String versionName = info.versionName;
+            return versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * 获取系统androidManifest文件中的versionCode
+     * @return 当前应用的版本code 返回-1 代表获取失败
+     */
+    public static int getVersionCode() {
+        Context context = MyApplication.getInstance();
+        try {
+            PackageManager manager = context.getPackageManager();
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            int versionCode = info.versionCode;
+            return versionCode;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

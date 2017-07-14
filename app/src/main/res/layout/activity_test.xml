@@ -22,6 +22,7 @@
         android:layout_height="350dp"
         android:layout_below="@+id/btn"
         android:background="#55FF0000"
+        android:onClick="onclick1"
         android:layout_centerHorizontal="true"
         />
 </RelativeLayout>
