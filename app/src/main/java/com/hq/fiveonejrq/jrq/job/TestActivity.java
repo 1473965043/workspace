@@ -7,6 +7,10 @@ import android.widget.Toast;
 
 import com.hq.fiveonejrq.jrq.R;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,7 +28,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 import rx.Observer;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
@@ -41,24 +44,57 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void onclick1(View view){
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(url)
-                .build();
-        retrofit.create(Api.class).tiYu("10", "10")
-                .enqueue(new Callback<News>() {
-                    @Override
-                    public void onResponse(Call<News> call, Response<News> response) {
-                        Log.e("onResponse:", response.body().toString());
-                    }
-
-                    @Override
-                    public void onFailure(Call<News> call, Throwable t) {
-                        Log.e("onResponse:", t.getMessage());
-                    }
-                });
+        printConstructor(JobBean.class.getName());
     }
-    
+
+    public static void printConstructor(String className) {
+        Log.i("Reflect", className);
+        try {
+            Class<?> aClass = Class.forName(className);
+            Constructor<?>[] constructors = aClass.getConstructors();
+            for (int i = 0; i < constructors.length; i++) {
+                Log.i("Reflect", "公共构造方法：  "+constructors[i]);
+            }
+            Constructor<?>[] declaredConstructors = aClass.getDeclaredConstructors();
+            for (int i = 0; i < declaredConstructors.length; i++) {
+                Log.i("Reflect", "所有构造方法：  "+declaredConstructors[i]);
+            }
+            Log.i("Reflect", "===============父类与父类接口========================");
+            Log.i("Reflect", "父类：" + aClass.getSuperclass().getName());
+            Class<?> intes[] = aClass.getInterfaces();
+            for (int i = 0; i < intes.length; i++) {
+                Log.i("Reflect", "所有父接口：" + intes[i]);
+            }
+            Log.i("Reflect", "===============本类属性========================");
+            java.lang.reflect.Field[] field = aClass.getDeclaredFields();
+            for (int i = 0; i < field.length; i++) {
+                String modifier = Modifier.toString(field[i].getModifiers());//属性修饰符
+                String typeName = field[i].getType().getName();//属性类型
+                String fieldName = field[i].getName();//属性名
+                Log.i("Reflect", "本类属性： "+ modifier + typeName + fieldName);
+            }
+            Log.i("Reflect", "===============父类属性========================");
+            java.lang.reflect.Field[] fields = aClass.getFields();
+            for (int i = 0; i < fields.length; i++) {
+                String modifier = Modifier.toString(fields[i].getModifiers());//属性修饰符
+                String typeName = fields[i].getType().getName();//属性类型
+                String fieldName = fields[i].getName();//属性名
+                Log.i("Reflect", "父类属性： "+ modifier + typeName + fieldName);
+            }
+            Log.i("Reflect", "===============调用类方法========================");
+            Method method = aClass.getMethod("publics", String.class);
+            method.invoke(aClass.getDeclaredConstructor().newInstance(), "1");
+            //调用私有构造函数必须加c.setAccessible(true);
+            Constructor c = aClass.getDeclaredConstructor(String.class);
+            c.setAccessible(true);
+            method.invoke(c.newInstance("1"), "1");
+            method.invoke(aClass.getDeclaredConstructor(int.class).newInstance(1), "1");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void onclick(View view){
         // 创建retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
