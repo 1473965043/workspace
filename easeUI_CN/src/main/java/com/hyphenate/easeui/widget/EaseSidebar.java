@@ -98,7 +98,7 @@ public class EaseSidebar extends View{
     		}else if(adapter instanceof SectionIndexer){
     		    sectionIndex = (SectionIndexer)adapter;
     		}else{
-    		    throw new RuntimeException("listview sets adapter does not implement SectionIndexer interface");
+    		    throw new RuntimeException("listview sets adapter does not implement SectionIndexer interfaces");
     		}
 		}
 		String[] adapterSections = (String[]) sectionIndex.getSections();

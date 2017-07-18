@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +35,7 @@ import rx.schedulers.Schedulers;
 
 public class TestActivity extends AppCompatActivity {
 
-    private String url = "http://apis.baidu.com/txapi/";
+    private String url = "https://www.jfcaifu.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,30 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void onclick1(View view){
-        printConstructor(JobBean.class.getName());
+        // 创建retrofit对象
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())//解析方法
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//设置支持Rxjava
+                .baseUrl(url)//主机地址
+                .build();
+        String type = "app/index/indexBorrowsNew.html?appkey=V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D&signa=CA3B4D88E89FC21BB4077F66C0FC1E87&ts=1500371481286&user_id=20657&sgn=D090EE4AECAA8D492579689CFFC85D08";
+        Call<Map<Object, Object>> call = retrofit.create(Api.class)
+        .tiYu(type);
+        call.enqueue(new Callback<Map<Object, Object>>() {
+            @Override
+            public void onResponse(Call<Map<Object, Object>> call, Response<Map<Object, Object>> response) {
+                Log.i("onResponse", response.body().toString());
+            }
+
+            @Override
+            public void onFailure(Call<Map<Object, Object>> call, Throwable t) {
+                Log.e("onResponse", t.getMessage());
+            }
+        });
+//        printConstructor(JobBean.class.getName());
     }
 
+    //反射机制
     public static void printConstructor(String className) {
         Log.i("Reflect", className);
         try {
@@ -94,7 +116,7 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-
+    //RxJava与Retrofit结合使用
     public void onclick(View view){
         // 创建retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
@@ -147,9 +169,8 @@ public class TestActivity extends AppCompatActivity {
         @GET("{type}/{type}")
         Observable<News> tiYu(@Path("type") String type, @Query("num") String num,@Query("page")String page);
 
-        @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
-        @GET("world/world")
-        Call<News> tiYu(@Query("num") String num,@Query("page")String page);
+        @GET("{type}")
+        Call<Map<Object, Object>> tiYu(@Path("type") String type);
 
         @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
         @GET("{type1}/{type2}")
