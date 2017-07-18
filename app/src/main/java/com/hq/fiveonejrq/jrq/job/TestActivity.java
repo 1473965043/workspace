@@ -11,9 +11,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,12 +25,15 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,11 +44,27 @@ public class TestActivity extends AppCompatActivity {
 
     private String url = "https://www.jfcaifu.com/";
 
+    private OkHttpClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         getSupportActionBar().hide();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                //打印retrofit日志
+                Log.d("Retrofit",message);
+            }
+        });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        client = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .connectTimeout(10000, TimeUnit.SECONDS)
+                .readTimeout(10000, TimeUnit.SECONDS)
+                .writeTimeout(10000, TimeUnit.SECONDS)
+                .build();
     }
 
     public void onclick1(View view){
@@ -50,10 +73,17 @@ public class TestActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//设置支持Rxjava
                 .baseUrl(url)//主机地址
+                .client(client)
                 .build();
         String type = "app/index/indexBorrowsNew.html?appkey=V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D&signa=CA3B4D88E89FC21BB4077F66C0FC1E87&ts=1500371481286&user_id=20657&sgn=D090EE4AECAA8D492579689CFFC85D08";
+        Map<String, String> map = new HashMap<>();
+        map.put("appkey", "V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D");
+        map.put("signa", "CA3B4D88E89FC21BB4077F66C0FC1E87");
+        map.put("ts", "1500371481286");
+        map.put("user_id", "20657");
+        map.put("sgn", "D090EE4AECAA8D492579689CFFC85D08");
         Call<Map<Object, Object>> call = retrofit.create(Api.class)
-        .tiYu(type);
+        .yes("https://www.jfcaifu.com/app/index/indexBorrowsNew.html?appkey=V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D&signa=CA3B4D88E89FC21BB4077F66C0FC1E87&ts=1500371481286&user_id=20657&sgn=D090EE4AECAA8D492579689CFFC85D08");
         call.enqueue(new Callback<Map<Object, Object>>() {
             @Override
             public void onResponse(Call<Map<Object, Object>> call, Response<Map<Object, Object>> response) {
@@ -65,6 +95,7 @@ public class TestActivity extends AppCompatActivity {
                 Log.e("onResponse", t.getMessage());
             }
         });
+
 //        printConstructor(JobBean.class.getName());
     }
 
@@ -157,29 +188,25 @@ public class TestActivity extends AppCompatActivity {
     public interface Api {
 
         @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
-        @GET("world/world")
-        Call<News> getNews(@Query("num") String num,@Query("page")String page);
-
-        @FormUrlEncoded
-        @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
-        @POST("world/world")
-        Call<News> postNews(@Field("num") String num, @Field("page")String page);
-
-        @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
         @GET("{type}/{type}")
         Observable<News> tiYu(@Path("type") String type, @Query("num") String num,@Query("page")String page);
 
-        @GET("{type}")
-        Call<Map<Object, Object>> tiYu(@Path("type") String type);
+        /**
+         * 半静态的url地址请求
+         * 适合单节url，多节url中newsId字段“/”会转为"%2F"
+         * @param newsId
+         * @return
+         */
+        @GET("app/{newsId}")
+        Call<Map<Object, Object>> tiYu(@Path("newsId") String newsId, @QueryMap Map<String, String> map);
 
-        @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
-        @GET("{type1}/{type2}")
-        Call<News> tiYu(@Path("type1") String type1,@Path("type2") String type2,  @Query("num") String num,@Query("page")String page);
-
-        @FormUrlEncoded
-        @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
-        @POST("keji/keji")
-        Call<News> keji(@Query("num") String num,@Query("page")String page);
+        /**
+         * 动态的url地址请求
+         * @param url
+         * @return
+         */
+        @GET
+        Call<Map<Object, Object>> yes(@Url String url);
 
     }
 
