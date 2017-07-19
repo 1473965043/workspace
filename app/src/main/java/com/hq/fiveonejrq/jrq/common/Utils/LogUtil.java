@@ -11,7 +11,7 @@ public class LogUtil {
     /** debug模式 */
     private static boolean debug = false;
 
-    public static String NETWORK = "netword";
+    public static String NETWORK = "network";
 
     public static String ACTIVITY = "activity";
 

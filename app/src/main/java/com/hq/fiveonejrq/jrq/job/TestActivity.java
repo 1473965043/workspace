@@ -3,16 +3,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.hq.fiveonejrq.jrq.R;
+import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
+import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
+import com.hq.fiveonejrq.jrq.common.bean.MySubscriber;
+import com.hq.fiveonejrq.jrq.common.interfaces.BaseResultListener;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -24,25 +24,17 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 import rx.Observable;
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
 
 public class TestActivity extends AppCompatActivity {
 
     private String url = "https://www.jfcaifu.com/";
+
+    private String path = "app/index/indexBorrowsNew.html?appkey=V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D&signa=CA3B4D88E89FC21BB4077F66C0FC1E87&ts=1500371481286&user_id=20657&sgn=D090EE4AECAA8D492579689CFFC85D08";
 
     private OkHttpClient client;
 
@@ -67,7 +59,7 @@ public class TestActivity extends AppCompatActivity {
                 .build();
     }
 
-    public void onclick1(View view){
+    public void test3(View view){
         // 创建retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
@@ -75,15 +67,8 @@ public class TestActivity extends AppCompatActivity {
                 .baseUrl(url)//主机地址
                 .client(client)
                 .build();
-        String type = "app/index/indexBorrowsNew.html?appkey=V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D&signa=CA3B4D88E89FC21BB4077F66C0FC1E87&ts=1500371481286&user_id=20657&sgn=D090EE4AECAA8D492579689CFFC85D08";
-        Map<String, String> map = new HashMap<>();
-        map.put("appkey", "V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D");
-        map.put("signa", "CA3B4D88E89FC21BB4077F66C0FC1E87");
-        map.put("ts", "1500371481286");
-        map.put("user_id", "20657");
-        map.put("sgn", "D090EE4AECAA8D492579689CFFC85D08");
         Call<Map<Object, Object>> call = retrofit.create(Api.class)
-        .yes("https://www.jfcaifu.com/app/index/indexBorrowsNew.html?appkey=V%2FSQ%2FyTyYjDmNLXB2unELw%3D%3D&signa=CA3B4D88E89FC21BB4077F66C0FC1E87&ts=1500371481286&user_id=20657&sgn=D090EE4AECAA8D492579689CFFC85D08");
+        .reftrofit(url + path);
         call.enqueue(new Callback<Map<Object, Object>>() {
             @Override
             public void onResponse(Call<Map<Object, Object>> call, Response<Map<Object, Object>> response) {
@@ -95,8 +80,10 @@ public class TestActivity extends AppCompatActivity {
                 Log.e("onResponse", t.getMessage());
             }
         });
+    }
 
-//        printConstructor(JobBean.class.getName());
+    public void test2(View view){
+        printConstructor(JobBean.class.getName());
     }
 
     //反射机制
@@ -148,48 +135,22 @@ public class TestActivity extends AppCompatActivity {
     }
 
     //RxJava与Retrofit结合使用
-    public void onclick(View view){
-        // 创建retrofit对象
-        Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())//解析方法
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//设置支持Rxjava
-                .baseUrl(url)//主机地址
-                .build();
-        // 实例化我们的moviesService对象
-        retrofit.create(Api.class).tiYu("world", "10", "10")
-        .subscribeOn(Schedulers.io())//添加耗时线程
-        .doOnSubscribe(new Action0() {
+    public void test1(View view){
+        BaseResultListener resultListener = new BaseResultListener() {
             @Override
-            public void call() {
-                Toast.makeText(TestActivity.this, "初始化", Toast.LENGTH_SHORT).show();
-            }
-        })
-        .subscribeOn(AndroidSchedulers.mainThread())//初始化线程
-        .observeOn(AndroidSchedulers.mainThread())//主线程显示数据
-        .subscribe(new Observer<News>() {
-            @Override
-            public void onCompleted() {
-
+            public void onSuccess(String response) {
+                LogUtil.logI("onResponse", response);
             }
 
             @Override
-            public void onError(Throwable e) {
-                Log.i("onResponse:", e.getMessage());
+            public void onError(String error) {
+                LogUtil.logE("onResponse", error);
             }
-
-            @Override
-            public void onNext(News news) {
-                Log.i("onResponse:", "结果");
-            }
-        });
-
+        };
+        RetrofitManage.getInstance().addTask(url+path, new MySubscriber(resultListener));
     }
 
     public interface Api {
-
-        @Headers({"apikey:81bf9da930c7f9825a3c3383f1d8d766" ,"Content-Type:application/json"})
-        @GET("{type}/{type}")
-        Observable<News> tiYu(@Path("type") String type, @Query("num") String num,@Query("page")String page);
 
         /**
          * 半静态的url地址请求
@@ -198,7 +159,7 @@ public class TestActivity extends AppCompatActivity {
          * @return
          */
         @GET("app/{newsId}")
-        Call<Map<Object, Object>> tiYu(@Path("newsId") String newsId, @QueryMap Map<String, String> map);
+        Call<Map<Object, Object>> reftrofit(@Path("newsId") String newsId, @QueryMap Map<String, String> map);
 
         /**
          * 动态的url地址请求
@@ -206,49 +167,64 @@ public class TestActivity extends AppCompatActivity {
          * @return
          */
         @GET
-        Call<Map<Object, Object>> yes(@Url String url);
+        Call<Map<Object, Object>> reftrofit(@Url String url);
+
+        /**
+         * 与RxJava连用
+         * @param url
+         * @return
+         */
+        @GET
+        Observable<News> retrofitAndRxjava(@Url String url);
 
     }
 
     public class News {
 
-        public int code;
-        public String msg;
-        /**
-         * ctime : 2016-10-01 18:13
-         * title : 新加坡防长提南海争端：各国恐因渔船相持不下
-         * description : 搜狐国际
-         * picUrl : http://photocdn.sohu.com/20161001/Img469502343_ss.jpeg
-         * url : http://news.sohu.com/20161001/n469502342.shtml
-         */
+        double account;
+        double account_yes;
+        String name;
+        String appName;
 
-        public List<NewslistBean> newslist;
+        public double getAccount() {
+            return account;
+        }
 
-        public class NewslistBean {
-            public String ctime;
-            public String title;
-            public String description;
-            public String picUrl;
-            public String url;
+        public void setAccount(double account) {
+            this.account = account;
+        }
 
-            @Override
-            public String toString() {
-                return "NewslistBean{" +
-                        "ctime='" + ctime + '\'' +
-                        ", title='" + title + '\'' +
-                        ", description='" + description + '\'' +
-                        ", picUrl='" + picUrl + '\'' +
-                        ", url='" + url + '\'' +
-                        '}';
-            }
+        public double getAccount_yes() {
+            return account_yes;
+        }
+
+        public void setAccount_yes(double account_yes) {
+            this.account_yes = account_yes;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAppName() {
+            return appName;
+        }
+
+        public void setAppName(String appName) {
+            this.appName = appName;
         }
 
         @Override
         public String toString() {
             return "News{" +
-                    "code=" + code +
-                    ", msg='" + msg + '\'' +
-                    ", newslist=" + newslist +
+                    "account=" + account +
+                    ", account_yes=" + account_yes +
+                    ", name='" + name + '\'' +
+                    ", appName='" + appName + '\'' +
                     '}';
         }
     }

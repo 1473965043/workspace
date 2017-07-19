@@ -1,11 +1,19 @@
 package com.hq.fiveonejrq.jrq.common.bean;
 
+import com.hq.fiveonejrq.jrq.common.interfaces.RetrofitService;
+
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.http.Url;
+import rx.Observable;
+
 /**
  * Created by guodong on 2017/7/18.
  * app用户类
  */
 
-public class UserInfo {
+public class UserInfo<T> implements RetrofitService<T>{
 
     /** 登录状态 */
     private boolean isLogin = false;
@@ -71,5 +79,15 @@ public class UserInfo {
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    @Override
+    public Observable<T> onGetData(@Url String url) {
+        return null;
+    }
+
+    @Override
+    public Observable<Map<String, String>> onPostData(@Url String url) {
+        return null;
     }
 }

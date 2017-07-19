@@ -72,6 +72,12 @@ public class NetworkUtils {
     private static String TS = "ts";
     /** userId */
     private static String USERID = "user_id";
+    /** 设置超时 */
+    public static final int DEFAULT_TIMEOUT = 5;
+    /** POST请求 */
+    public static final String POST = "post";
+    /** GET请求 */
+    public static final String GET = "get";
 
     public static Map<String, String> getHttpBaseParame(){
         Map<String, String> map = new HashMap<>();
