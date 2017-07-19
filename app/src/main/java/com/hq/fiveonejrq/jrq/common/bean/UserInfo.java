@@ -13,7 +13,7 @@ import rx.Observable;
  * app用户类
  */
 
-public class UserInfo<T> implements RetrofitService<T>{
+public class UserInfo{
 
     /** 登录状态 */
     private boolean isLogin = false;
@@ -79,15 +79,5 @@ public class UserInfo<T> implements RetrofitService<T>{
 
     public void setSign(String sign) {
         this.sign = sign;
-    }
-
-    @Override
-    public Observable<T> onGetData(@Url String url) {
-        return null;
-    }
-
-    @Override
-    public Observable<Map<String, String>> onPostData(@Url String url) {
-        return null;
     }
 }

@@ -5,13 +5,13 @@ package com.hq.fiveonejrq.jrq.common.interfaces;
  * 网络请求结果监听器
  */
 
-public interface BaseResultListener {
+public interface BaseResultListener<T> {
 
     /**
      * 请求成功回调
-     * @param response 服务器返回的json数据
+     * @param t 服务器返回的数据
      */
-    void onSuccess(String response);
+    void onSuccess(T t);
 
     /**
      * 请求出错回调

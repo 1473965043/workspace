@@ -11,7 +11,7 @@ import rx.Subscriber;
  * Created by Administrator on 2017/7/19.
  */
 
-public class MySubscriber extends Subscriber<JSONObject> {
+public class MySubscriber<T> extends Subscriber<HttpResult<T>> {
 
     private BaseResultListener mBaseResultListener;
 
@@ -35,9 +35,9 @@ public class MySubscriber extends Subscriber<JSONObject> {
     }
 
     @Override
-    public void onNext(JSONObject object) {
+    public void onNext(HttpResult<T> object) {
         LogUtil.logD(LogUtil.NETWORK, object.toString());
-        mBaseResultListener.onSuccess(object.toString());
+        mBaseResultListener.onSuccess(object.getRes_data());
     }
 
     public MySubscriber(BaseResultListener listener){

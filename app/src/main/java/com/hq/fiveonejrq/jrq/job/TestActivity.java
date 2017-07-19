@@ -7,6 +7,7 @@ import android.view.View;
 import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
+import com.hq.fiveonejrq.jrq.common.bean.Entity;
 import com.hq.fiveonejrq.jrq.common.bean.MySubscriber;
 import com.hq.fiveonejrq.jrq.common.interfaces.BaseResultListener;
 
@@ -136,10 +137,10 @@ public class TestActivity extends AppCompatActivity {
 
     //RxJava与Retrofit结合使用
     public void test1(View view){
-        BaseResultListener resultListener = new BaseResultListener() {
+        BaseResultListener resultListener = new BaseResultListener<Entity>() {
             @Override
-            public void onSuccess(String response) {
-                LogUtil.logI("onResponse", response);
+            public void onSuccess(Entity entity) {
+                LogUtil.logI("onResponse", entity.getReadNumb()+"");
             }
 
             @Override
@@ -147,7 +148,7 @@ public class TestActivity extends AppCompatActivity {
                 LogUtil.logE("onResponse", error);
             }
         };
-        RetrofitManage.getInstance().addTask(url+path, new MySubscriber(resultListener));
+        RetrofitManage.getInstance().addTask(url+path, new MySubscriber<Entity>(resultListener));
     }
 
     public interface Api {

@@ -20,4 +20,22 @@ public class HttpResult<T> {
     public void setRes_code(int res_code) {
         this.res_code = res_code;
     }
+
+    public String getRes_msg() {
+        return res_msg;
+    }
+
+    public void setRes_msg(String res_msg) {
+        this.res_msg = res_msg;
+    }
+
+    public T getRes_data() {
+        return res_data;
+    }
+
+    public void setRes_data(T res_data) {
+        this.res_data = res_data;
+    }
+
+
 }

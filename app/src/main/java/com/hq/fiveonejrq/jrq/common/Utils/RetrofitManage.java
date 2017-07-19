@@ -69,37 +69,10 @@ public class RetrofitManage {
                 .baseUrl(AppUrlUtils.BASE_URL)
                 .client(okHttpClient)
                 .build();
-//        retrofit.create(RetrofitService.class).onGetData(url)
-//                .enqueue(new Callback<JSONObject>() {
-//                    @Override
-//                    public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-//                        LogUtil.logD(LogUtil.NETWORK, response.body().toString());
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<JSONObject> call, Throwable t) {
-//                        LogUtil.logD(LogUtil.NETWORK, t.toString());
-//                    }
-//                });
         retrofit.create(RetrofitService.class).onGetData(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<JSONObject>() {
-                    @Override
-                    public void onCompleted() {
-                        
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.logD(LogUtil.NETWORK, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(JSONObject object) {
-                        LogUtil.logD(LogUtil.NETWORK, object.toString());
-                    }
-                });
+                .subscribe(observer);
 //        toRxJava(retrofit.create(RetrofitService.class).onGetData(url), observer);
     }
 
