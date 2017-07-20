@@ -45,7 +45,7 @@ public class CustomConverterFactory extends Converter.Factory {
             //获取value的值
             String response = value.string();
             //返回json字符串
-            LogUtil.logD(LogUtil.NETWORK, response);
+            LogUtil.d(LogUtil.NETWORK, response);
             return response;
         }
     }
@@ -55,7 +55,7 @@ public class CustomConverterFactory extends Converter.Factory {
         @Override
         public RequestBody convert(T value) throws IOException {
             String string = new Gson().toJson(value);
-            LogUtil.logI(LogUtil.NETWORK, string);
+            LogUtil.i(LogUtil.NETWORK, string);
             return RequestBody.create(MediaType.parse("application/json; charset=UTF-8"), string);
         }
     }

@@ -27,21 +27,5 @@ public interface BaseResultListener<T> {
      */
     void onError(String error);
 
-    public class MyListener<T> implements BaseResultListener<T>{
-
-//        @Override
-//        public void onSuccess(String response, int code, String returnMsg) {
-//            return;
-//        }
-
-        @Override
-        public void onSuccess(T t, int code, String returnMsg) {
-            return;
-        }
-
-        @Override
-        public void onError(String error) {
-            return;
-        }
-    }
+    public abstract class MyListener<T> implements BaseResultListener<T>{}
 }
