@@ -2,40 +2,49 @@ package com.hq.fiveonejrq.jrq.common.bean;
 
 /**
  * Created by Administrator on 2017/7/19.
- * 网络数据类
+ * 网络基础数据类
+ * T为形参，从外部传入实体类
  */
 
-public class HttpResult<T> {
+public class HttpResult {
+
     //返回码
-    private int res_code;
+    private int error_code;
     //返回内容
-    private String res_msg;
+    private String reason;
     //数据对象
-    private T res_data;
+    private Entity result;
 
-    public int getRes_code() {
-        return res_code;
+    public int getError_code() {
+        return error_code;
     }
 
-    public void setRes_code(int res_code) {
-        this.res_code = res_code;
+    public void setError_code(int error_code) {
+        this.error_code = error_code;
     }
 
-    public String getRes_msg() {
-        return res_msg;
+    public String getReason() {
+        return reason;
     }
 
-    public void setRes_msg(String res_msg) {
-        this.res_msg = res_msg;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
-    public T getRes_data() {
-        return res_data;
+    public Entity getResult() {
+        return result;
     }
 
-    public void setRes_data(T res_data) {
-        this.res_data = res_data;
+    public void setResult(Entity result) {
+        this.result = result;
     }
 
-
+    @Override
+    public String toString() {
+        return "HttpResult{" +
+                "error_code=" + error_code +
+                ", reason='" + reason + '\'' +
+                ", result=" + result +
+                '}';
+    }
 }

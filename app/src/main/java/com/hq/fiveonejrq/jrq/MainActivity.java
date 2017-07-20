@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.hq.fiveonejrq.jrq.common.base.BaseActivity;
-import com.hq.fiveonejrq.jrq.common.base.BottomItemView;
+import com.hq.fiveonejrq.jrq.common.custom.BaseActivity;
+import com.hq.fiveonejrq.jrq.common.widget.BottomItemView;
 import com.hq.fiveonejrq.jrq.job.JobsFragment;
 import com.hq.fiveonejrq.jrq.homepage.HomePageFragment;
 import com.hq.fiveonejrq.jrq.message.MessageFragment;

@@ -1,13 +1,5 @@
 package com.hq.fiveonejrq.jrq.common.bean;
 
-import com.hq.fiveonejrq.jrq.common.interfaces.RetrofitService;
-
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.http.Url;
-import rx.Observable;
-
 /**
  * Created by guodong on 2017/7/18.
  * app用户类

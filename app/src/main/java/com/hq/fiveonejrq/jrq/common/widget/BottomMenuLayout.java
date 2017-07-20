@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.common.base.BottomItemView;
 
 import java.util.List;
 

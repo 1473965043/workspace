@@ -1,28 +1,75 @@
 package com.hq.fiveonejrq.jrq.common.bean;
 
-import org.json.JSONArray;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/19.
  */
 
 public class Entity {
-    JSONArray borrowList;
-    double readNumb;
+    List<Data> data;
+    String totalNum;
+    String pn;
+    String rn;
 
-    public JSONArray getBorrowList() {
-        return borrowList;
+    public List<Data> getData() {
+        return data;
     }
 
-    public void setBorrowList(JSONArray borrowList) {
-        this.borrowList = borrowList;
+    public void setData(List<Data> data) {
+        this.data = data;
     }
 
-    public double getReadNumb() {
-        return readNumb;
+    public String getTotalNum() {
+        return totalNum;
     }
 
-    public void setReadNumb(double readNumb) {
-        this.readNumb = readNumb;
+    public void setTotalNum(String totalNum) {
+        this.totalNum = totalNum;
+    }
+
+    public String getPn() {
+        return pn;
+    }
+
+    public void setPn(String pn) {
+        this.pn = pn;
+    }
+
+    public String getRn() {
+        return rn;
+    }
+
+    public void setRn(String rn) {
+        this.rn = rn;
+    }
+
+    public class Data{
+        String id;
+        String title;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        @Override
+        public String toString() {
+            return "Data{" +
+                    "id='" + id + '\'' +
+                    ", title='" + title + '\'' +
+                    '}';
+        }
     }
 }

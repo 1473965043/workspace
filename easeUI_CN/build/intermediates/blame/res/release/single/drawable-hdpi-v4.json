@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_23.png",
-        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ee_23.png"
-    },
-    {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_dx_checkbox_on.png",
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_dx_checkbox_on.png"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_23.png",
+        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ee_23.png"
     },
     {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_input_bar_bg_normal.9.png",
@@ -68,12 +68,12 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ee_3.png"
     },
     {
-        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_video_recorder_start_btn.png",
-        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_video_recorder_start_btn.png"
-    },
-    {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_record_animate_09.png",
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_record_animate_09.png"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_video_recorder_start_btn.png",
+        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_video_recorder_start_btn.png"
     },
     {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_icon_marka.png",
@@ -104,24 +104,24 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_settings_normal.png"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_32.png",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ee_32.png"
-    },
-    {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_mm_listitem_disable.9.png",
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_mm_listitem_disable.9.png"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_32.png",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ee_32.png"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_show_head_toast_bg.9.png",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_show_head_toast_bg.9.png"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_dx_checkbox_on.png",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_dx_checkbox_on.png"
-    },
-    {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_chatto_bg_focused.9.png",
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_chatto_bg_focused.9.png"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_dx_checkbox_on.png",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_dx_checkbox_on.png"
     },
     {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ee_18.png",
@@ -140,12 +140,12 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_record_animate_09.png"
     },
     {
-        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_settings_selected.png",
-        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_settings_selected.png"
-    },
-    {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_dx_checkbox_off.png",
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_dx_checkbox_off.png"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_settings_selected.png",
+        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_settings_selected.png"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_record_animate_03.png",
@@ -220,12 +220,12 @@
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_video_recorder_stop_btn.png"
     },
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_contact_list_selected.png",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_contact_list_selected.png"
-    },
-    {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_search_clear_normal.png",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_search_clear_normal.png"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_contact_list_selected.png",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\src\\main\\res\\drawable-hdpi\\ease_contact_list_selected.png"
     },
     {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ease_record_animate_10.png",

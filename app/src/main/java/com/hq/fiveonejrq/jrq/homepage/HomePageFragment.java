@@ -23,7 +23,7 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.common.base.BottomItemView;
+import com.hq.fiveonejrq.jrq.common.widget.BottomItemView;
 import com.hq.fiveonejrq.jrq.homepage.adapter.ActivityAdapter;
 import com.hq.fiveonejrq.jrq.homepage.adapter.AdvertisementAdapter;
 import com.hq.fiveonejrq.jrq.homepage.adapter.RecommendAdapter;

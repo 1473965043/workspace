@@ -1,17 +1,12 @@
 package com.hq.fiveonejrq.jrq.common.Utils;
 
-import com.hq.fiveonejrq.jrq.common.interfaces.RetrofitService;
+import com.hq.fiveonejrq.jrq.common.custom.CustomConverterFactory;
+import com.hq.fiveonejrq.jrq.common.interfaces.RetrofitApiService;
 
-import org.json.JSONObject;
-
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -64,16 +59,17 @@ public class RetrofitManage {
                 .build();
         //创建Retrofit实例，添加RxJavaCallAdapterFactory、GsonConverterFactory、以及baseUrl
         Retrofit retrofit = new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(CustomConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(AppUrlUtils.BASE_URL)
                 .client(okHttpClient)
                 .build();
-        retrofit.create(RetrofitService.class).onGetData(url)
+        retrofit.create(RetrofitApiService.class).onGetData(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
-//        toRxJava(retrofit.create(RetrofitService.class).onGetData(url), observer);
+//        toRxJava(retrofit.create(RetrofitApiService.class).onGetData(url), observer);
     }
 
     /**

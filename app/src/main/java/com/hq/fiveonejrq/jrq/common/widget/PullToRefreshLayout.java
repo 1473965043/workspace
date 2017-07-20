@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.common.base.Pullable;
+import com.hq.fiveonejrq.jrq.common.interfaces.Pullable;
 
 import java.util.Timer;
 import java.util.TimerTask;

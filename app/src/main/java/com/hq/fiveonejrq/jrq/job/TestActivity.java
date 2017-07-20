@@ -8,7 +8,7 @@ import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
 import com.hq.fiveonejrq.jrq.common.bean.Entity;
-import com.hq.fiveonejrq.jrq.common.bean.MySubscriber;
+import com.hq.fiveonejrq.jrq.common.custom.MySubscriber;
 import com.hq.fiveonejrq.jrq.common.interfaces.BaseResultListener;
 
 import java.lang.reflect.Constructor;
@@ -138,9 +138,10 @@ public class TestActivity extends AppCompatActivity {
     //RxJava与Retrofit结合使用
     public void test1(View view){
         BaseResultListener resultListener = new BaseResultListener<Entity>() {
+
             @Override
-            public void onSuccess(Entity entity) {
-                LogUtil.logI("onResponse", entity.getReadNumb()+"");
+            public void onSuccess(Entity entity, int code, String returnMsg) {
+                LogUtil.logD("onResponse", entity.getTotalNum()+"");
             }
 
             @Override
@@ -148,7 +149,7 @@ public class TestActivity extends AppCompatActivity {
                 LogUtil.logE("onResponse", error);
             }
         };
-        RetrofitManage.getInstance().addTask(url+path, new MySubscriber<Entity>(resultListener));
+        RetrofitManage.getInstance().addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1", new MySubscriber<Entity>(resultListener));
     }
 
     public interface Api {

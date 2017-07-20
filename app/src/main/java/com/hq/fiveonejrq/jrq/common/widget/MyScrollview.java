@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ScrollView;
 
-import com.hq.fiveonejrq.jrq.common.base.Pullable;
+import com.hq.fiveonejrq.jrq.common.interfaces.Pullable;
 
 /**
  * 屏蔽 滑动事件
