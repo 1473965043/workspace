@@ -127,4 +127,5 @@ public class PushReceiver extends BroadcastReceiver {
 //			LocalBroadcastManager.getInstance(context).sendBroadcast(msgIntent);
 //		}
 	}
+
 }

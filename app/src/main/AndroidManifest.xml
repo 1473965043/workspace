@@ -90,6 +90,8 @@
             tools:replace="screenOrientation" />
 
         <service android:name=".common.service.DownService"/>
+        <service android:name=".common.service.CancelService"/>
+        <service android:name=".common.service.DaemonService"/>
 
         <receiver
             android:name=".common.receiver.PushReceiver"

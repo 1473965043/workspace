@@ -43,6 +43,8 @@ public class MessageFragment extends Fragment {
      */
     private DownService.MyBinder mBinder;
 
+    private boolean isbindService = false;
+
     /**
      * 通知栏管理器
      */
@@ -80,7 +82,7 @@ public class MessageFragment extends Fragment {
         });
         Toast.makeText(getActivity(), screenWidth+"与"+screenHeight, Toast.LENGTH_SHORT).show();
         //绑定服务
-        getActivity().bindService(new Intent(getActivity(), DownService.class), mConnection, Context.BIND_AUTO_CREATE);
+        isbindService = getActivity().bindService(new Intent(getActivity(), DownService.class), mConnection, Context.BIND_AUTO_CREATE);
         return view;
     }
 
@@ -189,7 +191,10 @@ public class MessageFragment extends Fragment {
                 }
             });
 
-            getActivity().unbindService(mConnection);
+            if(mConnection != null && isbindService){
+                getActivity().unbindService(mConnection);
+                isbindService = false;
+            }
             mHandler.sendEmptyMessage(0);
         }
 
@@ -222,4 +227,12 @@ public class MessageFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mConnection != null){
+            getActivity().unbindService(mConnection);
+        }
+    }
 }
