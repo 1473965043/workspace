@@ -5,13 +5,16 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.widget.Toast;
 
+import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.service.DaemonService;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * Created by guodong on 2017/6/5.
@@ -27,15 +30,14 @@ public class MyApplication extends MultiDexApplication {
         super.onCreate();
         MultiDex.install(this);
         //初始化sdk
-        startService(new Intent(this, DaemonService.class));
         JPushInterface.setDebugMode(true);//正式版的时候设置false，关闭调试
         JPushInterface.init(this);
-        startService(new Intent(this, DaemonService.class));
-        PendingIntent intent = PendingIntent.getService(this, 0x123,
-                new Intent(this, DaemonService.class), PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
-        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, AlarmManager.INTERVAL_HALF_HOUR,
-                AlarmManager.INTERVAL_HALF_HOUR, intent);
+//        startService(new Intent(this, DaemonService.class));
+//        PendingIntent intent = PendingIntent.getService(this, 0x123,
+//                new Intent(this, DaemonService.class), PendingIntent.FLAG_UPDATE_CURRENT);
+//        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, AlarmManager.INTERVAL_HALF_HOUR,
+//                AlarmManager.INTERVAL_HALF_HOUR, intent);
         //建议添加tag标签，发送消息的之后就可以指定tag标签来发送了
         Set<String> set = new HashSet<>();
         set.add("guodong");

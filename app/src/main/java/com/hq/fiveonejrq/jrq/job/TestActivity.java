@@ -152,7 +152,8 @@ public class TestActivity extends AppCompatActivity {
                 LogUtil.e("onResponse", error);
             }
         };
-        RetrofitManage.getInstance().addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1", new MySubscriber(resultListener, Entity.class));
+        RetrofitManage.getInstance().addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1",
+                new MySubscriber<Entity>(resultListener, Entity.class));
     }
 
     public interface Api {

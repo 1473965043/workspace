@@ -108,10 +108,22 @@
             </intent-filter>
         </receiver>
 
-        <!-- 设置环信应用的AppKey -->
-        <meta-data
-            android:name="APP_CHANNEL"
-            android:value="${APP_CHANNEL_VALUE}"/>
+        <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
+        <!-- 若不启用该功能可删除该组件，将不拉起其他应用也不能被其他应用拉起 -->
+        <service
+            android:name="cn.jpush.android.service.DaemonService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter >
+                <action android:name="cn.jpush.android.intent.DaemonService" />
+                <category android:name="com.hq.fiveonejrq.jrq"/>
+            </intent-filter>
+        </service>
+
+        <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
+        <meta-data android:name="JPUSH_APPKEY" android:value="2ede49b590beb32a2ea39334"/>
+
+        <meta-data android:name="APP_CHANNEL" android:value="${APP_CHANNEL_VALUE}"/>
     </application>
 
 </manifest>

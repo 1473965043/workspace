@@ -30,7 +30,7 @@ public class ProtectService extends Service {
                             sPower = false;
                         }
                         SystemClock.sleep(1500);
-                        Log.d("AigeStudio", "ProtectService");
+                        Log.e("AigeStudio", "ProtectService");
                         startService(new Intent(ProtectService.this, DaemonService.class));
                     }
                 }

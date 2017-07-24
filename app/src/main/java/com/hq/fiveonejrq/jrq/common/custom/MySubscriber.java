@@ -1,16 +1,9 @@
 package com.hq.fiveonejrq.jrq.common.custom;
 
-import android.text.TextUtils;
-
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
-import com.hq.fiveonejrq.jrq.common.bean.Entity;
 import com.hq.fiveonejrq.jrq.common.bean.HttpResult;
 import com.hq.fiveonejrq.jrq.common.interfaces.BaseResultListener;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -21,7 +14,7 @@ import rx.Subscriber;
  * Created by Administrator on 2017/7/19.
  */
 
-public class MySubscriber extends Subscriber<String> {
+public class MySubscriber<T> extends Subscriber<String> {
 
     private BaseResultListener mBaseResultListener;
 
@@ -50,16 +43,23 @@ public class MySubscriber extends Subscriber<String> {
 
     @Override
     public void onNext(String str) {
+
         HttpResult result = mGson.fromJson(str, objectType);
         mBaseResultListener.onSuccess(result.getResult(), result.getError_code(), result.getReason());
     }
 
-    public MySubscriber(BaseResultListener listener, Class clazz){
+    public MySubscriber(BaseResultListener listener, Class cls){
         mGson = new Gson();
         mBaseResultListener = listener;
-//        objectType = type(HttpResult.class, clazz);
+        objectType = type(HttpResult.class, cls);
     }
 
+    /**
+     * 获取泛型type
+     * @param raw
+     * @param args
+     * @return
+     */
     public ParameterizedType type(final Class raw, final Type... args) {
         return new ParameterizedType() {
             public Type getRawType() {
