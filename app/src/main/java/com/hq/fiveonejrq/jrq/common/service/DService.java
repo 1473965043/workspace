@@ -11,6 +11,7 @@ public class DService extends NotificationListenerService {
     public void onNotificationPosted(StatusBarNotification sbn) {
     }
 
+
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
     }

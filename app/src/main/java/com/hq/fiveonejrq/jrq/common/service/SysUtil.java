@@ -38,4 +38,5 @@ public final class SysUtil {
     public static boolean isAfter5() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR;
     }
+
 }

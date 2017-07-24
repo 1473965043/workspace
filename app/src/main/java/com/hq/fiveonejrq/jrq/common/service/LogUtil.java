@@ -8,7 +8,7 @@ import java.util.Locale;
  * Log util for whole project
  *
  * @author AigeStudio
- * @since 2011-11-09
+ * @since 2017-11-09
  */
 public final class LogUtil {
     private final static String TAG = "AigeStudio";

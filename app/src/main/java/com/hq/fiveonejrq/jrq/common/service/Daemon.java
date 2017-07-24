@@ -62,6 +62,7 @@ public final class Daemon {
                     }
                     try {
                         Thread.sleep(1500);
+
                     } catch (InterruptedException e) {
                         LogUtil.w("Thread sleep failed:" + e.toString());
                     }

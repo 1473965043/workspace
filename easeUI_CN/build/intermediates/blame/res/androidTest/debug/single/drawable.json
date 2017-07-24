@@ -1,11 +1,11 @@
 [
     {
-        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ease_chat_send_btn_selector.xml",
-        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_chat_send_btn_selector.xml"
-    },
-    {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ease_msg_state_failed_resend.xml",
         "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_msg_state_failed_resend.xml"
+    },
+    {
+        "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ease_chat_send_btn_selector.xml",
+        "source": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\bundles\\debug\\res\\drawable\\ease_chat_send_btn_selector.xml"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\ease_timestampe_bg.xml",

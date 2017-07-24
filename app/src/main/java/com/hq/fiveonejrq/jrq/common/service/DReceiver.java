@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 /**
  * @author AigeStudio
@@ -14,6 +16,7 @@ public class DReceiver extends BroadcastReceiver {
     private PendingIntent mPendingIntent;
     private AlarmManager am;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onReceive(Context context, Intent intent) {
         if (null == intent) return;

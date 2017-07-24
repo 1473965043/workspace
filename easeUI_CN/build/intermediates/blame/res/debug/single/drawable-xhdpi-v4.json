@@ -1,11 +1,11 @@
 [
     {
-        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_unread_dot.9.png",
-        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_unread_dot.9.png"
-    },
-    {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_chat_location_pressed.png",
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_chat_location_pressed.png"
+    },
+    {
+        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_unread_dot.9.png",
+        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_unread_dot.9.png"
     },
     {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_chat_takepic_pressed.png",
@@ -60,16 +60,16 @@
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_chat_image_normal.png"
     },
     {
-        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_chat_takepic_normal.png",
-        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_chat_takepic_normal.png"
+        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_group_icon.png",
+        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_group_icon.png"
     },
     {
         "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_chatting_biaoqing_btn_normal.png",
         "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_chatting_biaoqing_btn_normal.png"
     },
     {
-        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_group_icon.png",
-        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_group_icon.png"
+        "merged": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_chat_takepic_normal.png",
+        "source": "D:\\Android\\StudioProjects\\demo\\easeUI_CN\\src\\main\\res\\drawable-xhdpi\\ease_chat_takepic_normal.png"
     },
     {
         "merged": "E:\\Android\\studioprojects\\jrq\\easeUI_CN\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\ease_chat_press_speak_btn_normal.9.png",

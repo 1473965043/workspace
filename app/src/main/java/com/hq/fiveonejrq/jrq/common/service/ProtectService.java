@@ -8,7 +8,7 @@ import android.util.Log;
 
 /**
  * @author AigeStudio
- * @since 2016-05-05
+ * @since 2017-05-05
  */
 public class ProtectService extends Service {
     private static boolean sPower = true, isRunning;

@@ -3,12 +3,9 @@ package com.hq.fiveonejrq.jrq.common.service;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
-
-import com.hq.fiveonejrq.jrq.R;
 
 /**
  * @author AigeStudio

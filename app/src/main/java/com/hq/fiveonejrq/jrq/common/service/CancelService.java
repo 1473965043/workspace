@@ -26,6 +26,7 @@ public class CancelService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
+
                 SystemClock.sleep(1000);
                 stopForeground(true);
                 NotificationManager manager =
