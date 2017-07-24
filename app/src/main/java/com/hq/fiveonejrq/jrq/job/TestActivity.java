@@ -8,6 +8,7 @@ import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
 import com.hq.fiveonejrq.jrq.common.bean.Entity;
+import com.hq.fiveonejrq.jrq.common.bean.HttpResult;
 import com.hq.fiveonejrq.jrq.common.custom.MySubscriber;
 import com.hq.fiveonejrq.jrq.common.interfaces.BaseResultListener;
 
@@ -141,15 +142,17 @@ public class TestActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(Entity entity, int code, String returnMsg) {
-                LogUtil.logD("onResponse", entity.getTotalNum()+"");
+                for (Entity.Data data: entity.getData()) {
+                    LogUtil.d("onResponse", data.toString());
+                }
             }
 
             @Override
             public void onError(String error) {
-                LogUtil.logE("onResponse", error);
+                LogUtil.e("onResponse", error);
             }
         };
-        RetrofitManage.getInstance().addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1", new MySubscriber<Entity>(resultListener));
+        RetrofitManage.getInstance().addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1", new MySubscriber(resultListener, Entity.class));
     }
 
     public interface Api {

@@ -6,14 +6,14 @@ package com.hq.fiveonejrq.jrq.common.bean;
  * T为形参，从外部传入实体类
  */
 
-public class HttpResult {
+public class HttpResult<T> {
 
     //返回码
     private int error_code;
     //返回内容
     private String reason;
     //数据对象
-    private Entity result;
+    private T result;
 
     public int getError_code() {
         return error_code;
@@ -31,11 +31,11 @@ public class HttpResult {
         this.reason = reason;
     }
 
-    public Entity getResult() {
+    public T getResult() {
         return result;
     }
 
-    public void setResult(Entity result) {
+    public void setResult(T result) {
         this.result = result;
     }
 

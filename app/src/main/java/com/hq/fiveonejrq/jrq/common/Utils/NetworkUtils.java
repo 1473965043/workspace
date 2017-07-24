@@ -22,7 +22,7 @@ public class NetworkUtils {
      */
     public static void send(String url,Map<String, String> map, BaseResultListener resultListener){
         if(url.isEmpty() || null == map || map.isEmpty()){
-            LogUtil.logE(LogUtil.NETWORK, "请求的网址或参数为空，请检查。");
+            LogUtil.e(LogUtil.NETWORK, "请求的网址或参数为空，请检查。");
             return;
         }
         getUrl(url, map, resultListener);
