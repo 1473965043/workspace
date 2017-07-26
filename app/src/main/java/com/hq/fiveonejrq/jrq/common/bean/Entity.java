@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/7/19.
+ * 菜谱类
  */
 
 public class Entity {

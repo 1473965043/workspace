@@ -8,13 +8,15 @@ import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
 import com.hq.fiveonejrq.jrq.common.bean.Entity;
-import com.hq.fiveonejrq.jrq.common.bean.HttpResult;
-import com.hq.fiveonejrq.jrq.common.custom.MySubscriber;
-import com.hq.fiveonejrq.jrq.common.interfaces.BaseResultListener;
+import com.hq.fiveonejrq.jrq.common.bean.OilPrice;
+import com.hq.fiveonejrq.jrq.common.custom.CustomResultListener;
+import com.hq.fiveonejrq.jrq.common.custom.CustomResultsListener;
+import com.hq.fiveonejrq.jrq.common.custom.CustomSubscriber;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -138,7 +140,15 @@ public class TestActivity extends AppCompatActivity {
 
     //RxJava与Retrofit结合使用
     public void test1(View view){
-        BaseResultListener resultListener = new BaseResultListener<Entity>() {
+        getData();
+        getDatas();
+    }
+
+    /**
+     * 获取单个数据对象
+     */
+    private void getData(){
+        CustomResultListener resultListener = new CustomResultListener<Entity>(){
 
             @Override
             public void onSuccess(Entity entity, int code, String returnMsg) {
@@ -151,9 +161,35 @@ public class TestActivity extends AppCompatActivity {
             public void onError(String error) {
                 LogUtil.e("onResponse", error);
             }
+
         };
-        RetrofitManage.getInstance().addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1",
-                new MySubscriber<Entity>(resultListener, Entity.class));
+        RetrofitManage.getInstance()
+                .addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1"
+                , new CustomSubscriber(resultListener, Entity.class));
+    }
+
+    /**
+     * 获取多个数据对象
+     */
+    private void getDatas(){
+        CustomResultsListener resultsListener = new CustomResultsListener<OilPrice>(){
+
+            @Override
+            public void onSuccess(List<OilPrice> list, int code, String returnMsg) {
+                for (OilPrice price: list) {
+                    LogUtil.d("onResponse", price.toString());
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                LogUtil.e("onResponse", error);
+            }
+        };
+
+        RetrofitManage.getInstance()
+                .addTask("http://apis.juhe.cn/cnoil/oil_city?key=172f39c0475e01cbaac3fd0eea511980"
+                        , new CustomSubscriber(resultsListener, OilPrice.class));
     }
 
     public interface Api {

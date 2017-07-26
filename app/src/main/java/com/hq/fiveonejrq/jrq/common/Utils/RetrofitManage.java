@@ -13,10 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Administrator on 2017/7/19.
+ * Created by guodong on 2017/7/19.
  */
 
 public class RetrofitManage {
@@ -25,6 +26,10 @@ public class RetrofitManage {
     private static RetrofitManage mInstance;
     /** 日志拦截器 */
     private static HttpLoggingInterceptor loggingInterceptor;
+
+    private OkHttpClient okHttpClient;
+
+    private Retrofit retrofit;
 
     /** 单例模式 */
     public static RetrofitManage getInstance(){
@@ -51,36 +56,35 @@ public class RetrofitManage {
     public void addTask(String url, Observer observer){
 
         //创建OkHttpClient对象进行一些网络配置
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
-                .connectTimeout(NetworkUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(NetworkUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(NetworkUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .build();
+        if(okHttpClient == null){
+            okHttpClient = new OkHttpClient.Builder()
+                    .addInterceptor(loggingInterceptor)
+                    .connectTimeout(NetworkUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                    .readTimeout(NetworkUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                    .writeTimeout(NetworkUtils.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                    .build();
+        }
         //创建Retrofit实例，添加RxJavaCallAdapterFactory、GsonConverterFactory、以及baseUrl
-        Retrofit retrofit = new Retrofit.Builder()
-//                .addConverterFactory(GsonConverterFactory.create())
-                .addConverterFactory(CustomConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(AppUrlUtils.BASE_URL)
-                .client(okHttpClient)
-                .build();
-        retrofit.create(RetrofitApiService.class).onGetData(url)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-//        toRxJava(retrofit.create(RetrofitApiService.class).onGetData(url), observer);
+        if(retrofit == null){
+            retrofit = new Retrofit.Builder()
+//                .addConverterFactory(GsonConverterFactory.create())//Gson解析网络数据
+                    .addConverterFactory(CustomConverterFactory.create())//自定义返回数据
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .baseUrl(AppUrlUtils.BASE_URL)
+                    .client(okHttpClient)
+                    .build();
+        }
+        toRxJava(url, observer);
     }
 
     /**
      * Retrofit与RxJava连用,发送网络请求
-     * @param observable 被观察这
+     * @param url 请求地址
      * @param observer 观察者
      */
-    private void toRxJava(Observable observable, Observer observer){
-        observable
+    private void toRxJava(String url, Observer observer){
+        retrofit.create(RetrofitApiService.class).onGetData(url)
                 .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())//取消订阅线程
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
     }

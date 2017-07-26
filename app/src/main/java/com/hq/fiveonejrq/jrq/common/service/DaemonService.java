@@ -26,6 +26,13 @@ public class DaemonService extends Service {
 //        }
     }
 
+    //        startService(new Intent(this, DaemonService.class));
+//        PendingIntent intent = PendingIntent.getService(this, 0x123,
+//                new Intent(this, DaemonService.class), PendingIntent.FLAG_UPDATE_CURRENT);
+//        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+//        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, AlarmManager.INTERVAL_HALF_HOUR,
+//                AlarmManager.INTERVAL_HALF_HOUR, intent);
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
