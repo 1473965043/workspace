@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.service.DaemonService;
 
@@ -30,6 +31,7 @@ public class MyApplication extends MultiDexApplication {
         super.onCreate();
         MultiDex.install(this);
         //初始化sdk
+        SDKInitializer.initialize(this);
         JPushInterface.setDebugMode(true);//正式版的时候设置false，关闭调试
         JPushInterface.init(this);
         //建议添加tag标签，发送消息的之后就可以指定tag标签来发送了

@@ -1,6 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    dataBinding {
+        enabled = true
+    }
+
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
@@ -42,9 +47,13 @@ android {
         jcenter()
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 
-
-    productFlavors{
+    productFlavors {
 
         wandoujia {
             manifestPlaceholders = [APP_CHANNEL_VALUE: "wandoujia"];
@@ -66,7 +75,7 @@ android {
                 //生成apk名字的格式：Channel1.0.0_2016-06-22_baidu.apk
                 // 可自定义自己想要生成的格式
                 def fileName = "${variant.productFlavors[0].name}_${releaseTime()}_${defaultConfig.versionName}.apk"
-                    output.outputFile = new File(outputFile.parent, fileName)
+                output.outputFile = new File(outputFile.parent, fileName)
             }
         }
     }
@@ -81,32 +90,31 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    /** 搜索框效果  */
+    //    /** dialog库 */
+    //    compile 'com.flyco.dialog:FlycoDialog_Lib:1.0.0'
+    //    /** 节选器 */
+    //    compile 'com.7heaven.widgets:segmentcontrol:1.16'
+    /** 二维码  */
+    //极光推送
+    //retrofit网络框架
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:recyclerview-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
-    compile project(':easeUI_CN')
-    /** 网络框架okhttp */
+    /** 网络框架okhttp  */
     compile 'com.zhy:okhttputils:2.6.2'
-    /** 带圆环的头像 */
+    /** 带圆环的头像  */
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    /** 搜索框效果 */
     compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
-//    /** dialog库 */
-//    compile 'com.flyco.dialog:FlycoDialog_Lib:1.0.0'
-//    /** 节选器 */
-//    compile 'com.7heaven.widgets:segmentcontrol:1.16'
-    /** 二维码 */
     compile 'com.journeyapps:zxing-android-embedded:3.4.0'
-
     compile 'com.android.support:design:25.3.0'
-
     compile 'com.android.support:multidex:1.0.0'
-    //极光推送
     compile 'cn.jiguang.sdk:jpush:3.0.5'
     compile 'cn.jiguang.sdk:jcore:1.1.2'
-    //retrofit网络框架
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    testCompile 'junit:junit:4.12'
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/BaiduLBS_Android1.jar')
 }

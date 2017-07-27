@@ -1,4 +1,5 @@
 package com.hq.fiveonejrq.jrq.job;
+import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.hq.fiveonejrq.jrq.common.bean.OilPrice;
 import com.hq.fiveonejrq.jrq.common.custom.CustomResultListener;
 import com.hq.fiveonejrq.jrq.common.custom.CustomResultsListener;
 import com.hq.fiveonejrq.jrq.common.custom.CustomSubscriber;
+import com.hq.fiveonejrq.jrq.databinding.ActivityTestBinding;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -42,10 +44,13 @@ public class TestActivity extends AppCompatActivity {
 
     private OkHttpClient client;
 
+    private ActivityTestBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_test);
+        mBinding.setActivity(this);
         getSupportActionBar().hide();
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override

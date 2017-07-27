@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.hq.fiveonejrq.jrq.R;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.controller.EaseUI;
 
 /**
  * Created by guodong on 2017/2/27.
@@ -30,8 +28,6 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.MyTranslucentTheme);
         super.onCreate(savedInstanceState);
-        EaseUI.getInstance().init(this, null);
-        EMClient.getInstance().setDebugMode(true);
         setContentView(setLayoutId());
         setStatusBarBackgroundColor();
         initViews();
