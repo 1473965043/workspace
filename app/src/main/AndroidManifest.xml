@@ -40,13 +40,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+             <!--<intent-filter>-->
+                 <!--<action android:name="android.intent.action.MAIN" />-->
+                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
         </activity>
         <activity android:name=".job.TestActivity">
             <!--<intent-filter>-->
@@ -70,7 +67,8 @@
             android:screenOrientation="landscape"
             tools:replace="screenOrientation"/>
 
-        <activity android:name=".BaiduMapActivity">
+        <activity android:name=".BaiduMapActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -126,6 +124,11 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="HYua9k4oRsv1kTSyhgCBpK7IZzng6UPA"/>
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+        </service>
     </application>
 
 </manifest>

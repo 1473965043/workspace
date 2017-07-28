@@ -116,5 +116,4 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     testCompile 'junit:junit:4.12'
     compile files('libs/BaiduLBS_Android.jar')
-    compile files('libs/BaiduLBS_Android1.jar')
 }
