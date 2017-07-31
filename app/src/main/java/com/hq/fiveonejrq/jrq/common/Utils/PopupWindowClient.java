@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 /**
  * Created by guodong on 2017/7/28.
+ * PopupWindiws封装类
  */
 
 public class PopupWindowClient {

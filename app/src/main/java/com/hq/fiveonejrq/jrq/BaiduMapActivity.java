@@ -63,6 +63,10 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
 
     private PopupWindow mPopupWindow;
 
+    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.bike_location);
+
+    private Marker mMarkerA;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,33 +77,17 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
         mMapBinding.setActivity(this);//绑定数据
         mBaiduMap = mMapView.getMap();
         MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
-        // 定位初始化
-        mLocClient = new LocationClient(getApplicationContext());
-        mLocClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
+        mBaiduMap.setMapStatus(msu);
+        initOverlay();
     }
 
     public void initOverlay() {
         // add marker overlay
         LatLng llA = new LatLng(39.963175, 116.400244);
-        LatLng llB = new LatLng(39.942821, 116.369199);
-        LatLng llC = new LatLng(39.939723, 116.425541);
-        LatLng llD = new LatLng(39.906965, 116.401394);
-
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.mipmap.bike_location);
 
         MarkerOptions ooA = new MarkerOptions().position(llA).icon(bitmap)
                 .zIndex(9).draggable(true);
-
-        Marker mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
+        mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
         ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
         giflist.add(bitmap);
 
@@ -132,21 +120,6 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
             public void onMarkerDragStart(Marker marker) {
             }
         });
-    }
-
-    public void addMaker(){
-//        mBaiduMap.setMapStatus(msu);
-        //定义Maker坐标点
-        LatLng point = new LatLng(121.494718, 50.301549);
-        //构建Marker图标
-        BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.arrow);
-        //构建MarkerOption，用于在地图上添加Marker
-        OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .icon(bitmap);
-        //在地图上添加Marker，并显示
-        mBaiduMap.addOverlay(option);
     }
 
     @Override
@@ -231,6 +204,7 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
         mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
         mMapView = null;
+        bitmap.recycle();
         super.onDestroy();
     }
 
