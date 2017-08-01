@@ -30,5 +30,13 @@
             android:text="罗 盘"
             android:textColor="@android:color/white"
             android:background="@color/job_checkbox_color"/>
+
+        <Button
+            android:id="@+id/add_marker"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60"
+            android:text="添加marker"
+            android:textColor="@android:color/white"
+            android:background="@color/internal_search_blue"/>
     </LinearLayout>
 </layout>

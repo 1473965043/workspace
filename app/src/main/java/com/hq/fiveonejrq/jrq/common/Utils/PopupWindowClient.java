@@ -12,12 +12,76 @@ import android.widget.Toast;
 
 /**
  * Created by guodong on 2017/7/28.
- * PopupWindiws封装类
+ * PopupWindiws封装类 --- 采用建造者模式
  */
 
 public class PopupWindowClient {
 
     private static int[] defaultPixels = {720, 1280};
+
+    private Context mContext;
+
+    private View contentView;
+
+    private int layoutId;
+
+    private Drawable backgroundDrawable;
+
+    private View relativeView;
+
+    private boolean focusable = false;
+
+    private PopupWindow.OnDismissListener dismissListener;
+
+    private int[] size = new int[2];
+
+    private int[] position = new int[2];
+
+    private int[] pixels = new int[2];
+
+    private PopupWindow mPopupWindow;
+
+    private PopupWindowClient(Builder builder){
+        this.backgroundDrawable = builder.backgroundDrawable;
+        this.contentView = builder.contentView;
+        this.dismissListener = builder.dismissListener;
+        this.focusable = builder.focusable;
+        this.layoutId = builder.layoutId;
+        this.mContext = builder.mContext;
+        this.pixels = builder.pixels;
+        this.position = builder.position;
+        this.size = builder.size;
+        this.relativeView = builder.relativeView;
+    }
+
+    private void setPopupWindow(PopupWindow popupWindow){
+        this.mPopupWindow = popupWindow;
+    }
+
+    /**
+     * 弹出弹窗
+     */
+    public void show(){
+        if(this.relativeView != null){
+            mPopupWindow.showAsDropDown(relativeView, position[0], position[1]);//设置窗体显示位置
+        }else{
+            try{
+                throw new NullPointerException("relativeView不能为空");
+            }catch (Exception e){
+                Toast.makeText(mContext, "showAsDropDown方法中的view不能为空！", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+    }
+
+    /**
+     * 关闭弹窗
+     */
+    public void close(){
+        if(mPopupWindow != null){
+            mPopupWindow.dismiss();
+        }
+    }
 
     public static class Builder{
 
@@ -130,7 +194,7 @@ public class PopupWindowClient {
             return this;
         }
 
-        public PopupWindow show(){
+        public PopupWindowClient build(){
             PopupWindow popupWindow = new PopupWindow(mContext);
             if(contentView != null){
                 popupWindow.setContentView(contentView);
@@ -163,17 +227,9 @@ public class PopupWindowClient {
                 popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);//设置窗口宽度
             }
             popupWindow.setFocusable(focusable);
-            if(relativeView != null){
-                popupWindow.showAsDropDown(relativeView, position[0], position[1]);//设置窗体显示位置
-            }else{
-                try{
-                    throw new NullPointerException("relativeView不能为空");
-                }catch (Exception e){
-                    Toast.makeText(mContext, "showAsDropDown方法中的view不能为空！", Toast.LENGTH_SHORT).show();
-                    return null;
-                }
-            }
-            return popupWindow;
+            PopupWindowClient client = new PopupWindowClient(this);
+            client.setPopupWindow(popupWindow);
+            return client;
         }
     }
 }

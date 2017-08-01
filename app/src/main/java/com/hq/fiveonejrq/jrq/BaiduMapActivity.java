@@ -12,119 +12,88 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.GroundOverlayOptions;
 import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.LatLngBounds;
+import com.hq.fiveonejrq.jrq.common.Utils.BaiduMapClient;
 import com.hq.fiveonejrq.jrq.common.Utils.PopupWindowClient;
 import com.hq.fiveonejrq.jrq.databinding.ActivityBaiduMapBinding;
 import com.hq.fiveonejrq.jrq.databinding.PopClientLayoutBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class BaiduMapActivity extends Activity implements SensorEventListener {
 
-    // 定位相关
-    LocationClient mLocClient;
     public MyLocationListenner myListener = new MyLocationListenner();
     private MyLocationConfiguration.LocationMode mCurrentMode;
-    private SensorManager mSensorManager;
     private Double lastX = 0.0;
     private int mCurrentDirection = 0;
     private double mCurrentLat = 0.0;
     private double mCurrentLon = 0.0;
     private float mCurrentAccracy;
 
-    MapView mMapView;
-    BaiduMap mBaiduMap;
+    private MapView mMapView;
+    private BaiduMap mBaiduMap;
 
     boolean isFirstLoc = true; // 是否首次定位
     private MyLocationData locData;
 
     ActivityBaiduMapBinding mMapBinding;
 
-    private PopupWindow mPopupWindow;
-
-    BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.mipmap.bike_location);
-
-    private Marker mMarkerA;
+    BaiduMapClient mMapClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMapBinding = DataBindingUtil.setContentView(this, R.layout.activity_baidu_map);
-        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//获取传感器管理服务
-        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
-        mMapView = mMapBinding.bmapView;
         mMapBinding.setActivity(this);//绑定数据
+        mMapView = mMapBinding.bmapView;
         mBaiduMap = mMapView.getMap();
-        MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(14.0f);
-        mBaiduMap.setMapStatus(msu);
-        initOverlay();
+        mCurrentMode = MyLocationConfiguration.LocationMode.NORMAL;
+        List<LatLng> latLngs = new ArrayList<>();
+        LatLng llA = new LatLng(32.079254, 118.787623);
+        LatLng llB = new LatLng(32.064355, 118.787624);
+        LatLng llC = new LatLng(28.7487420000, 115.8748860000);
+        LatLng llD = new LatLng(28.7534890000, 115.8767960000);
+        LatLng llE = new LatLng(31.301560, 121.494732);
+        latLngs.add(llA);
+        latLngs.add(llB);
+        latLngs.add(llC);
+        latLngs.add(llD);
+        latLngs.add(llE);
+        mMapClient = new BaiduMapClient.Builder(this, mMapView)
+                .addOverlay(latLngs, R.mipmap.bike_location, mOnMarkerClickListener)
+                .openLocation(myListener)
+                .setSensorEventListener(this)
+                .build();
     }
 
-    public void initOverlay() {
-        // add marker overlay
-        LatLng llA = new LatLng(39.963175, 116.400244);
-
-        MarkerOptions ooA = new MarkerOptions().position(llA).icon(bitmap)
-                .zIndex(9).draggable(true);
-        mMarkerA = (Marker) (mBaiduMap.addOverlay(ooA));
-        ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-        giflist.add(bitmap);
-
-        // add ground overlay
-        LatLng southwest = new LatLng(39.92235, 116.380338);
-        LatLng northeast = new LatLng(39.947246, 116.414977);
-        LatLngBounds bounds = new LatLngBounds.Builder().include(northeast)
-                .include(southwest).build();
-
-        OverlayOptions ooGround = new GroundOverlayOptions()
-                .positionFromBounds(bounds).image(bitmap).transparency(0.8f);
-        mBaiduMap.addOverlay(ooGround);
-
-        MapStatusUpdate u = MapStatusUpdateFactory
-                .newLatLng(bounds.getCenter());
-        mBaiduMap.setMapStatus(u);
-
-        mBaiduMap.setOnMarkerDragListener(new BaiduMap.OnMarkerDragListener() {
-            public void onMarkerDrag(Marker marker) {
-            }
-
-            public void onMarkerDragEnd(Marker marker) {
-                Toast.makeText(
-                        getApplicationContext(),
-                        "拖拽结束，新位置：" + marker.getPosition().latitude + ", "
-                                + marker.getPosition().longitude,
-                        Toast.LENGTH_LONG).show();
-            }
-
-            public void onMarkerDragStart(Marker marker) {
-            }
-        });
-    }
+    public BaiduMap.OnMarkerClickListener mOnMarkerClickListener = new BaiduMap.OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker marker) {
+            Toast.makeText(BaiduMapActivity.this, "瞅你咋地！", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+    };
 
     @Override
     protected void onPause() {
-        mMapView.onPause();
+        mMapClient.onPause();
         super.onPause();
     }
 
@@ -142,7 +111,7 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
                 .setFocusable(true)
                 .setDimension(200, ViewGroup.LayoutParams.WRAP_CONTENT)
                 .showAsDropDown(mMapBinding.imageSetting, -136, 32)
-                .show();
+                .build().show();
         binding.normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,6 +142,12 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
                         mCurrentMode, true, null));
             }
         });
+        binding.addMarker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     /** 获取标题 */
@@ -182,29 +157,19 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
 
     @Override
     protected void onResume() {
-        mMapView.onResume();
+        mMapClient.onResume();
         super.onResume();
-        //为系统的方向传感器注册监听器
-        mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
-                SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
     protected void onStop() {
-        //取消注册传感器监听
-        mSensorManager.unregisterListener(this);
+        mMapClient.onStop();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        // 退出时销毁定位
-        mLocClient.stop();
-        // 关闭定位图层
-        mBaiduMap.setMyLocationEnabled(false);
-        mMapView.onDestroy();
-        mMapView = null;
-        bitmap.recycle();
+        mMapClient.onDestroy();
         super.onDestroy();
     }
 
@@ -252,12 +217,19 @@ public class BaiduMapActivity extends Activity implements SensorEventListener {
             mBaiduMap.setMyLocationData(locData);
             if (isFirstLoc) {
                 isFirstLoc = false;
-                LatLng ll = new LatLng(location.getLatitude(),
-                        location.getLongitude());
+                LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
                 MapStatus.Builder builder = new MapStatus.Builder();
                 builder.target(ll).zoom(18.0f);
                 mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
             }
+//            if (isFirstLoc) {
+//                isFirstLoc = false;
+//                LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+//                BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.fromResource(R.mipmap.current_location);
+//                MarkerOptions ooA = new MarkerOptions().position(ll).icon(bitmapDescriptor).zIndex(9).draggable(true);
+//                mMapView.getMap().addOverlay(ooA);
+//                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newLatLng(ll));
+//            }
         }
 
         @Override
