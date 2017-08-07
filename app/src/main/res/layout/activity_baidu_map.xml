@@ -23,7 +23,7 @@
                 android:layout_centerInParent="true"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:text="@{activity.getStr()}"/>
+                android:text="@{activity.getStr}"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -45,10 +45,88 @@
                 android:src="@mipmap/setting"/>
         </RelativeLayout>
 
-        <com.baidu.mapapi.map.MapView
-            android:id="@+id/bmapView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true" />
+            android:layout_height="match_parent">
+
+            <com.baidu.mapapi.map.MapView
+                android:id="@+id/bmapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true" />
+
+            <ImageView
+                android:id="@+id/img_current_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/current_location"
+                android:visibility="gone"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginBottom="@dimen/x15"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:background="@mipmap/round_bg"
+                    android:onClick="@{activity.refreshMarker}"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/img_refresh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/ic_refresh"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x100"
+                    android:background="@mipmap/round_bg"
+                    android:onClick="@{activity.location}"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/img_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/location"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/x100"
+                android:layout_height="@dimen/x100"
+                android:background="@mipmap/round_bg"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginBottom="@dimen/x15"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/customer_service"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/x150"
+                android:background="@mipmap/scan_btn"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
     </LinearLayout>
 </layout>
