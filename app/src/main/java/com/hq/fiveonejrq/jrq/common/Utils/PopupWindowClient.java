@@ -41,6 +41,8 @@ public class PopupWindowClient {
 
     private PopupWindow mPopupWindow;
 
+    private int animationStyle;
+
     private PopupWindowClient(Builder builder){
         this.backgroundDrawable = builder.backgroundDrawable;
         this.contentView = builder.contentView;
@@ -52,6 +54,7 @@ public class PopupWindowClient {
         this.position = builder.position;
         this.size = builder.size;
         this.relativeView = builder.relativeView;
+        this.animationStyle = builder.animationStyle;
     }
 
     private void setPopupWindow(PopupWindow popupWindow){
@@ -104,6 +107,8 @@ public class PopupWindowClient {
         private int[] position = new int[2];
 
         private int[] pixels = new int[2];
+
+        private int animationStyle;
 
         public Builder(Context context){
             this.mContext = context;
@@ -182,6 +187,11 @@ public class PopupWindowClient {
             return this;
         }
 
+        public Builder setAnimationStyle(int animationStyle){
+            this.animationStyle = animationStyle;
+            return this;
+        }
+
         public Builder showAsDropDown(View relativeView){
             this.relativeView = relativeView;
             return this;
@@ -226,6 +236,7 @@ public class PopupWindowClient {
             }else{
                 popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);//设置窗口宽度
             }
+            popupWindow.setAnimationStyle(animationStyle);
             popupWindow.setFocusable(focusable);
             PopupWindowClient client = new PopupWindowClient(this);
             client.setPopupWindow(popupWindow);

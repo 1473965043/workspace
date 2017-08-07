@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -72,9 +71,10 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
                 public void onInfoWindowClick() {
                     new PopupWindowClient.Builder(BaiduMapActivity.this)
                             .setContentView(R.layout.pop_infowindow_layout)
-                            .setProportion(1.0, 0.25)
-                            .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")))
+                            .setProportion(1.0, ViewGroup.LayoutParams.WRAP_CONTENT)
+                            .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF0000")))
                             .setFocusable(true)
+                            .setAnimationStyle(R.style.PopupWindowAnimationStyle)
                             .showAsDropDown(mMapBinding.titlebar, Gravity.TOP, 0)
                             .build().show();
                 }

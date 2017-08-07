@@ -89,4 +89,10 @@
         <attr name="super_sidebar_textcolor_press" format="color" />
     </declare-styleable>
     <!--end-->
+
+    <!-- popupwindow进出场动画 -->
+    <style name="PopupWindowAnimationStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_open_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_close_anim</item>
+    </style>
 </resources>
