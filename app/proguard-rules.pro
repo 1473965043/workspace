@@ -85,3 +85,8 @@
 # ---------------------  retrofit网络框架  _________________________
 -dontwarn okio.**
 -dontwarn javax.annotation.**
+
+# -------------------- 百度地图 ------------------------
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-dontwarn com.baidu.**

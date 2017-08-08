@@ -3,6 +3,7 @@ package com.hq.fiveonejrq.jrq.common.Utils;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -218,6 +219,14 @@ public class PopupWindowClient {
             this.gravity = gravity;
             this.position[0] = pixels[0] * xoff/defaultPixels[0];
             this.position[1] = pixels[1] * yoff/defaultPixels[1];
+            return this;
+        }
+
+        public Builder showAtLocation(View parent, int xoff, int yoff){
+            this.parentView = parent;
+            this.gravity = Gravity.TOP;
+            this.position[0] = xoff;
+            this.position[1] = yoff;
             return this;
         }
 

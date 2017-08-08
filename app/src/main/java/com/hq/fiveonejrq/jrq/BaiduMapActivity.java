@@ -76,7 +76,7 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
                             .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")))
                             .setFocusable(true)
                             .setAnimationStyle(R.style.PopupWindowAnimationStyle)
-                            .showAtLocation(mMapBinding.parent, Gravity.TOP  , 0, Util.getStatusBarHeight(mMapBinding.getActivity()))
+                            .showAtLocation(mMapBinding.parent, 0, Util.getStatusBarHeight(mMapBinding.getActivity()))
                             .build().show();
                 }
             });
