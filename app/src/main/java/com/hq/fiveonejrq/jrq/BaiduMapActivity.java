@@ -24,6 +24,7 @@ import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.hq.fiveonejrq.jrq.common.Utils.BaiduMapClient;
 import com.hq.fiveonejrq.jrq.common.Utils.PopupWindowClient;
+import com.hq.fiveonejrq.jrq.common.Utils.Util;
 import com.hq.fiveonejrq.jrq.common.bean.MarkerInfo;
 import com.hq.fiveonejrq.jrq.common.custom.OrientationListener;
 import com.hq.fiveonejrq.jrq.databinding.ActivityBaiduMapBinding;
@@ -72,10 +73,10 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
                     new PopupWindowClient.Builder(BaiduMapActivity.this)
                             .setContentView(R.layout.pop_infowindow_layout)
                             .setProportion(1.0, ViewGroup.LayoutParams.WRAP_CONTENT)
-                            .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FF0000")))
+                            .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")))
                             .setFocusable(true)
                             .setAnimationStyle(R.style.PopupWindowAnimationStyle)
-                            .showAsDropDown(mMapBinding.titlebar, Gravity.TOP, 0)
+                            .showAtLocation(mMapBinding.parent, Gravity.TOP  , 0, Util.getStatusBarHeight(mMapBinding.getActivity()))
                             .build().show();
                 }
             });

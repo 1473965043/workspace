@@ -27,7 +27,7 @@ public class PopupWindowClient {
 
     private Drawable backgroundDrawable;
 
-    private View relativeView;
+    private View relativeView, parentView;
 
     private boolean focusable = false;
 
@@ -41,7 +41,7 @@ public class PopupWindowClient {
 
     private PopupWindow mPopupWindow;
 
-    private int animationStyle;
+    private int animationStyle, gravity;
 
     private PopupWindowClient(Builder builder){
         this.backgroundDrawable = builder.backgroundDrawable;
@@ -55,6 +55,8 @@ public class PopupWindowClient {
         this.size = builder.size;
         this.relativeView = builder.relativeView;
         this.animationStyle = builder.animationStyle;
+        this.parentView = builder.parentView;
+        this.gravity = builder.gravity;
     }
 
     private void setPopupWindow(PopupWindow popupWindow){
@@ -65,16 +67,23 @@ public class PopupWindowClient {
      * 弹出弹窗
      */
     public void show(){
+
+        if(this.parentView != null){
+            mPopupWindow.showAtLocation(parentView, gravity, position[0], position[1]);//设置窗体显示位置
+            return;
+        }
+
         if(this.relativeView != null){
             mPopupWindow.showAsDropDown(relativeView, position[0], position[1]);//设置窗体显示位置
-        }else{
-            try{
-                throw new NullPointerException("relativeView不能为空");
-            }catch (Exception e){
-                Toast.makeText(mContext, "showAsDropDown方法中的view不能为空！", Toast.LENGTH_SHORT).show();
-                return;
-            }
         }
+//        else{
+//            try{
+//                throw new NullPointerException("relativeView不能为空");
+//            }catch (Exception e){
+//                Toast.makeText(mContext, "showAsDropDown方法中的view不能为空！", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//        }
     }
 
     /**
@@ -96,7 +105,7 @@ public class PopupWindowClient {
 
         private Drawable backgroundDrawable;
 
-        private View relativeView;
+        private View relativeView, parentView;
 
         private boolean focusable = false;
 
@@ -108,7 +117,7 @@ public class PopupWindowClient {
 
         private int[] pixels = new int[2];
 
-        private int animationStyle;
+        private int animationStyle, gravity;
 
         public Builder(Context context){
             this.mContext = context;
@@ -199,6 +208,14 @@ public class PopupWindowClient {
 
         public Builder showAsDropDown(View relativeView, int xoff, int yoff){
             this.relativeView = relativeView;
+            this.position[0] = pixels[0] * xoff/defaultPixels[0];
+            this.position[1] = pixels[1] * yoff/defaultPixels[1];
+            return this;
+        }
+
+        public Builder showAtLocation(View parent, int gravity, int xoff, int yoff){
+            this.parentView = parent;
+            this.gravity = gravity;
             this.position[0] = pixels[0] * xoff/defaultPixels[0];
             this.position[1] = pixels[1] * yoff/defaultPixels[1];
             return this;

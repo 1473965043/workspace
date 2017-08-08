@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.hq.fiveonejrq.jrq.MyApplication;
 
@@ -55,8 +56,10 @@ public class Util {
         //获取status_bar_height资源的ID
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            //根据资源ID获取响应的尺寸值
-            return pxTodp(context, context.getResources().getDimensionPixelSize(resourceId));
+            //根据资源ID获取响应的尺寸值px
+            return context.getResources().getDimensionPixelSize(resourceId);
+//            //根据资源ID获取响应的尺寸值dp
+//            return pxTodp(context, context.getResources().getDimensionPixelSize(resourceId));
         }
         return -1;
     }
