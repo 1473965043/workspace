@@ -64,6 +64,10 @@ public class PopupWindowClient {
         this.mPopupWindow = popupWindow;
     }
 
+    public PopupWindow getPopupWindow(){
+        return mPopupWindow;
+    }
+
     /**
      * 弹出弹窗
      */
@@ -91,7 +95,7 @@ public class PopupWindowClient {
      * 关闭弹窗
      */
     public void close(){
-        if(mPopupWindow != null){
+        if(mPopupWindow != null && mPopupWindow.isShowing()){
             mPopupWindow.dismiss();
         }
     }

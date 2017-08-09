@@ -1,17 +1,23 @@
 package com.hq.fiveonejrq.jrq;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.mapapi.bikenavi.adapter.IBEngineInitListener;
+import com.baidu.mapapi.bikenavi.adapter.IBRoutePlanListener;
+import com.baidu.mapapi.bikenavi.model.BikeRoutePlanError;
+import com.baidu.mapapi.bikenavi.params.BikeNaviLauchParam;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -22,6 +28,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.hq.fiveonejrq.jrq.common.Utils.BaiduMapClient;
 import com.hq.fiveonejrq.jrq.common.Utils.PopupWindowClient;
 import com.hq.fiveonejrq.jrq.common.Utils.Util;
@@ -29,6 +36,9 @@ import com.hq.fiveonejrq.jrq.common.bean.MarkerInfo;
 import com.hq.fiveonejrq.jrq.common.custom.OrientationListener;
 import com.hq.fiveonejrq.jrq.databinding.ActivityBaiduMapBinding;
 import com.hq.fiveonejrq.jrq.databinding.PopClientLayoutBinding;
+import com.hq.fiveonejrq.jrq.databinding.PopInfowindowLayoutBinding;
+
+import java.util.ArrayList;
 
 public class BaiduMapActivity extends Activity implements OrientationListener.OnOrientationListener{
 
@@ -39,6 +49,8 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
     private double mCurrentLon = 0.0;
     private int mDirection;
 
+    private PopupWindowClient mPopupWindowClient;
+
     private MapView mMapView;
     private BaiduMap mBaiduMap;
 
@@ -47,11 +59,20 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
 
     ActivityBaiduMapBinding mMapBinding;
 
+    PopClientLayoutBinding binding;
+
+    PopInfowindowLayoutBinding infowindowLayoutBinding;
+
     BaiduMapClient mMapClient;
+
+    BikeNaviLauchParam param;
+
+    LatLng destinationLat, currentLat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestPermission();
         mMapBinding = DataBindingUtil.setContentView(this, R.layout.activity_baidu_map);
         mMapBinding.setActivity(this);//绑定数据
         mMapView = mMapBinding.bmapView;
@@ -61,28 +82,86 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
         mMapClient.openLocation(myListener);
         mMapClient.setOnOrientationListener(this);
         mMapClient.addInfosOverlay(MarkerInfo.infos, 0, mOnMarkerClickListener);
+        binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.pop_client_layout, null, false);
+        infowindowLayoutBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.pop_infowindow_layout, null, false);
+        infowindowLayoutBinding.navigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //导航
+                Log.d("View", "startBikeNavi");
+                mMapClient.mapNavigation(BaiduMapActivity.this, mIBEngineInitListener);
+            }
+        });
     }
+
+    public IBEngineInitListener mIBEngineInitListener = new IBEngineInitListener() {
+        @Override
+        public void engineInitSuccess() {
+            Log.d("View", "engineInitSuccess");
+            param = new BikeNaviLauchParam().stPt(currentLat).endPt(destinationLat);
+            mMapClient.routePlanWithParam(param, mIBRoutePlanListener);
+        }
+
+        @Override
+        public void engineInitFail() {
+            Log.d("View", "engineInitFail");
+        }
+    };
+
+    public IBRoutePlanListener mIBRoutePlanListener = new IBRoutePlanListener() {
+        @Override
+        public void onRoutePlanStart() {
+            Log.d("View", "onRoutePlanStart");
+        }
+
+        @Override
+        public void onRoutePlanSuccess() {
+            Log.d("View", "onRoutePlanSuccess");
+            Intent intent = new Intent();
+            intent.setClass(mMapBinding.getActivity(), BNaviGuideActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void onRoutePlanFail(BikeRoutePlanError bikeRoutePlanError) {
+            Log.d("View", "onRoutePlanFail");
+        }
+    };
 
     public BaiduMap.OnMarkerClickListener mOnMarkerClickListener = new BaiduMap.OnMarkerClickListener() {
         @Override
         public boolean onMarkerClick(Marker marker) {
+            MarkerInfo info = (MarkerInfo) marker.getExtraInfo().getSerializable("info");
+            destinationLat = new LatLng(info.getLatitude(), info.getLongitude());
             mMapClient.initInfoWindow(marker, new InfoWindow.OnInfoWindowClickListener(){
 
                 @Override
                 public void onInfoWindowClick() {
-                    new PopupWindowClient.Builder(BaiduMapActivity.this)
-                            .setContentView(R.layout.pop_infowindow_layout)
-                            .setProportion(1.0, ViewGroup.LayoutParams.WRAP_CONTENT)
-                            .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")))
-                            .setFocusable(true)
-                            .setAnimationStyle(R.style.PopupWindowAnimationStyle)
-                            .showAtLocation(mMapBinding.parent, 0, Util.getStatusBarHeight(mMapBinding.getActivity()))
-                            .build().show();
+                    if(mPopupWindowClient == null){
+                        mPopupWindowClient = new PopupWindowClient.Builder(BaiduMapActivity.this)
+                                .setContentView(infowindowLayoutBinding.infowindowPop)
+                                .setProportion(1.0, ViewGroup.LayoutParams.WRAP_CONTENT)
+                                .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")))
+                                .setFocusable(true)
+                                .setAnimationStyle(R.style.PopupWindowAnimationStyle)
+                                .showAtLocation(mMapBinding.parent, 0, Util.getStatusBarHeight(mMapBinding.getActivity()))
+                                .build();
+                    }
+                    mPopupWindowClient.show();
                 }
             });
             return false;
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        if(mPopupWindowClient != null){
+            mPopupWindowClient.close();
+            return;
+        }
+        super.onBackPressed();
+    }
 
     @Override
     protected void onPause() {
@@ -97,7 +176,6 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
 
     /** 设置 */
     public void setting(View view){
-        PopClientLayoutBinding binding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.pop_client_layout, null, false);
         new PopupWindowClient.Builder(this)
                 .setContentView(binding.llSetting)
                 .setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")))
@@ -210,9 +288,9 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
             if (location == null || mMapView == null) {
                 return;
             }
-            Log.e("地理位置", "经度：" + location.getLongitude() + "纬度："+location.getLatitude());
             mCurrentLat = location.getLatitude();
             mCurrentLon = location.getLongitude();
+            currentLat = new LatLng(mCurrentLat, mCurrentLon);
             // 构造定位数据
             locData = new MyLocationData.Builder()
                     .accuracy(0)
@@ -232,5 +310,20 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
 
         @Override
         public void onConnectHotSpotMessage(String var1, int var2){}
+    }
+
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            ArrayList<String> permissions = new ArrayList<>();
+            if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                permissions.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+
+            if (permissions.size() == 0) {
+                return;
+            } else {
+                requestPermissions(permissions.toArray(new String[permissions.size()]), 0);
+            }
+        }
     }
 }

@@ -7,43 +7,55 @@
     </data>
 
     <LinearLayout
-      android:id="@+id/activity_test"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/activity_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y100"
+                android:onClick="@{activity.test1}"
+                android:text="Retrofit与RxJava"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:background="#FAEB00"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y100"
+                android:background="#55FF0000"
+                android:onClick="@{activity.test2}"
+                android:text="java反射"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y100"
+                android:background="#77BBCC00"
+                android:onClick="@{activity.test3}"
+                android:text="Retrofit"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@android:color/white"
+                />
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btn"
+            android:id="@+id/map"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/y100"
-            android:onClick="@{activity.test1}"
-            android:text="Retrofit与RxJava"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:background="#FAEB00"
-            />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/y100"
-            android:background="#55FF0000"
-            android:onClick="@{activity.test2}"
-            android:text="java反射"
-            android:textSize="16sp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/white"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/y100"
-            android:background="#77BBCC00"
-            android:onClick="@{activity.test3}"
-            android:text="Retrofit"
-            android:textSize="16sp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/white"
-            />
+            android:text="百度地图"/>
     </LinearLayout>
 </layout>
 

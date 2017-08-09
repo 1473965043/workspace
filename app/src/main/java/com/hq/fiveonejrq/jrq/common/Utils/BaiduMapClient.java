@@ -1,17 +1,20 @@
 package com.hq.fiveonejrq.jrq.common.Utils;
 
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.bikenavi.BikeNavigateHelper;
+import com.baidu.mapapi.bikenavi.adapter.IBEngineInitListener;
+import com.baidu.mapapi.bikenavi.adapter.IBRoutePlanListener;
+import com.baidu.mapapi.bikenavi.params.BikeNaviLauchParam;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -50,6 +53,8 @@ public class BaiduMapClient{
 
     private BitmapDescriptor defaultBitmap, mBitmap;
 
+    private BikeNavigateHelper mNaviHelper;
+
     //覆盖物
     private Marker marker = null;
 
@@ -61,6 +66,7 @@ public class BaiduMapClient{
         this.context = context;
         this.mMapView = mapView;
         this.defaultBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.bike_location);
+        this.mNaviHelper = BikeNavigateHelper.getInstance();
         mOrientationListener = new OrientationListener(context);
         changeDefaultBaiduMapView();
     }
@@ -176,6 +182,21 @@ public class BaiduMapClient{
         }else{//如果是的关闭的状态，当点击后，就会处于开启的状态
             mMapView.getMap().setTrafficEnabled(true);
         }
+    }
+
+    /**
+     * 地图导航
+     */
+    public void mapNavigation(Activity activity, IBEngineInitListener ibEngineInitListener){
+        mNaviHelper.initNaviEngine(activity, ibEngineInitListener);
+    }
+
+    /**
+     * 骑行
+     * @param param
+     */
+    public void routePlanWithParam(BikeNaviLauchParam param, IBRoutePlanListener routePlanListener) {
+        mNaviHelper.routePlanWithParams(param, routePlanListener);
     }
 
     /**
