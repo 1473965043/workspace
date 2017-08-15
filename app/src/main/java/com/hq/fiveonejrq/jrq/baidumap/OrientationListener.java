@@ -1,4 +1,4 @@
-package com.hq.fiveonejrq.jrq.common.custom;
+package com.hq.fiveonejrq.jrq.baidumap;
 
 import android.content.Context;
 import android.hardware.Sensor;

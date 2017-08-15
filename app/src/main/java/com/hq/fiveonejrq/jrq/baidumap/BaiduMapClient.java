@@ -1,4 +1,4 @@
-package com.hq.fiveonejrq.jrq.common.Utils;
+package com.hq.fiveonejrq.jrq.baidumap;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,8 +26,6 @@ import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.hq.fiveonejrq.jrq.R;
-import com.hq.fiveonejrq.jrq.common.bean.MarkerInfo;
-import com.hq.fiveonejrq.jrq.common.custom.OrientationListener;
 
 import java.util.List;
 

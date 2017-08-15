@@ -1,4 +1,4 @@
-package com.hq.fiveonejrq.jrq;
+package com.hq.fiveonejrq.jrq.baidumap;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,8 +6,10 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,14 @@ import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.mapapi.bikenavi.BikeNavigateHelper;
 import com.baidu.mapapi.bikenavi.adapter.IBEngineInitListener;
+import com.baidu.mapapi.bikenavi.adapter.IBRouteGuidanceListener;
 import com.baidu.mapapi.bikenavi.adapter.IBRoutePlanListener;
+import com.baidu.mapapi.bikenavi.adapter.IBTTSPlayer;
+import com.baidu.mapapi.bikenavi.model.BikeRouteDetailInfo;
 import com.baidu.mapapi.bikenavi.model.BikeRoutePlanError;
+import com.baidu.mapapi.bikenavi.model.RouteGuideKind;
 import com.baidu.mapapi.bikenavi.params.BikeNaviLauchParam;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -30,16 +37,14 @@ import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
-import com.hq.fiveonejrq.jrq.common.Utils.BaiduMapClient;
+import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.PopupWindowClient;
 import com.hq.fiveonejrq.jrq.common.Utils.Util;
-import com.hq.fiveonejrq.jrq.common.bean.MarkerInfo;
-import com.hq.fiveonejrq.jrq.common.custom.OrientationListener;
 import com.hq.fiveonejrq.jrq.databinding.ActivityBaiduMapBinding;
+import com.hq.fiveonejrq.jrq.databinding.BikeGuideLayoutBinding;
 import com.hq.fiveonejrq.jrq.databinding.PopClientLayoutBinding;
 import com.hq.fiveonejrq.jrq.databinding.PopInfowindowLayoutBinding;
 import com.hq.fiveonejrq.jrq.homepage.ScanCodeActivity;
-import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
@@ -354,6 +359,108 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
             } else {
                 requestPermissions(permissions.toArray(new String[permissions.size()]), 0);
             }
+        }
+    }
+
+    public static class BikeGuideActivity extends AppCompatActivity {
+
+        private BikeNavigateHelper mNaviHelper;
+    //
+
+        BikeNaviLauchParam param;
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            mNaviHelper.quit();
+        }
+
+        @Override
+        protected void onResume() {
+            super.onResume();
+            mNaviHelper.resume();
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            BikeGuideLayoutBinding binding = DataBindingUtil.setContentView(this, R.layout.bike_guide_layout);
+            mNaviHelper = BikeNavigateHelper.getInstance();
+            View view = mNaviHelper.onCreate(BikeGuideActivity.this);
+            if (view != null) {
+                binding.bikeLinearLayout.addView(view);
+            }
+            getSupportActionBar().hide();
+            mNaviHelper.startBikeNavi(BikeGuideActivity.this);
+
+            mNaviHelper.setTTsPlayer(new IBTTSPlayer() {
+                @Override
+                public int playTTSText(String s, boolean b) {
+                    Log.d("tts", s);
+                    return 0;
+                }
+            });
+            mNaviHelper.setRouteGuidanceListener(this, new IBRouteGuidanceListener() {
+                @Override
+                public void onRouteGuideIconUpdate(Drawable icon) {
+
+                }
+
+                @Override
+                public void onRouteGuideKind(RouteGuideKind routeGuideKind) {
+
+                }
+
+                @Override
+                public void onRoadGuideTextUpdate(CharSequence charSequence, CharSequence charSequence1) {
+
+                }
+
+                @Override
+                public void onRemainDistanceUpdate(CharSequence charSequence) {
+
+                }
+
+                @Override
+                public void onRemainTimeUpdate(CharSequence charSequence) {
+
+                }
+
+                @Override
+                public void onGpsStatusChange(CharSequence charSequence, Drawable drawable) {
+
+                }
+
+                @Override
+                public void onRouteFarAway(CharSequence charSequence, Drawable drawable) {
+
+                }
+
+                @Override
+                public void onRoutePlanYawing(CharSequence charSequence, Drawable drawable) {
+
+                }
+
+                @Override
+                public void onReRouteComplete() {
+
+                }
+
+                @Override
+                public void onArriveDest() {
+
+                }
+
+                @Override
+                public void onVibrate() {
+
+                }
+
+                @Override
+                public void onGetRouteDetailInfo(BikeRouteDetailInfo bikeRouteDetailInfo) {
+
+                }
+            });
         }
     }
 }

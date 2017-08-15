@@ -1,8 +1,7 @@
-package com.hq.fiveonejrq.jrq.message;
+package com.hq.fiveonejrq.jrq.main.message;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;

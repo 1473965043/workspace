@@ -1,22 +1,15 @@
-package com.hq.fiveonejrq.jrq;
+package com.hq.fiveonejrq.jrq.main;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
-import android.widget.Toast;
 
 import com.baidu.mapapi.SDKInitializer;
-import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
-import com.hq.fiveonejrq.jrq.common.service.DaemonService;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 
 /**
  * Created by guodong on 2017/6/5.

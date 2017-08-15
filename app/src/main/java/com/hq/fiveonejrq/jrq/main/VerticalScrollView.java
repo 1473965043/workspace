@@ -1,4 +1,4 @@
-package com.hq.fiveonejrq.jrq;
+package com.hq.fiveonejrq.jrq.main;
 
 import android.content.Context;
 import android.util.AttributeSet;

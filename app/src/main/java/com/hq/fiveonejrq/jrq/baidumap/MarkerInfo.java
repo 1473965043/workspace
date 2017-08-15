@@ -1,4 +1,4 @@
-package com.hq.fiveonejrq.jrq.common.bean;
+package com.hq.fiveonejrq.jrq.baidumap;
 
 import com.hq.fiveonejrq.jrq.R;
 
