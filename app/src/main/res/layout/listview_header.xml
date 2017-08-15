@@ -56,7 +56,7 @@
             android:layout_toLeftOf="@id/listview_header_text"
             android:src="@mipmap/pull_icon_big" />
 
-        <com.library.custom.widget.SimpleViewSwitcher
+        <com.hq.fiveonejrq.jrq.demo.refresh.widget.SimpleViewSwitcher
             android:id="@+id/listview_header_progressbar"
             android:layout_width="30dip"
             android:layout_height="30dip"

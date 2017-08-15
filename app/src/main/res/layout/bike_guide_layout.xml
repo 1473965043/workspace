@@ -3,7 +3,7 @@
     <data>
         <variable
             name="activity"
-            type="com.hq.fiveonejrq.jrq.BikeGuideActivity"/>
+            type="com.hq.fiveonejrq.jrq.demo.baidumap.BaiduMapActivity.BikeGuideActivity"/>
     </data>
 
     <LinearLayout

@@ -2,7 +2,7 @@
     <data>
         <variable
             name="activity"
-            type="com.baidumap.BaiduMapActivity"/>
+            type="com.hq.fiveonejrq.jrq.demo.baidumap.BaiduMapActivity"/>
     </data>
 
     <LinearLayout
