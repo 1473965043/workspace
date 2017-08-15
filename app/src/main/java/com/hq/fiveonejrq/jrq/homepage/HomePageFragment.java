@@ -18,10 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.widget.BottomItemView;
 import com.hq.fiveonejrq.jrq.homepage.adapter.ActivityAdapter;
@@ -210,7 +207,7 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 if(position == 0){
-                    new IntentIntegrator(getActivity()).initiateScan();
+
                 }else if(position == 1){
 
                 }
@@ -307,15 +304,6 @@ public class HomePageFragment extends Fragment {
     // Get the results:
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null) {
-            if(result.getContents() == null) {
-                Toast.makeText(getContext(), "Cancelled", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getContext(), "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+
     }
 }

@@ -1,5 +1,6 @@
 package com.hq.fiveonejrq.jrq;
 
+import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +13,12 @@ import com.baidu.mapapi.bikenavi.adapter.IBTTSPlayer;
 import com.baidu.mapapi.bikenavi.model.BikeRouteDetailInfo;
 import com.baidu.mapapi.bikenavi.model.RouteGuideKind;
 import com.baidu.mapapi.bikenavi.params.BikeNaviLauchParam;
+import com.hq.fiveonejrq.jrq.databinding.BikeGuideLayoutBinding;
 
-public class BNaviGuideActivity extends AppCompatActivity {
+public class BikeGuideActivity extends AppCompatActivity {
 
     private BikeNavigateHelper mNaviHelper;
+//
 
     BikeNaviLauchParam param;
 
@@ -34,14 +37,14 @@ public class BNaviGuideActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BikeGuideLayoutBinding binding = DataBindingUtil.setContentView(this, R.layout.bike_guide_layout);
         mNaviHelper = BikeNavigateHelper.getInstance();
-
-        View view = mNaviHelper.onCreate(BNaviGuideActivity.this);
+        View view = mNaviHelper.onCreate(BikeGuideActivity.this);
         if (view != null) {
-            setContentView(view);
+            binding.bikeLinearLayout.addView(view);
         }
-
-        mNaviHelper.startBikeNavi(BNaviGuideActivity.this);
+        getSupportActionBar().hide();
+        mNaviHelper.startBikeNavi(BikeGuideActivity.this);
 
         mNaviHelper.setTTsPlayer(new IBTTSPlayer() {
             @Override

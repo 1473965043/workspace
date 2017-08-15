@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -37,6 +38,9 @@ import com.hq.fiveonejrq.jrq.common.custom.OrientationListener;
 import com.hq.fiveonejrq.jrq.databinding.ActivityBaiduMapBinding;
 import com.hq.fiveonejrq.jrq.databinding.PopClientLayoutBinding;
 import com.hq.fiveonejrq.jrq.databinding.PopInfowindowLayoutBinding;
+import com.hq.fiveonejrq.jrq.homepage.ScanCodeActivity;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
 
@@ -118,7 +122,7 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
         public void onRoutePlanSuccess() {
             Log.d("View", "onRoutePlanSuccess");
             Intent intent = new Intent();
-            intent.setClass(mMapBinding.getActivity(), BNaviGuideActivity.class);
+            intent.setClass(mMapBinding.getActivity(), BikeGuideActivity.class);
             startActivity(intent);
         }
 
@@ -276,6 +280,32 @@ public class BaiduMapActivity extends Activity implements OrientationListener.On
         mBaiduMap.setMyLocationConfiguration(config);
     }
 
+    public void scanCode(View view){
+        startActivityForResult(new Intent(mMapBinding.getActivity(), ScanCodeActivity.class), 0);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        /**
+         * 处理二维码扫描结果
+         */
+        if (requestCode == 0) {
+            //处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+                    Toast.makeText(this, "解析结果:" + result, Toast.LENGTH_LONG).show();
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(mMapBinding.getActivity(), "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
 
     /**
      * 定位SDK监听函数, 需实现BDLocationListener里的方法

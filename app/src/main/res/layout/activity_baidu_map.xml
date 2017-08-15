@@ -126,7 +126,8 @@
                 android:layout_height="@dimen/x150"
                 android:background="@mipmap/scan_btn"
                 android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"/>
+                android:layout_alignParentBottom="true"
+                android:onClick="@{activity.scanCode}"/>
 
         </RelativeLayout>
     </LinearLayout>

@@ -1,22 +1,10 @@
 package com.hq.fiveonejrq.jrq.job;
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
-import com.baidu.mapapi.bikenavi.BikeNavigateHelper;
-import com.baidu.mapapi.bikenavi.adapter.IBEngineInitListener;
-import com.baidu.mapapi.bikenavi.adapter.IBRoutePlanListener;
-import com.baidu.mapapi.bikenavi.model.BikeRoutePlanError;
-import com.baidu.mapapi.bikenavi.params.BikeNaviLauchParam;
-import com.baidu.mapapi.model.LatLng;
-import com.hq.fiveonejrq.jrq.BNaviGuideActivity;
 import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
@@ -30,7 +18,6 @@ import com.hq.fiveonejrq.jrq.databinding.ActivityTestBinding;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -59,10 +46,6 @@ public class TestActivity extends AppCompatActivity {
 
     private ActivityTestBinding mBinding;
 
-    private BikeNavigateHelper mNaviHelper;
-    BikeNaviLauchParam param;
-    private static boolean isPermissionRequested = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,22 +54,12 @@ public class TestActivity extends AppCompatActivity {
         mBinding.setActivity(this);
         getSupportActionBar().hide();
 
-        requestPermission();
         mBinding.map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startBikeNavi();
+
             }
         });
-
-        mNaviHelper = BikeNavigateHelper.getInstance();
-        //LatLng startPt = new LatLng(40.047788, 116.313261);
-        //LatLng endPt = new LatLng(40.056783, 116.308518);
-
-        LatLng startPt = new LatLng(40.0417200168,116.3068018451);
-        LatLng endPt = new LatLng(40.0507147935,116.3020593442);
-
-        param = new BikeNaviLauchParam().stPt(startPt).endPt(endPt);
 
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
@@ -102,45 +75,6 @@ public class TestActivity extends AppCompatActivity {
                 .readTimeout(10000, TimeUnit.SECONDS)
                 .writeTimeout(10000, TimeUnit.SECONDS)
                 .build();
-    }
-
-    private void startBikeNavi() {
-        Log.d("View", "startBikeNavi");
-        mNaviHelper.initNaviEngine(this, new IBEngineInitListener() {
-            @Override
-            public void engineInitSuccess() {
-                Log.d("View", "engineInitSuccess");
-                routePlanWithParam();
-            }
-
-            @Override
-            public void engineInitFail() {
-                Log.d("View", "engineInitFail");
-            }
-        });
-    }
-
-    private void routePlanWithParam() {
-        mNaviHelper.routePlanWithParams(param, new IBRoutePlanListener() {
-            @Override
-            public void onRoutePlanStart() {
-                Log.d("View", "onRoutePlanStart");
-            }
-
-            @Override
-            public void onRoutePlanSuccess() {
-                Log.d("View", "onRoutePlanSuccess");
-                Intent intent = new Intent();
-                intent.setClass(TestActivity.this, BNaviGuideActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onRoutePlanFail(BikeRoutePlanError error) {
-                Log.d("View", "onRoutePlanFail");
-            }
-
-        });
     }
 
     public void test3(View view){
@@ -348,24 +282,6 @@ public class TestActivity extends AppCompatActivity {
                     ", name='" + name + '\'' +
                     ", appName='" + appName + '\'' +
                     '}';
-        }
-    }
-
-    private void requestPermission() {
-        if (Build.VERSION.SDK_INT >= 23 && !isPermissionRequested) {
-
-            isPermissionRequested = true;
-
-            ArrayList<String> permissions = new ArrayList<>();
-            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            }
-
-            if (permissions.size() == 0) {
-                return;
-            } else {
-                requestPermissions(permissions.toArray(new String[permissions.size()]), 0);
-            }
         }
     }
 }

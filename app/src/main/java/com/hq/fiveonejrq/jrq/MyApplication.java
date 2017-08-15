@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.baidu.mapapi.SDKInitializer;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.service.DaemonService;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -34,6 +35,7 @@ public class MyApplication extends MultiDexApplication {
         SDKInitializer.initialize(this);
         JPushInterface.setDebugMode(true);//正式版的时候设置false，关闭调试
         JPushInterface.init(this);
+        ZXingLibrary.initDisplayOpinion(this);
         //建议添加tag标签，发送消息的之后就可以指定tag标签来发送了
         Set<String> set = new HashSet<>();
         set.add("guodong");

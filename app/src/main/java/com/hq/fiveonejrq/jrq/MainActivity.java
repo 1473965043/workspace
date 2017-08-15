@@ -90,7 +90,9 @@ public class MainActivity extends BaseActivity {
         for (int i = 0; i < fragmentList.size(); i++) {
             if(i == getCurrent()){
                 fragmentList.get(i).onActivityResult(requestCode, resultCode, data);
-                return;
+//                return;
+            }else{
+                super.onActivityResult(requestCode, resultCode, data);
             }
         }
     }

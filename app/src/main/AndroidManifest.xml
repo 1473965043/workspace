@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
           package="com.hq.fiveonejrq.jrq">
 
     <!-- 这个权限用于进行网络定位 -->
@@ -21,10 +20,11 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
     <!-- OpenGLES 2.0 -->
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
@@ -45,42 +45,39 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".job.TestActivity">
-
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN"/>
-             <category android:name="android.intent.category.LAUNCHER"/>
-             </intent-filter>
-        </activity>
-        <activity android:name=".job.SearchActivity"/>
-        <activity android:name=".homepage.SearchActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".homepage.ScanCodeActivity"/>
-        <activity
-            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-            android:screenOrientation="landscape"
-            tools:replace="screenOrientation"/>
-        <activity
-            android:name=".BaiduMapActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".job.TestActivity">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".job.SearchActivity"/>
+        <activity android:name=".homepage.SearchActivity">
+
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
+
+
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
+        </activity>
+        <activity android:name=".homepage.ScanCodeActivity"/>
+        <activity
+            android:name=".BaiduMapActivity"
+            android:theme="@android:style/Theme.NoTitleBar">
+
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN"/>
+
+
+             <category android:name="android.intent.category.LAUNCHER"/>
+             </intent-filter>
         </activity>
 
         <service android:name=".common.service.DownService"/>
@@ -139,8 +136,7 @@
             android:process=":remote">
         </service>
 
-        <activity android:name=".BNaviGuideActivity">
-        </activity>
+        <activity android:name=".BikeGuideActivity"/>
     </application>
 
 </manifest>
