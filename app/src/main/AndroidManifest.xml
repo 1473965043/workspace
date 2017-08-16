@@ -74,11 +74,11 @@
         <activity
             android:name=".demo.baidumap.BaiduMapActivity"
             android:theme="@android:style/Theme.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+            <!--</intent-filter>-->
         </activity>
 
         <service android:name=".common.service.DownService"/>
@@ -139,6 +139,11 @@
 
         <activity android:name=".demo.baidumap.BaiduMapActivity$BikeGuideActivity"/>
         <activity android:name=".demo.analysis.XmlAnalysisActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

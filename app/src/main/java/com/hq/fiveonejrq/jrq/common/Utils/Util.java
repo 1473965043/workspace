@@ -91,12 +91,18 @@ public class Util {
      * 获取文件保存地址
      * @return
      */
-    public static String getFileTargetPath(Context context, String fileName){
-        String targetPath;
+    public static String getFileTargetPath(Context context, String fileName, String dirName){
+        String targetPath = null;
         if(null != getExternalStorageDirectory()){
-            File file = new File(getExternalStorageDirectory() + File.separator + getAppName(context));
+            File file = null;
+            if(dirName == null){
+                file = new File(getExternalStorageDirectory() + File.separator + "jrq");
+            }else{
+                file = new File(getExternalStorageDirectory() + File.separator + "jrq"
+                        + File.separator + dirName);
+            }
             if(!file.exists()){
-                file.mkdir();
+                file.mkdirs();
             }
             targetPath = file.getAbsolutePath() + File.separator + fileName;
         }else{

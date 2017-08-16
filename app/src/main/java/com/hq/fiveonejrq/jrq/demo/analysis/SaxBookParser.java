@@ -7,6 +7,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
@@ -86,8 +87,11 @@ public class SaxBookParser implements BookParser {
             //设置price元素的文本节点
             handler.characters(ch, 0, ch.length);
             handler.endElement(url, localName, "price");
+            handler.endElement(url, localName, "book");
         }
-        return null;
+        handler.endElement(url, localName, "books");
+        handler.endDocument();
+        return writer.toString();
     }
 
     /**
@@ -109,21 +113,39 @@ public class SaxBookParser implements BookParser {
         @Override
         public void startDocument() throws SAXException {
             super.startDocument();
+            mBooksList = new ArrayList<>();
+            mStringBuilder = new StringBuilder();
         }
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
             super.startElement(uri, localName, qName, attributes);
+            if(localName.equals("book")){
+                mBooks = new Books();
+            }
+            //将字符长度设置为0 以便重新开始读取元素内的字符节点
+            mStringBuilder.setLength(0);
         }
 
         @Override
         public void characters(char[] ch, int start, int length) throws SAXException {
             super.characters(ch, start, length);
+            //将读取的字符数组追加到builder中
+            mStringBuilder.append(ch, start, length);
         }
 
         @Override
         public void endElement(String uri, String localName, String qName) throws SAXException {
             super.endElement(uri, localName, qName);
+            if(localName.equals("id")){
+                mBooks.setId(Integer.valueOf(mStringBuilder.toString()));
+            }else if(localName.equals("price")){
+                mBooks.setPrice(Float.valueOf(mStringBuilder.toString()));
+            }else if(localName.equals("name")){
+                mBooks.setName(mStringBuilder.toString());
+            }else if(localName.equals("book")){
+                mBooksList.add(mBooks);
+            }
         }
     }
 }

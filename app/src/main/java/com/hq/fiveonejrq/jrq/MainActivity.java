@@ -9,8 +9,8 @@ import com.hq.fiveonejrq.jrq.common.custom.BaseActivity;
 import com.hq.fiveonejrq.jrq.common.widget.BottomItemView;
 import com.hq.fiveonejrq.jrq.job.JobsFragment;
 import com.hq.fiveonejrq.jrq.homepage.HomePageFragment;
-import com.hq.fiveonejrq.jrq.main.message.MessageFragment;
-import com.hq.fiveonejrq.jrq.main.mine.MineFragment;
+import com.hq.fiveonejrq.jrq.message.MessageFragment;
+import com.hq.fiveonejrq.jrq.mine.MineFragment;
 import com.hq.fiveonejrq.jrq.common.widget.BottomMenuLayout;
 
 import java.util.ArrayList;

@@ -67,7 +67,7 @@ public class DownService extends Service{
          * @param fileName 文件名
          */
         public void setParameters(String path, Context context, String fileName){
-            String targetPath = Util.getFileTargetPath(context, fileName);
+            String targetPath = Util.getFileTargetPath(context, fileName, "apk");
             mDownUtils = new DownUtils(new FileDownBean(path, targetPath));
         }
 

@@ -1,4 +1,4 @@
-package com.hq.fiveonejrq.jrq.main.mine;
+package com.hq.fiveonejrq.jrq.mine;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

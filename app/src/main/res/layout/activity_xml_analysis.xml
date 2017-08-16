@@ -4,6 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".demo.analysis.XmlAnalysisActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/sax_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sax解析read"
+            android:layout_weight="1"
+            android:textColor="@android:color/holo_orange_dark"/>
+
+        <Button
+            android:id="@+id/sax_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sax解析write"
+            android:layout_weight="1"
+            android:textColor="@android:color/holo_orange_dark"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dom_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dom解析read"
+            android:layout_weight="1"
+            android:textColor="@android:color/holo_orange_dark"/>
+
+        <Button
+            android:id="@+id/dom_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dom解析write"
+            android:layout_weight="1"
+            android:textColor="@android:color/holo_orange_dark"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/pull_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pull解析read"
+            android:layout_weight="1"
+            android:textColor="@android:color/holo_orange_dark"/>
+
+        <Button
+            android:id="@+id/pull_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pull解析write"
+            android:layout_weight="1"
+            android:textColor="@android:color/holo_orange_dark"/>
+    </LinearLayout>
 </LinearLayout>

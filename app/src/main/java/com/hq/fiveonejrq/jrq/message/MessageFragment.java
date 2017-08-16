@@ -1,4 +1,4 @@
-package com.hq.fiveonejrq.jrq.main.message;
+package com.hq.fiveonejrq.jrq.message;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -123,7 +123,7 @@ public class MessageFragment extends Fragment {
     }
 
     public void deleteFile(){
-        File file = new File(Util.getFileTargetPath(getActivity(), "jfcaifu.apk"));
+        File file = new File(Util.getFileTargetPath(getActivity(), "jfcaifu.apk", null));
         if(file.exists()){
             file.delete();
         }else{
