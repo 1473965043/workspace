@@ -138,8 +138,9 @@ public class XmlAnalysisActivity extends AppCompatActivity {
                 InputStream is = new ByteArrayInputStream(parser.serialize(list).getBytes("UTF-8"));
                 int len = 0;
                 byte[] buffer = new byte[1024];
-                while ( (len = is.read(buffer)) != -1){
+                while ((len = is.read(buffer)) != -1){
                     fos.write(buffer, 0, len);
+                    fos.flush();
                 }
                 is.close();
                 fos.close();
