@@ -16,4 +16,9 @@
         <attr name="background_item" format="reference|color" />
         <attr name="arrow_item" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="CustomLayout">
+        <attr name="column_count" format="integer"/>
+        <attr name="default_icon" format="reference"/>
+    </declare-styleable>
 </resources>

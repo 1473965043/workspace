@@ -74,11 +74,13 @@
         <activity
             android:name=".demo.baidumap.BaiduMapActivity"
             android:theme="@android:style/Theme.NoTitleBar">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <service android:name=".common.service.DownService"/>
@@ -144,6 +146,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".imageUtils.AlbumActivity">
         </activity>
     </application>
 
