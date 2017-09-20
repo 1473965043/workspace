@@ -52,9 +52,11 @@ public class CustomLayout extends ViewGroup {
         // 计算出所有的childView的宽和高
 //        measureChildren(widthMeasureSpec, heightMeasureSpec);
 
+        int width = 0, height = 0;
+
         int childWidth = 0;
         if(widthMode == MeasureSpec.EXACTLY){
-            childWidth = sizeWidth/getChildCount();
+            childWidth = sizeWidth/rowCount;
         }else{
             new Exception("dimension assignment error");
         }
@@ -62,10 +64,22 @@ public class CustomLayout extends ViewGroup {
         /**
          * 记录如果是wrap_content是设置的宽和高
          */
+        int columnHeight = 0;
         int childrenCount = getChildCount();
-        int childrenWidth = 0, childrenHeight = 0;
-
+        for (int i = 0; i < childrenCount; i++) {
+            View child = getChildAt(i);
+            int cWidth = child.getMeasuredWidth();
+            int cHeight = child.getMeasuredHeight();
+            width = width + cWidth;
+            if(width > sizeWidth){
+                width = width - cWidth;
+//                columnHeight =
+            }
+            columnHeight = Math.max(columnHeight, cHeight);
+        }
     }
+
+    int rowCount = 3;
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
