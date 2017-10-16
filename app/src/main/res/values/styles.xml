@@ -107,4 +107,13 @@
         <attr name="inner_scan_speed" format="integer" /><!-- 控制扫描速度 -->
         <attr name="inner_scan_iscircle" format="boolean" /><!-- 控制小圆点是否展示 -->
     </declare-styleable>
+
+    <style name="ButtonProgressBar" parent="Base.Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:progressDrawable">@drawable/init_progressbar</item>
+        <item name="android:progress">30</item>
+    </style>
 </resources>

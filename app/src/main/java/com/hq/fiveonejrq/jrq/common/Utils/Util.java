@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Environment;
 import android.support.compat.BuildConfig;
@@ -13,8 +14,10 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import com.hq.fiveonejrq.jrq.MyApplication;
+import com.hq.fiveonejrq.jrq.R;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 /**
@@ -205,6 +208,36 @@ public class Util {
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    /**
+     * 获取图片名称获取图片的资源id的方法
+     * @param context
+     * @param imageName
+     * @return
+     */
+    public static int getResourceId(Context context, String imageName) {
+        String packageName = context.getPackageName();
+        Resources res = context.getResources();
+        int resId = res.getIdentifier(imageName, "drawable", packageName);
+        return resId;
+    }
+
+    /**
+     * 获取图片名称获取图片的资源id的方法 (通过反射)
+     * @param imageName
+     * @return
+     */
+    public static int getgetResourceId(String imageName){
+        try {
+            Class drawable  =  R.drawable.class;
+            Field field = drawable.getField(imageName);
+            int resId = field.getInt(field.getName());
+            return resId;
+        } catch (Exception e) {
+            Log.e("ERROR", "PICTURE NOT　FOUND！");
+            return 0;
         }
     }
 }

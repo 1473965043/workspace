@@ -52,30 +52,40 @@ public class CustomLayout extends ViewGroup {
         // 计算出所有的childView的宽和高
 //        measureChildren(widthMeasureSpec, heightMeasureSpec);
 
-        int width = 0, height = 0;
+        int width = 0;
+        int height = 0;
 
-        int childWidth = 0;
-        if(widthMode == MeasureSpec.EXACTLY){
-            childWidth = sizeWidth/rowCount;
-        }else{
-            new Exception("dimension assignment error");
-        }
+//        int childWidth = 0;
+//        if(widthMode == MeasureSpec.EXACTLY){
+//            childWidth = sizeWidth/rowCount;
+//        }else{
+//            new Exception("dimension assignment error");
+//        }
 //http://blog.csdn.net/lmj623565791/article/details/38352503
-        /**
-         * 记录如果是wrap_content是设置的宽和高
-         */
-        int columnHeight = 0;
+        int lineWidth = 0;//记录某行的宽度
+        int lineHeight = 0;//记录某行的高度
+
         int childrenCount = getChildCount();
         for (int i = 0; i < childrenCount; i++) {
             View child = getChildAt(i);
+            measureChild(child, widthMeasureSpec, heightMeasureSpec);
             int cWidth = child.getMeasuredWidth();
             int cHeight = child.getMeasuredHeight();
-            width = width + cWidth;
-            if(width > sizeWidth){
-                width = width - cWidth;
-//                columnHeight =
+
+            if(lineWidth + cWidth <= sizeWidth){
+                lineWidth = lineWidth + cWidth;
+                lineHeight = Math.max(lineHeight, cHeight);
+            } else if(lineWidth + cWidth > sizeWidth){
+                width = Math.max(lineWidth, cWidth);// 取最大的
+                height += lineHeight;//高度累加
+                lineWidth = cWidth;//将新的一行的宽度赋值给lineWidth
+                lineHeight = cHeight;//将新的一行的高度赋值给lineHeight
             }
-            columnHeight = Math.max(columnHeight, cHeight);
+
+            if(i == childrenCount - 1){//最后一个子child
+                width = Math.max(lineWidth, cWidth);// 取最大的
+                height += lineHeight;
+            }
         }
     }
 
