@@ -46,19 +46,19 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN"/>-->
 
 
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
+             <!--<category android:name="android.intent.category.LAUNCHER"/>-->
+             <!--</intent-filter>-->
         </activity>
         <activity android:name=".job.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".job.SearchActivity"/>
         <activity android:name=".homepage.SearchActivity">
@@ -140,13 +140,7 @@
         </service>
 
         <activity android:name=".demo.baidumap.BaiduMapActivity$BikeGuideActivity"/>
-        <activity android:name=".demo.analysis.XmlAnalysisActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+        <activity android:name=".demo.analysis.XmlAnalysisActivity"></activity>
         <activity android:name=".imageUtils.AlbumActivity">
         </activity>
     </application>

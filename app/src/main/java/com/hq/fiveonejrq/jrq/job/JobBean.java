@@ -37,4 +37,12 @@ public class JobBean implements View.OnClickListener{
     public void publics(String jobMoney){
         Log.i("Reflect", "this is publics");
     }
+
+    public final void getFinalMethod(int size){
+        Log.e(getClass().getSimpleName(), "getFinalMethod: " + size);
+    }
+
+    private final void getPrivateFinalMethod(String title){
+        Log.e(getClass().getSimpleName(), "getFinalMethod: " + title);
+    }
 }

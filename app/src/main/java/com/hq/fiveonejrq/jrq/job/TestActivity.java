@@ -5,36 +5,43 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
 import com.hq.fiveonejrq.jrq.common.bean.Entity;
+import com.hq.fiveonejrq.jrq.common.bean.HttpResult;
 import com.hq.fiveonejrq.jrq.common.bean.OilPrice;
 import com.hq.fiveonejrq.jrq.common.custom.CustomResultListener;
 import com.hq.fiveonejrq.jrq.common.custom.CustomResultsListener;
 import com.hq.fiveonejrq.jrq.common.custom.CustomSubscriber;
+import com.hq.fiveonejrq.jrq.common.interfaces.RetrofitApiService;
 import com.hq.fiveonejrq.jrq.databinding.ActivityTestBinding;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
-import rx.Observable;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -49,7 +56,6 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_test);
         mBinding.setActivity(this);
         getSupportActionBar().hide();
@@ -81,12 +87,11 @@ public class TestActivity extends AppCompatActivity {
         // 创建retrofit对象
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())//解析方法
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//设置支持Rxjava
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//设置支持Rxjava
                 .baseUrl(url)//主机地址
                 .client(client)
                 .build();
-        Call<Map<Object, Object>> call = retrofit.create(Api.class)
-        .reftrofit(url + path);
+        Call<Map<Object, Object>> call = retrofit.create(Api.class).reftrofit(url + path);
         call.enqueue(new Callback<Map<Object, Object>>() {
             @Override
             public void onResponse(Call<Map<Object, Object>> call, Response<Map<Object, Object>> response) {
@@ -147,6 +152,14 @@ public class TestActivity extends AppCompatActivity {
             c.setAccessible(true);
             method.invoke(c.newInstance("1"), "1");
             method.invoke(aClass.getDeclaredConstructor(int.class).newInstance(1), "1");
+            Log.i("Reflect", "===============调用类final方法========================");
+            Method finalMethod = aClass.getMethod("getFinalMethod", int.class);
+            finalMethod.invoke(c.newInstance("1"),1);
+            Method privateFinalMethod = aClass.getDeclaredMethod("getPrivateFinalMethod", String.class);
+            // 如果不加上上面这句，将会Error: TestPrivate can not access a member of class PrivateClass with modifiers "private"
+            //https://www.cnblogs.com/mengdd/archive/2013/01/26/2878136.html
+            privateFinalMethod.setAccessible(true);// 抑制Java的访问控制检查
+            privateFinalMethod.invoke(c.newInstance("1"),  "私有带有final修饰的方法");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -177,9 +190,9 @@ public class TestActivity extends AppCompatActivity {
             }
 
         };
-        RetrofitManage.getInstance()
-                .addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1"
-                , new CustomSubscriber(resultListener, Entity.class));
+//        RetrofitManage.getInstance()
+//                .addTask("http://apis.juhe.cn/cook/query?key=fc163e68f84eedc609f843140f856855&menu=%E8%BE%A3%E6%A4%92&rn=1&pn=1"
+//                , new CustomSubscriber(resultListener, Entity.class));
     }
 
     /**
@@ -201,9 +214,64 @@ public class TestActivity extends AppCompatActivity {
             }
         };
 
-        RetrofitManage.getInstance()
-                .addTask("http://apis.juhe.cn/cnoil/oil_city?key=172f39c0475e01cbaac3fd0eea511980"
-                        , new CustomSubscriber(resultsListener, OilPrice.class));
+        RetrofitManage.getInstance().execute(
+                getService(RetrofitApiService.class).onGetData("http://apis.juhe.cn/cnoil/oil_city?key=172f39c0475e01cbaac3fd0eea511980")
+                , new MySubscriber(List.class, OilPrice.class)
+        );
+    }
+
+    public ParameterizedType type(final Class raw, final Type... args) {
+        return new ParameterizedType() {
+            public Type getRawType() {
+                return raw;
+            }
+
+            public Type[] getActualTypeArguments() {
+                return args;
+            }
+
+            public Type getOwnerType() {
+                return null;
+            }
+        };
+    }
+
+    public <T> T getService(Class<T> cls){
+        return RetrofitManage.getInstance().getService(cls);
+    }
+
+    public class MySubscriber implements Observer<String> {
+
+        private Type type;
+
+        public MySubscriber(Class tClass){
+            type = type(HttpResult.class, tClass);
+        }
+
+        public MySubscriber(Class fClass, Class tClass){
+            type = type(HttpResult.class, type(fClass, tClass));
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            LogUtil.d("onResponse", "");
+        }
+
+        @Override
+        public void onComplete() {
+            LogUtil.d("onResponse", "");
+        }
+
+        @Override
+        public void onSubscribe(Disposable d) {
+            LogUtil.d("onResponse", "");
+        }
+
+        @Override
+        public void onNext(String s) {
+            HttpResult httpResult = new Gson().fromJson(s, type);
+        }
+
     }
 
     public interface Api {
