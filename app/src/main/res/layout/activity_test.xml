@@ -55,7 +55,24 @@
             android:id="@+id/map"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/y100"
+            android:background="@color/bg_color"
             android:text="百度地图"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y100"
+            android:onClick="@{activity.notice}"
+            android:background="@color/cc"
+            android:textColor="@android:color/white"
+            android:text="通知"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y100"
+            android:onClick="@{activity.customNotice}"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:text="自定义通知"/>
     </LinearLayout>
 </layout>
 

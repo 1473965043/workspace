@@ -1,11 +1,19 @@
 package com.hq.fiveonejrq.jrq.job;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.RemoteViews;
 
 import com.google.gson.Gson;
+import com.hq.fiveonejrq.jrq.MainActivity;
 import com.hq.fiveonejrq.jrq.R;
 import com.hq.fiveonejrq.jrq.common.Utils.LogUtil;
 import com.hq.fiveonejrq.jrq.common.Utils.RetrofitManage;
@@ -17,6 +25,7 @@ import com.hq.fiveonejrq.jrq.common.custom.CustomResultsListener;
 import com.hq.fiveonejrq.jrq.common.custom.CustomSubscriber;
 import com.hq.fiveonejrq.jrq.common.interfaces.RetrofitApiService;
 import com.hq.fiveonejrq.jrq.databinding.ActivityTestBinding;
+import com.hq.fiveonejrq.jrq.demo.baidumap.BaiduMapActivity;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -107,6 +116,77 @@ public class TestActivity extends AppCompatActivity {
 
     public void test2(View view){
         printConstructor(JobBean.class.getName());
+    }
+
+    public void notice(View view){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setTicker("Hello World!");// 收到通知的时候用于显示于屏幕顶部通知栏的内容
+        builder.setSmallIcon(R.mipmap.pullup_icon_big);// 设置通知小图标,在下拉之前显示的图标
+//        builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.bike_location));// 落下后显示的图标
+        builder.setWhen(System.currentTimeMillis());
+        builder.setContentTitle("This is title");
+        builder.setContentText("Here is content");
+        // builder.setSound(uri);//声音提示
+        // builder.setSound(sound, streamType);//多媒体 streamtype
+        // builder.setStyle(style);//style设置
+        // http://developer.android.com/reference/android/app/Notification.Style.html
+//        builder.setOngoing(true);// 不能被用户x掉，会一直显示，如音乐播放等
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);//设置震动
+        builder.setAutoCancel(true);// 自动取消
+//        builder.setOnlyAlertOnce(true);// 只alert一次
+        builder.setDefaults(Notification.DEFAULT_ALL);//系统默认响铃
+        builder.setContentInfo("额外的内容");// 添加到了右下角
+        Intent intent = new Intent(this, BaiduMapActivity.class);
+        intent.putExtra("KEY", "Value");
+        intent.setPackage(this.getPackageName());
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(pendingIntent);
+        Notification notification = builder.build();
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(0, notification);
+    }
+
+    public void customNotice(View view){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        // new Notification.Builder(this)
+        builder.setContentTitle("New mail from " + "sender.toString()")
+                .setContentText("subject").setSmallIcon(R.mipmap.location_arrow);
+        // .setLargeIcon(aBitmap)
+
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt("tag", 100);
+        resultIntent.putExtras(bundle);
+        // Because clicking the notification opens a new ("special") activity,
+        // there's
+        // no need to create an artificial back stack.
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 0,
+                resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // 封装自定义的布局
+        RemoteViews mRemoteViews = new RemoteViews(this.getPackageName(),
+                R.layout.custom_notification_layout);
+
+        // 如果是动态设置值的时候，需要这些操作
+//        mRemoteViews.setImageViewResource(R.id.img_user, R.drawable.ic_launcher);
+//        mRemoteViews.setTextViewText(R.id.tv, "XXX");
+//        mRemoteViews.setProgressBar(R.id.progressBar, 100, 50, false);
+//
+//        // 点击ImageView时跳转
+//        mRemoteViews.setOnClickPendingIntent(R.id.img_user, resultPendingIntent);
+
+        // builder.setContentIntent(resultPendingIntent);
+        builder.setContent(mRemoteViews);
+        builder.setContentIntent(resultPendingIntent);
+        // Sets an ID for the notification
+        int mNotificationId = 100;
+        // Gets an instance of the NotificationManager service
+        NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        Notification notification = builder.build();
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+        // Builds the notification and issues it.
+        mNotifyMgr.notify(mNotificationId, notification);
     }
 
     //反射机制

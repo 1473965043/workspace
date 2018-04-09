@@ -7,7 +7,7 @@ android {
     }
 
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.hq.fiveonejrq.jrq"
         minSdkVersion 15
@@ -53,29 +53,43 @@ android {
         }
     }
 
+    flavorDimensions "default"
     productFlavors {
 
         wandoujia {
+            dimension "default"
             manifestPlaceholders = [APP_CHANNEL_VALUE: "wandoujia"]
         }
 
         baidu {
+            dimension "default"
             manifestPlaceholders = [APP_CHANNEL_VALUE: "baidu"]
         }
 
         _360 {
+            dimension "default"
             manifestPlaceholders = [APP_CHANNEL_VALUE: "_360"]
         }
     }
 
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def outputFile = output.outputFile
+//    applicationVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (variant.buildType.name.equals('release')) {
+//                //生成apk名字的格式：Channel1.0.0_2016-06-22_baidu.apk
+//                // 可自定义自己想要生成的格式
+//                def fileName = "${variant.productFlavors[0].name}_${releaseTime()}_${defaultConfig.versionName}.apk"
+//                output.outputFile = new File(outputFile.parent, fileName)
+//            }
+//        }
+//    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
             if (variant.buildType.name.equals('release')) {
                 //生成apk名字的格式：Channel1.0.0_2016-06-22_baidu.apk
                 // 可自定义自己想要生成的格式
-                def fileName = "${variant.productFlavors[0].name}_${releaseTime()}_${defaultConfig.versionName}.apk"
-                output.outputFile = new File(outputFile.parent, fileName)
+                outputFileName = "${variant.productFlavors[0].name}_${releaseTime()}_${defaultConfig.versionName}.apk"
             }
         }
     }
